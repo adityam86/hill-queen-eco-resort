@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Phone, MessageSquare, Mail, MapPin, Clock, Mountain, ShieldCheck, ExternalLink } from 'lucide-react';
 import { ResortSettings, buildTelLink, buildWhatsAppLink } from '@/lib/settings';
+import SecretKnockTrigger from '@/components/SecretKnockTrigger';
 
 interface FooterProps {
   settings: ResortSettings;
@@ -67,11 +68,6 @@ export default function Footer({ settings }: FooterProps) {
               <li>
                 <Link href="/contact" className="hover:text-gold transition-colors flex items-center gap-1.5">
                   <span>›</span> Location, Map & Directions
-                </Link>
-              </li>
-              <li>
-                <Link href="/admin/login" className="hover:text-gold text-ivory/50 transition-colors flex items-center gap-1.5 pt-1">
-                  <span>›</span> Management Login
                 </Link>
               </li>
             </ul>
@@ -185,7 +181,7 @@ export default function Footer({ settings }: FooterProps) {
         {/* Bottom bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-ivory/50 gap-4">
           <p>
-            © {currentYear} {settings.resortName}. All rights reserved. Mamudi, Murguma, Purulia, West Bengal.
+            <SecretKnockTrigger>© {currentYear}</SecretKnockTrigger> {settings.resortName}. All rights reserved. Mamudi, Murguma, Purulia, West Bengal.
           </p>
           <div className="flex items-center gap-6">
             <Link href="/about" className="hover:text-gold transition-colors">
@@ -196,9 +192,6 @@ export default function Footer({ settings }: FooterProps) {
             </Link>
             <Link href="/contact" className="hover:text-gold transition-colors">
               Contact Us
-            </Link>
-            <Link href="/admin/login" className="hover:text-gold transition-colors">
-              Admin Portal
             </Link>
           </div>
         </div>

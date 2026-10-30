@@ -15,13 +15,19 @@ import {
   Server,
   AlertTriangle,
 } from 'lucide-react';
+import { redirect } from 'next/navigation';
 import prisma from '@/lib/prisma';
 import { getResortSettings } from '@/lib/settings';
-import { getCurrentAdmin } from '@/lib/auth';
+import { getCurrentAdmin, getAdminSession } from '@/lib/auth';
 
 export const dynamic = 'force-dynamic';
 
 export default async function AdminDashboardPage() {
+  const session = await getAdminSession();
+  if (!session) {
+    redirect('/admin/login');
+  }
+
   const settings = await getResortSettings();
   const currentAdmin = await getCurrentAdmin();
 

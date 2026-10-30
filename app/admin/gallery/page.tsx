@@ -1,10 +1,17 @@
 import React from 'react';
+import { redirect } from 'next/navigation';
 import prisma from '@/lib/prisma';
 import AdminGalleryManager from '@/components/AdminGalleryManager';
+import { getAdminSession } from '@/lib/auth';
 
 export const dynamic = 'force-dynamic';
 
 export default async function AdminGalleryPage() {
+  const session = await getAdminSession();
+  if (!session) {
+    redirect('/admin/login');
+  }
+
   const photos = await prisma.galleryImage.findMany({
     orderBy: { displayOrder: 'asc' },
   });

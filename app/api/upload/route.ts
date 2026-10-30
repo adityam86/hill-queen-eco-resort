@@ -40,16 +40,31 @@ export async function POST(req: NextRequest) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
+    // Validate magic bytes (file signature check)
+    const isJpeg = buffer.length > 3 && buffer[0] === 0xff && buffer[1] === 0xd8 && buffer[2] === 0xff;
+    const isPng = buffer.length > 8 && buffer[0] === 0x89 && buffer[1] === 0x50 && buffer[2] === 0x4e && buffer[3] === 0x47;
+    const isWebp = buffer.length > 12 && buffer.toString('utf8', 0, 4) === 'RIFF' && buffer.toString('utf8', 8, 12) === 'WEBP';
+
+    if (!isJpeg && !isPng && !isWebp) {
+      return NextResponse.json(
+        { error: 'File content does not match genuine image signatures.' },
+        { status: 400 }
+      );
+    }
+
     // Prepare upload directory in public/uploads/
     const uploadDir = path.join(process.cwd(), 'public', 'uploads');
     if (!existsSync(uploadDir)) {
       await mkdir(uploadDir, { recursive: true });
     }
 
-    // Sanitize and generate unique filename
-    const ext = path.extname(file.name) || '.jpg';
+    // Sanitize extension strictly against allowed list
+    const rawExt = path.extname(file.name).toLowerCase();
+    const allowedExts = ['.jpg', '.jpeg', '.png', '.webp', '.avif'];
+    const ext = allowedExts.includes(rawExt) ? rawExt : '.jpg';
+
     const baseClean = file.name
-      .replace(ext, '')
+      .replace(path.extname(file.name), '')
       .replace(/[^a-zA-Z0-9_-]/g, '_')
       .slice(0, 30);
     const fileName = `${Date.now()}-${baseClean}${ext}`;

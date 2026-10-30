@@ -6,6 +6,8 @@ import prisma from './prisma';
 const JWT_SECRET_STRING = process.env.JWT_SECRET || 'hill-queen-resort-super-secret-jwt-key-change-in-production-2026';
 const JWT_SECRET = new TextEncoder().encode(JWT_SECRET_STRING);
 const COOKIE_NAME = process.env.ADMIN_SESSION_COOKIE || 'hq_admin_session';
+const GATEKEEPER_COOKIE_NAME = process.env.GATEKEEPER_COOKIE_NAME || 'hq_gatekeeper_pass';
+export const ADMIN_SECRET_KEY = process.env.ADMIN_SECRET_KEY || 'hq-resort-murguma-2026';
 
 export interface AdminSessionPayload {
   userId: string;
@@ -39,6 +41,62 @@ export function resetRateLimit(identifier: string) {
   rateLimitMap.delete(identifier);
 }
 
+// Gatekeeper Pass Logic: verifies the private admin secret key
+export function verifySecretKey(inputKey: string): boolean {
+  if (!inputKey) return false;
+  return inputKey.trim() === ADMIN_SECRET_KEY.trim();
+}
+
+export async function createGatekeeperToken(): Promise<string> {
+  return new SignJWT({ gatekeeper: true })
+    .setProtectedHeader({ alg: 'HS256' })
+    .setIssuedAt()
+    .setExpirationTime('2h')
+    .sign(JWT_SECRET);
+}
+
+export async function verifyGatekeeperToken(token: string): Promise<boolean> {
+  try {
+    const { payload } = await jwtVerify(token, JWT_SECRET);
+    return Boolean(payload?.gatekeeper);
+  } catch (error) {
+    return false;
+  }
+}
+
+export async function setGatekeeperCookie(token: string) {
+  const cookieStore = cookies();
+  cookieStore.set(GATEKEEPER_COOKIE_NAME, token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+    maxAge: 60 * 60 * 2, // 2 hours
+    path: '/',
+  });
+}
+
+export async function clearGatekeeperCookie() {
+  const cookieStore = cookies();
+  cookieStore.set(GATEKEEPER_COOKIE_NAME, '', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+    maxAge: 0,
+    path: '/',
+  });
+}
+
+export async function getGatekeeperPass(): Promise<boolean> {
+  try {
+    const cookieStore = cookies();
+    const token = cookieStore.get(GATEKEEPER_COOKIE_NAME)?.value;
+    if (!token) return false;
+    return await verifyGatekeeperToken(token);
+  } catch (err) {
+    return false;
+  }
+}
+
 export async function hashPassword(password: string): Promise<string> {
   const salt = await bcrypt.genSalt(12);
   return bcrypt.hash(password, salt);
@@ -70,7 +128,7 @@ export async function setAdminSessionCookie(token: string) {
   cookieStore.set(COOKIE_NAME, token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
+    sameSite: 'strict',
     maxAge: 60 * 60 * 24, // 24 hours
     path: '/',
   });
@@ -81,10 +139,12 @@ export async function clearAdminSessionCookie() {
   cookieStore.set(COOKIE_NAME, '', {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
+    sameSite: 'strict',
     maxAge: 0,
     path: '/',
   });
+  // Also clear gatekeeper cookie on logout
+  await clearGatekeeperCookie();
 }
 
 export async function getAdminSession(): Promise<AdminSessionPayload | null> {

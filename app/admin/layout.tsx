@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
+import { redirect, notFound } from 'next/navigation';
 import {
   Mountain,
   LayoutDashboard,
@@ -13,7 +13,7 @@ import {
   ExternalLink,
   Shield,
 } from 'lucide-react';
-import { getAdminSession, getCurrentAdmin } from '@/lib/auth';
+import { getAdminSession, getCurrentAdmin, getGatekeeperPass } from '@/lib/auth';
 import AdminLogoutButton from '@/components/AdminLogoutButton';
 
 export default async function AdminLayout({
@@ -22,12 +22,15 @@ export default async function AdminLayout({
   children: React.ReactNode;
 }) {
   const session = await getAdminSession();
-  const admin = await getCurrentAdmin();
+  const gatekeeper = await getGatekeeperPass();
 
-  // If not logged in, children will be the login page if on /admin/login
-  // But Next.js layouts wrap all pages under /admin, so we inspect if session exists:
-  // Note: if user is on /admin/login, we should allow them to see it without infinite redirect!
-  // In Next.js App Router, we can check session and render or let login page render.
+  // Stealth Cloak: If visitor does NOT have an active admin session and does NOT have a valid gatekeeper pass,
+  // return 404 (Not Found) so the admin path appears completely non-existent to bots and unauthorized users.
+  if (!session && !gatekeeper) {
+    notFound();
+  }
+
+  const admin = await getCurrentAdmin();
 
   return (
     <div className="min-h-screen bg-[#F4F1EA] text-forest flex flex-col md:flex-row">

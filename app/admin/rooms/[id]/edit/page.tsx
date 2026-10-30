@@ -1,7 +1,8 @@
 import React from 'react';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import prisma from '@/lib/prisma';
 import RoomForm from '@/components/RoomForm';
+import { getAdminSession } from '@/lib/auth';
 
 interface EditRoomPageProps {
   params: {
@@ -10,6 +11,11 @@ interface EditRoomPageProps {
 }
 
 export default async function EditRoomPage({ params }: EditRoomPageProps) {
+  const session = await getAdminSession();
+  if (!session) {
+    redirect('/admin/login');
+  }
+
   const room = await prisma.room.findUnique({
     where: { id: params.id },
     include: {

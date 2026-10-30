@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import MobileActionDrawer from '@/components/MobileActionDrawer';
+import SecretDoorTrigger from '@/components/SecretDoorTrigger';
 import { getResortSettings } from '@/lib/settings';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -127,6 +128,7 @@ export default async function RootLayout({
           phone={settings.phonePrimary}
           whatsapp={settings.whatsappNumber}
         />
+        <SecretDoorTrigger />
       </body>
     </html>
   );

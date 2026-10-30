@@ -1,10 +1,17 @@
 import React from 'react';
+import { redirect } from 'next/navigation';
 import { getResortSettings } from '@/lib/settings';
 import AdminSettingsForm from '@/components/AdminSettingsForm';
+import { getAdminSession } from '@/lib/auth';
 
 export const dynamic = 'force-dynamic';
 
 export default async function AdminSettingsPage() {
+  const session = await getAdminSession();
+  if (!session) {
+    redirect('/admin/login');
+  }
+
   const settings = await getResortSettings();
 
   return (

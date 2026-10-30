@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Phone, MessageSquare, Shield, Mountain } from 'lucide-react';
+import { Menu, X, Phone, MessageSquare, Mountain } from 'lucide-react';
 import { buildTelLink, buildWhatsAppLink } from '@/lib/settings';
 
 interface NavbarProps {
@@ -73,13 +73,6 @@ export default function Navbar({
             >
               <MessageSquare className="w-3 h-3 text-gold" /> WhatsApp Inquiry
             </a>
-            <Link
-              href="/admin/login"
-              className="hover:text-gold transition-colors flex items-center gap-1 text-ivory/60 hover:text-ivory text-[11px]"
-              title="Resort Owner Login"
-            >
-              <Shield className="w-3 h-3" /> Owner Portal
-            </Link>
           </div>
         </div>
       </div>
@@ -208,13 +201,6 @@ export default function Navbar({
                   <Phone className="w-4 h-4 text-gold" />
                   Call Directly: +91 {phone}
                 </a>
-                <Link
-                  href="/admin/login"
-                  onClick={() => setIsOpen(false)}
-                  className="text-center text-xs text-ivory/50 hover:text-gold pt-2 flex items-center justify-center gap-1.5"
-                >
-                  <Shield className="w-3.5 h-3.5" /> Owner Admin Portal
-                </Link>
               </div>
             </div>
           </div>

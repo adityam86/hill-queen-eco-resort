@@ -13,13 +13,20 @@ import {
   Users,
   ExternalLink,
 } from 'lucide-react';
+import { redirect } from 'next/navigation';
 import prisma from '@/lib/prisma';
+import { getAdminSession } from '@/lib/auth';
 import RoomStatusToggle from '@/components/RoomStatusToggle';
 import RoomDeleteButton from '@/components/RoomDeleteButton';
 
 export const dynamic = 'force-dynamic';
 
 export default async function AdminRoomsPage() {
+  const session = await getAdminSession();
+  if (!session) {
+    redirect('/admin/login');
+  }
+
   const rooms = await prisma.room.findMany({
     orderBy: { displayOrder: 'asc' },
     include: {
