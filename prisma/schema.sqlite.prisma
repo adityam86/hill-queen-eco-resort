@@ -1,0 +1,98 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  username     String   @unique
+  email        String   @unique
+  passwordHash String
+  name         String?
+  role         String   @default("ADMIN")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Room {
+  id                String      @id @default(cuid())
+  name              String
+  slug              String      @unique
+  description       String
+  price             Float       // In INR
+  maximumOccupancy  Int         @default(2)
+  bedConfiguration  String      @default("1 King Bed")
+  roomType          String      @default("Cottage")
+  isAc              Boolean     @default(false)
+  hasAttachedBath   Boolean     @default(true)
+  extraBedAvailable Boolean     @default(false)
+  foodInclusion     String      @default("Morning Tea / Meal options available on request")
+  amenities         String      // Comma-separated or JSON list
+  mainImage         String
+  isActive          Boolean     @default(true)
+  displayOrder      Int         @default(0)
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  images            RoomImage[]
+}
+
+model RoomImage {
+  id           String   @id @default(cuid())
+  roomId       String
+  imageUrl     String
+  caption      String?
+  displayOrder Int      @default(0)
+  room         Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+}
+
+model GalleryImage {
+  id           String   @id @default(cuid())
+  imageUrl     String
+  caption      String?
+  category     String   // "Resort Exterior", "Rooms", "Property Surroundings", "Food", "Facilities", "Nearby Attractions"
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+}
+
+model Facility {
+  id           String   @id @default(cuid())
+  title        String
+  description  String
+  icon         String   @default("Sparkles")
+  displayOrder Int      @default(0)
+  isActive     Boolean  @default(true)
+}
+
+model WebsiteSettings {
+  id             String   @id @default(cuid())
+  resortName     String   @default("Hill Queen Eco Resort")
+  tagline        String   @default("Escape Into Nature. Stay Close to Serenity.")
+  address        String   @default("Mamudi, Murguma, Purulia, West Bengal, India")
+  phonePrimary   String   @default("9735888106")
+  phoneSecondary String   @default("9733713255")
+  phoneTertiary  String   @default("8670214030")
+  whatsappNumber String   @default("9735888106")
+  email          String   @default("hillqueenecoresort@gmail.com")
+  websiteUrl     String   @default("https://hillqueenecoresort.com")
+  googleMapsUrl  String?
+  checkInTime    String   @default("11:00 AM")
+  checkOutTime   String   @default("10:00 AM")
+  heroHeading    String   @default("Discover Your Peaceful Escape.")
+  heroSubheading String   @default("Experience the beauty of nature and a relaxing stay at Hill Queen Eco Resort, Murguma, Purulia.")
+  aboutText      String?
+  seoTitle       String   @default("Hill Queen Eco Resort | Luxury Nature Resort in Murguma, Purulia")
+  seoDescription String   @default("Experience peaceful luxury at Hill Queen Eco Resort in Mamudi, Murguma, Purulia. Serene accommodation near Murguma Dam & Ajodhya Hills with authentic hospitality.")
+  updatedAt      DateTime @updatedAt
+}
+
+model PageContent {
+  id        String   @id @default(cuid())
+  pageKey   String   @unique
+  title     String
+  content   String
+  updatedAt DateTime @updatedAt
+}

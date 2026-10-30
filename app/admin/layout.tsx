@@ -1,0 +1,136 @@
+import React from 'react';
+import Link from 'next/link';
+import { redirect } from 'next/navigation';
+import {
+  Mountain,
+  LayoutDashboard,
+  BedDouble,
+  PlusCircle,
+  Image as ImageIcon,
+  Settings,
+  KeyRound,
+  LogOut,
+  ExternalLink,
+  Shield,
+} from 'lucide-react';
+import { getAdminSession, getCurrentAdmin } from '@/lib/auth';
+import AdminLogoutButton from '@/components/AdminLogoutButton';
+
+export default async function AdminLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const session = await getAdminSession();
+  const admin = await getCurrentAdmin();
+
+  // If not logged in, children will be the login page if on /admin/login
+  // But Next.js layouts wrap all pages under /admin, so we inspect if session exists:
+  // Note: if user is on /admin/login, we should allow them to see it without infinite redirect!
+  // In Next.js App Router, we can check session and render or let login page render.
+
+  return (
+    <div className="min-h-screen bg-[#F4F1EA] text-forest flex flex-col md:flex-row">
+      {/* If logged in, show full Admin Sidebar */}
+      {session && (
+        <aside className="w-full md:w-64 bg-forest-dark text-ivory flex-shrink-0 flex flex-col border-r border-gold/20">
+          {/* Admin Header */}
+          <div className="p-6 border-b border-gold/15">
+            <Link href="/admin" className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-forest border border-gold/40 flex items-center justify-center text-gold">
+                <Mountain className="w-5 h-5" />
+              </div>
+              <div>
+                <h1 className="font-serif text-sm font-bold text-ivory tracking-wide">
+                  HILL QUEEN
+                </h1>
+                <p className="text-[10px] text-gold uppercase tracking-widest font-semibold">
+                  Owner Portal
+                </p>
+              </div>
+            </Link>
+          </div>
+
+          {/* User badge */}
+          <div className="px-6 py-3 bg-forest/40 border-b border-gold/10 flex items-center justify-between text-xs">
+            <span className="text-ivory/70 truncate">
+              {admin?.name || session.username}
+            </span>
+            <span className="px-2 py-0.5 rounded text-[10px] bg-gold/20 text-gold font-semibold uppercase">
+              Admin
+            </span>
+          </div>
+
+          {/* Navigation Links */}
+          <nav className="flex-1 p-4 space-y-1.5 text-xs font-medium">
+            <Link
+              href="/admin"
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-forest text-ivory/80 hover:text-gold transition-colors"
+            >
+              <LayoutDashboard className="w-4 h-4 text-gold" />
+              <span>Dashboard Overview</span>
+            </Link>
+
+            <Link
+              href="/admin/rooms"
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-forest text-ivory/80 hover:text-gold transition-colors"
+            >
+              <BedDouble className="w-4 h-4 text-gold" />
+              <span>Rooms & Tariffs</span>
+            </Link>
+
+            <Link
+              href="/admin/rooms/new"
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-forest text-ivory/80 hover:text-gold transition-colors"
+            >
+              <PlusCircle className="w-4 h-4 text-gold" />
+              <span>Add New Room</span>
+            </Link>
+
+            <Link
+              href="/admin/gallery"
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-forest text-ivory/80 hover:text-gold transition-colors"
+            >
+              <ImageIcon className="w-4 h-4 text-gold" />
+              <span>Photo Gallery</span>
+            </Link>
+
+            <Link
+              href="/admin/settings"
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-forest text-ivory/80 hover:text-gold transition-colors"
+            >
+              <Settings className="w-4 h-4 text-gold" />
+              <span>Website Settings</span>
+            </Link>
+
+            <Link
+              href="/admin/password"
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-forest text-ivory/80 hover:text-gold transition-colors"
+            >
+              <KeyRound className="w-4 h-4 text-gold" />
+              <span>Change Password</span>
+            </Link>
+
+            <div className="pt-4 border-t border-gold/15 space-y-1.5">
+              <Link
+                href="/"
+                target="_blank"
+                className="flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-forest text-ivory/70 hover:text-gold transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  <ExternalLink className="w-4 h-4 text-gold" />
+                  <span>View Public Website</span>
+                </div>
+              </Link>
+
+              <AdminLogoutButton />
+            </div>
+          </nav>
+        </aside>
+      )}
+
+      {/* Main Content Area */}
+      <main className="flex-1 overflow-y-auto">{children}</main>
+    </div>
+  );
+}
