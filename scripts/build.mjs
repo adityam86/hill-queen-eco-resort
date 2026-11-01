@@ -37,3 +37,4 @@ if (dbUrl && (dbUrl.startsWith('postgres://') || dbUrl.startsWith('postgresql://
 // 4. Build Next.js application
 console.log('[3/3] Compiling Next.js application...');
 execSync('npx next build', { stdio: 'inherit' });
+
