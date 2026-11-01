@@ -91,8 +91,17 @@ export async function POST(req: NextRequest) {
     });
   } catch (error: any) {
     console.error('File upload error:', error);
+    if (error?.code === 'EROFS' || process.env.VERCEL) {
+      return NextResponse.json(
+        {
+          error:
+            'Serverless hosting (Vercel) has a read-only filesystem for local file writes. Please paste your image URL directly into the Image URL field (e.g. from Cloudinary, Imgur, or direct image link).',
+        },
+        { status: 400 }
+      );
+    }
     return NextResponse.json(
-      { error: 'An error occurred while uploading the photograph.' },
+      { error: error?.message || 'An error occurred while uploading the photograph.' },
       { status: 500 }
     );
   }

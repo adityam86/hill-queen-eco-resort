@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Phone, MessageSquare, Mail, MapPin, Clock, Mountain, ShieldCheck, ExternalLink } from 'lucide-react';
 import { ResortSettings, buildTelLink, buildWhatsAppLink, buildGoogleMapsOpenUrl, buildGoogleMapsDirectionsUrl } from '@/lib/settings';
 import SecretKnockTrigger from '@/components/SecretKnockTrigger';
@@ -9,7 +12,13 @@ interface FooterProps {
 }
 
 export default function Footer({ settings }: FooterProps) {
+  const pathname = usePathname();
   const currentYear = new Date().getFullYear();
+
+  // Do not render public consumer footer in admin panel or portal gate
+  if (pathname?.startsWith('/admin') || pathname?.startsWith('/portal-gate')) {
+    return null;
+  }
 
   return (
     <footer className="bg-forest-dark text-ivory/80 pt-16 pb-10 border-t border-gold/20">

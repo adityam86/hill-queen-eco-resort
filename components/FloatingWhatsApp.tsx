@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { MessageSquare, X } from 'lucide-react';
 import { buildWhatsAppLink } from '@/lib/settings';
 
@@ -11,7 +12,12 @@ interface FloatingWhatsAppProps {
 export default function FloatingWhatsApp({
   whatsappNumber = '9735888106',
 }: FloatingWhatsAppProps) {
+  const pathname = usePathname();
   const [showTooltip, setShowTooltip] = useState(true);
+
+  if (pathname?.startsWith('/admin') || pathname?.startsWith('/portal-gate')) {
+    return null;
+  }
 
   return (
     <aside aria-label="WhatsApp Contact" className="fixed bottom-20 sm:bottom-8 right-5 z-40 flex items-end gap-3 group">

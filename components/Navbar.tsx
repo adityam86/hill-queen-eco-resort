@@ -29,6 +29,11 @@ export default function Navbar({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Do not render public consumer navigation in admin panel or portal gate
+  if (pathname?.startsWith('/admin') || pathname?.startsWith('/portal-gate')) {
+    return null;
+  }
+
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },

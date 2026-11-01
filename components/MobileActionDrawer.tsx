@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Phone, MessageSquare, BedDouble } from 'lucide-react';
 import { buildTelLink, buildWhatsAppLink } from '@/lib/settings';
 
@@ -14,6 +15,11 @@ export default function MobileActionDrawer({
   phone = '9735888106',
   whatsapp = '9735888106',
 }: MobileActionDrawerProps) {
+  const pathname = usePathname();
+
+  if (pathname?.startsWith('/admin') || pathname?.startsWith('/portal-gate')) {
+    return null;
+  }
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 bg-forest-dark/95 backdrop-blur-md border-t border-gold/30 px-3 py-2 sm:hidden shadow-[0_-10px_25px_rgba(0,0,0,0.3)]">
       <div className="grid grid-cols-3 gap-2">

@@ -280,23 +280,25 @@ export default function AdminGalleryManager({ initialPhotos }: AdminGalleryManag
           </div>
         )}
 
-        <form onSubmit={handleAddPhoto} className="space-y-5">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
-            {/* Image URL / Upload */}
-            <div className="md:col-span-8">
-              <label className="block text-xs font-semibold text-forest uppercase tracking-wider mb-1.5">
-                Image Source (Upload Original Photo or Paste URL) *
-              </label>
-              <div className="flex gap-2">
+        <form onSubmit={handleAddPhoto} className="space-y-6">
+          {/* 1. Image Source & Upload Box */}
+          <div className="p-5 rounded-2xl bg-ivory/30 border border-ivory-dark space-y-3">
+            <label className="block text-xs font-semibold text-forest uppercase tracking-wider">
+              Photograph Image Source *
+            </label>
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
+              <div className="md:col-span-8">
                 <input
                   type="text"
                   required
                   value={imageUrl}
                   onChange={(e) => setImageUrl(e.target.value)}
-                  placeholder="Paste photograph URL or click Upload to select file"
-                  className="flex-1 px-4 py-2.5 rounded-xl border border-ivory-dark bg-ivory/20 text-forest text-sm focus:outline-none focus:border-gold"
+                  placeholder="Paste direct photograph URL (e.g. from Google Drive, Cloudinary, Imgur, Unsplash)"
+                  className="w-full px-4 py-2.5 rounded-xl border border-ivory-dark bg-white text-forest text-sm focus:outline-none focus:border-gold"
                 />
-                <label className="btn-forest px-4 py-2.5 rounded-xl text-xs font-semibold cursor-pointer inline-flex items-center gap-2 shrink-0 shadow-sm">
+              </div>
+              <div className="md:col-span-4">
+                <label className="w-full btn-forest px-4 py-2.5 rounded-xl text-xs font-semibold cursor-pointer inline-flex items-center justify-center gap-2 shadow-sm">
                   <Upload className="w-4 h-4 text-gold" />
                   <span>{uploading ? 'Uploading...' : 'Upload from Device'}</span>
                   <input
@@ -308,9 +310,35 @@ export default function AdminGalleryManager({ initialPhotos }: AdminGalleryManag
                 </label>
               </div>
             </div>
+            <p className="text-[11px] text-forest/60">
+              Tip: Pasting direct photo URLs is recommended for cloud deployments. Supported: JPG, PNG, WebP, AVIF.
+            </p>
 
+            {/* Live Image Preview Thumbnail */}
+            {imageUrl && (
+              <div className="pt-2 flex items-center gap-4 bg-white p-3 rounded-xl border border-ivory-dark">
+                <div className="relative w-24 h-16 rounded-lg overflow-hidden border border-gold/40 bg-forest-dark shrink-0">
+                  <Image src={imageUrl} alt="Upload preview" fill className="object-cover" />
+                </div>
+                <div className="flex-1 min-w-0 text-xs">
+                  <span className="font-semibold text-forest block">Photo Preview Ready</span>
+                  <p className="text-forest/60 truncate font-mono text-[11px] mt-0.5">{imageUrl}</p>
+                  <button
+                    type="button"
+                    onClick={() => setImageUrl('')}
+                    className="mt-1 text-red-600 hover:text-red-700 text-[11px] font-medium underline"
+                  >
+                    Clear photo
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* 2. Photo Metadata in a Balanced 2x2 Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {/* Category */}
-            <div className="md:col-span-4">
+            <div>
               <label className="block text-xs font-semibold text-forest uppercase tracking-wider mb-1.5">
                 Gallery Category (8 Sections) *
               </label>
@@ -326,25 +354,9 @@ export default function AdminGalleryManager({ initialPhotos }: AdminGalleryManag
                 ))}
               </select>
             </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
-            {/* Caption */}
-            <div className="md:col-span-6">
-              <label className="block text-xs font-semibold text-forest uppercase tracking-wider mb-1.5">
-                Photo Caption / Description
-              </label>
-              <input
-                type="text"
-                value={caption}
-                onChange={(e) => setCaption(e.target.value)}
-                placeholder="e.g. Front veranda of Eco Cottage overlooking the garden"
-                className="w-full px-4 py-2.5 rounded-xl border border-ivory-dark bg-ivory/20 text-forest text-sm focus:outline-none focus:border-gold"
-              />
-            </div>
 
             {/* Photo Type (Authenticity) */}
-            <div className="md:col-span-4">
+            <div>
               <label className="block text-xs font-semibold text-forest uppercase tracking-wider mb-1.5">
                 Photo Authenticity Type
               </label>
@@ -358,10 +370,24 @@ export default function AdminGalleryManager({ initialPhotos }: AdminGalleryManag
               </select>
             </div>
 
-            {/* Sequence */}
-            <div className="md:col-span-2">
+            {/* Caption */}
+            <div>
               <label className="block text-xs font-semibold text-forest uppercase tracking-wider mb-1.5">
-                Display Order
+                Photo Caption / Description
+              </label>
+              <input
+                type="text"
+                value={caption}
+                onChange={(e) => setCaption(e.target.value)}
+                placeholder="e.g. Front veranda of Eco Cottage overlooking the garden"
+                className="w-full px-4 py-2.5 rounded-xl border border-ivory-dark bg-ivory/20 text-forest text-sm focus:outline-none focus:border-gold"
+              />
+            </div>
+
+            {/* Sequence */}
+            <div>
+              <label className="block text-xs font-semibold text-forest uppercase tracking-wider mb-1.5">
+                Display Order (Sequence)
               </label>
               <input
                 type="number"
@@ -372,24 +398,14 @@ export default function AdminGalleryManager({ initialPhotos }: AdminGalleryManag
             </div>
           </div>
 
-          {/* Image Preview if provided */}
-          {imageUrl && (
-            <div className="pt-2">
-              <span className="text-[11px] text-forest/70 block mb-1">Preview of Image to Add:</span>
-              <div className="relative w-48 h-32 rounded-xl overflow-hidden border border-ivory-dark bg-forest-dark">
-                <Image src={imageUrl} alt="Upload preview" fill className="object-cover" />
-              </div>
-            </div>
-          )}
-
           <div className="pt-2">
             <button
               type="submit"
               disabled={submitting || uploading}
-              className="btn-gold px-6 py-2.5 rounded-xl text-xs font-bold inline-flex items-center gap-2 shadow-sm disabled:opacity-50"
+              className="btn-gold px-7 py-3 rounded-xl text-xs font-bold inline-flex items-center gap-2 shadow-sm disabled:opacity-50 hover:scale-[1.02] active:scale-[0.98] transition-all"
             >
               <Plus className="w-4 h-4" />
-              <span>{submitting ? 'Publishing...' : 'Publish Photograph to Gallery'}</span>
+              <span>{submitting ? 'Publishing...' : '+ Publish Photograph to Gallery'}</span>
             </button>
           </div>
         </form>
@@ -538,21 +554,22 @@ export default function AdminGalleryManager({ initialPhotos }: AdminGalleryManag
 
             <form onSubmit={handleUpdatePhoto} className="space-y-4 text-xs">
               {/* Replace Image File / URL */}
-              <div>
-                <label className="block font-semibold text-forest uppercase tracking-wider mb-1">
-                  Replace Image (Upload New File or Change URL)
+              <div className="space-y-1.5 p-3 rounded-xl bg-ivory/30 border border-ivory-dark">
+                <label className="block font-semibold text-forest uppercase tracking-wider text-[11px]">
+                  Replace Image Source *
                 </label>
-                <div className="flex gap-2">
+                <div className="flex flex-col sm:flex-row gap-2">
                   <input
                     type="text"
                     required
                     value={editImageUrl}
                     onChange={(e) => setEditImageUrl(e.target.value)}
-                    className="flex-1 px-3 py-2 rounded-xl border border-ivory-dark bg-ivory/20 text-forest text-xs focus:outline-none focus:border-gold"
+                    placeholder="Paste new image URL"
+                    className="flex-1 px-3 py-2 rounded-xl border border-ivory-dark bg-white text-forest text-xs focus:outline-none focus:border-gold"
                   />
-                  <label className="btn-forest px-3 py-2 rounded-xl text-xs font-semibold cursor-pointer inline-flex items-center gap-1.5 shrink-0 shadow-sm">
+                  <label className="btn-forest px-3.5 py-2 rounded-xl text-xs font-semibold cursor-pointer inline-flex items-center justify-center gap-1.5 shrink-0 shadow-sm">
                     <Upload className="w-3.5 h-3.5 text-gold" />
-                    <span>{editUploading ? 'Uploading...' : 'Upload'}</span>
+                    <span>{editUploading ? 'Uploading...' : 'Upload File'}</span>
                     <input
                       type="file"
                       accept="image/jpeg,image/png,image/webp,image/avif"
@@ -563,27 +580,43 @@ export default function AdminGalleryManager({ initialPhotos }: AdminGalleryManag
                 </div>
               </div>
 
-              {/* Category */}
-              <div>
-                <label className="block font-semibold text-forest uppercase tracking-wider mb-1">
-                  Category
-                </label>
-                <select
-                  value={editCategory}
-                  onChange={(e) => setEditCategory(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl border border-ivory-dark bg-ivory/20 text-forest text-xs focus:outline-none focus:border-gold"
-                >
-                  {RESORT_GALLERY_CATEGORIES.map((cat) => (
-                    <option key={cat} value={cat}>
-                      {cat}
-                    </option>
-                  ))}
-                </select>
+              {/* Category & Order Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {/* Category */}
+                <div>
+                  <label className="block font-semibold text-forest uppercase tracking-wider mb-1 text-[11px]">
+                    Category
+                  </label>
+                  <select
+                    value={editCategory}
+                    onChange={(e) => setEditCategory(e.target.value)}
+                    className="w-full px-3 py-2 rounded-xl border border-ivory-dark bg-ivory/20 text-forest text-xs focus:outline-none focus:border-gold"
+                  >
+                    {RESORT_GALLERY_CATEGORIES.map((cat) => (
+                      <option key={cat} value={cat}>
+                        {cat}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Display Order */}
+                <div>
+                  <label className="block font-semibold text-forest uppercase tracking-wider mb-1 text-[11px]">
+                    Display Order
+                  </label>
+                  <input
+                    type="number"
+                    value={editDisplayOrder}
+                    onChange={(e) => setEditDisplayOrder(e.target.value)}
+                    className="w-full px-3 py-2 rounded-xl border border-ivory-dark bg-ivory/20 text-forest text-xs focus:outline-none focus:border-gold"
+                  />
+                </div>
               </div>
 
               {/* Caption */}
               <div>
-                <label className="block font-semibold text-forest uppercase tracking-wider mb-1">
+                <label className="block font-semibold text-forest uppercase tracking-wider mb-1 text-[11px]">
                   Caption / Description
                 </label>
                 <input
@@ -595,25 +628,15 @@ export default function AdminGalleryManager({ initialPhotos }: AdminGalleryManag
                 />
               </div>
 
-              {/* Display Order */}
-              <div>
-                <label className="block font-semibold text-forest uppercase tracking-wider mb-1">
-                  Display Order
-                </label>
-                <input
-                  type="number"
-                  value={editDisplayOrder}
-                  onChange={(e) => setEditDisplayOrder(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl border border-ivory-dark bg-ivory/20 text-forest text-xs focus:outline-none focus:border-gold"
-                />
-              </div>
-
               {/* Preview */}
               {editImageUrl && (
-                <div className="pt-1">
-                  <span className="text-[10px] text-forest/60 block mb-1">Preview:</span>
-                  <div className="relative w-36 h-24 rounded-xl overflow-hidden border border-ivory-dark">
+                <div className="pt-1 flex items-center gap-3 p-2.5 rounded-xl bg-ivory/40 border border-ivory-dark">
+                  <div className="relative w-20 h-14 rounded-lg overflow-hidden border border-gold/40 bg-forest-dark shrink-0">
                     <Image src={editImageUrl} alt="Edit preview" fill className="object-cover" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="text-[10px] text-forest/70 font-semibold block">Replacement Preview</span>
+                    <p className="text-[10px] text-forest/50 truncate font-mono">{editImageUrl}</p>
                   </div>
                 </div>
               )}
