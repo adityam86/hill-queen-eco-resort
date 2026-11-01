@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 
 // Ensure DATABASE_URL is resolved from any Vercel integration variable
-if (!process.env.DATABASE_URL) {
+if (!process.env.DATABASE_URL || process.env.DATABASE_URL.startsWith('file:')) {
   const fallbackUrl =
     process.env.POSTGRES_PRISMA_URL ||
     process.env.POSTGRES_URL ||

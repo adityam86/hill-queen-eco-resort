@@ -13,6 +13,34 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized: Invalid secret key' }, { status: 401 });
     }
 
+    // Inspect available database environment variables
+    const currentDbUrl = process.env.DATABASE_URL || '';
+    const fallbackDbUrl =
+      process.env.POSTGRES_PRISMA_URL ||
+      process.env.POSTGRES_URL ||
+      process.env.STORAGE_URL;
+
+    // If current DATABASE_URL is invalid (e.g. SQLite file:./dev.db), replace with fallback
+    if (currentDbUrl.startsWith('file:') && fallbackDbUrl) {
+      process.env.DATABASE_URL = fallbackDbUrl;
+    }
+
+    const envDiagnostics = {
+      has_DATABASE_URL: Boolean(process.env.DATABASE_URL),
+      DATABASE_URL_starts_with: process.env.DATABASE_URL ? process.env.DATABASE_URL.split(':')[0] : null,
+      has_POSTGRES_PRISMA_URL: Boolean(process.env.POSTGRES_PRISMA_URL),
+      has_POSTGRES_URL: Boolean(process.env.POSTGRES_URL),
+      has_STORAGE_URL: Boolean(process.env.STORAGE_URL),
+    };
+
+    if (process.env.DATABASE_URL?.startsWith('file:')) {
+      return NextResponse.json({
+        error: 'DATABASE_URL is currently set to SQLite file:./dev.db on Vercel. A PostgreSQL connection string (postgresql://...) is required.',
+        diagnostics: envDiagnostics,
+        solution: 'In Vercel -> Settings -> Environment Variables, replace DATABASE_URL with your PostgreSQL connection string, or delete it so the Vercel Postgres integration can be used.',
+      }, { status: 400 });
+    }
+
     const adminEmail = 'admin@hillqueenecoresorts.com';
     let admin = await prisma.adminUser.findFirst({
       where: {
