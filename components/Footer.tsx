@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Phone, MessageSquare, Mail, MapPin, Clock, Mountain, ShieldCheck, ExternalLink } from 'lucide-react';
-import { ResortSettings, buildTelLink, buildWhatsAppLink } from '@/lib/settings';
+import { ResortSettings, buildTelLink, buildWhatsAppLink, buildGoogleMapsOpenUrl, buildGoogleMapsDirectionsUrl } from '@/lib/settings';
 import SecretKnockTrigger from '@/components/SecretKnockTrigger';
 
 interface FooterProps {
@@ -156,19 +156,25 @@ export default function Footer({ settings }: FooterProps) {
                 <Clock className="w-3.5 h-3.5 text-gold shrink-0" />
                 <span>Check-in: <strong>{settings.checkInTime}</strong> | Check-out: <strong>{settings.checkOutTime}</strong></span>
               </div>
-              {settings.googleMapsUrl && (
-                <div className="pt-2">
-                  <a
-                    href={settings.googleMapsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-gold hover:text-gold-light text-xs font-medium underline underline-offset-4"
-                  >
-                    <span>View on Google Maps</span>
-                    <ExternalLink className="w-3 h-3" />
-                  </a>
-                </div>
-              )}
+              <div className="pt-2 flex flex-col gap-1.5">
+                <a
+                  href={buildGoogleMapsDirectionsUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-gold hover:text-gold-light text-xs font-semibold"
+                >
+                  <span>› Get Directions to Resort</span>
+                </a>
+                <a
+                  href={buildGoogleMapsOpenUrl(settings.googleMapsUrl, settings.address)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-ivory/70 hover:text-gold text-xs underline underline-offset-4"
+                >
+                  <span>Google Maps Business Listing</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
               <div className="pt-2">
                 <p className="text-[11px] text-ivory/60 leading-normal">
                   Hill Queen Eco Resort is a serene nature stay. We do not require advance online payment gateway transactions. Connect with us directly via phone or WhatsApp.
@@ -181,7 +187,7 @@ export default function Footer({ settings }: FooterProps) {
         {/* Bottom bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-ivory/50 gap-4">
           <p>
-            <SecretKnockTrigger>© {currentYear}</SecretKnockTrigger> {settings.resortName}. All rights reserved. Mamudi, Murguma, Purulia, West Bengal.
+            <SecretKnockTrigger>© {currentYear}</SecretKnockTrigger> {settings.resortName}. All rights reserved. Mamudi, Murguma, Purulia, West Bengal 723152.
           </p>
           <div className="flex items-center gap-6">
             <Link href="/about" className="hover:text-gold transition-colors">

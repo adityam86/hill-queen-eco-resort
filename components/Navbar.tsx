@@ -53,7 +53,7 @@ export default function Navbar({
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-1.5">
               <Mountain className="w-3.5 h-3.5 text-gold" />
-              Mamudi, Murguma, Purulia, West Bengal
+              Mamudi, Murguma, Purulia, West Bengal 723152
             </span>
             <span className="text-ivory/40">|</span>
             <span>Direct Resort Bookings & Inquiries</span>

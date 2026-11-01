@@ -1,0 +1,158 @@
+{
+  "exportedAt": "2026-10-31T20:37:25.799Z",
+  "resort": "Hill Queen Eco Resort",
+  "domain": "https://hillqueenecoresorts.com",
+  "version": "1.0.0",
+  "settings": {
+    "resortName": "Hill Queen Eco Resort",
+    "tagline": "Escape Into Nature. Stay Close to Serenity.",
+    "address": "Mamudi, Murguma, Purulia, West Bengal 723152, India",
+    "phonePrimary": "9735888106",
+    "phoneSecondary": "9733713255",
+    "phoneTertiary": "8670214030",
+    "whatsappNumber": "9735888106",
+    "email": "hillqueenecoresort@gmail.com",
+    "websiteUrl": "https://hillqueenecoresort.com",
+    "googleMapsUrl": "https://share.google/yDmE0tmJM7PhlxVlN",
+    "checkInTime": "11:00 AM",
+    "checkOutTime": "10:00 AM",
+    "heroHeading": "Discover Your Peaceful Escape.",
+    "heroSubheading": "Experience the beauty of nature and a relaxing stay at Hill Queen Eco Resort, Murguma, Purulia.",
+    "aboutText": "Nestled in the tranquil valley of Mamudi near the scenic Murguma Dam in Purulia, West Bengal, Hill Queen Eco Resort is a peaceful nature retreat designed for travellers seeking rest, clean mountain air, and authentic hospitality. Surrounded by the rolling ridges of the Ajodhya Hills and lush rural landscape, our eco-friendly resort offers comfortable cottage accommodations, home-cooked regional meals, and personalized care. Whether you are seeking a peaceful weekend get-away with family, exploring the hills, or unwinding by the lake, Hill Queen Eco Resort welcomes you to a serene home away from home.",
+    "seoTitle": "Hill Queen Eco Resort | Luxury Nature Resort in Murguma, Purulia",
+    "seoDescription": "Experience peaceful luxury at Hill Queen Eco Resort in Mamudi, Murguma, Purulia, West Bengal 723152. Serene accommodation near Murguma Dam & Ajodhya Hills with authentic hospitality."
+  },
+  "rooms": [
+    {
+      "name": "Eco Lake View Cottage",
+      "slug": "eco-lake-view-cottage",
+      "roomType": "Cottage",
+      "description": "Spacious independent cottage featuring panoramic views of the scenic countryside and gentle breezes from nearby Murguma Dam. Crafted with warm rustic touches, a private veranda, and comfortable double bedding for restful sleep.",
+      "price": 2500,
+      "maximumOccupancy": 3,
+      "bedConfiguration": "1 King Bed + Extra Bed Space",
+      "isAc": false,
+      "hasAttachedBath": true,
+      "extraBedAvailable": true,
+      "foodInclusion": "Complimentary morning tea; fresh home-cooked meals available on order",
+      "amenities": "Attached Western Bathroom, 24/7 Running Water, Private Veranda, Mountain View, Power Backup, Tea Maker",
+      "mainImage": "https://images.unsplash.com/photo-1587061949409-02df41d5e562?q=80&w=1200&auto=format&fit=crop",
+      "isActive": true,
+      "displayOrder": 1,
+      "images": [
+        {
+          "imageUrl": "https://images.unsplash.com/photo-1587061949409-02df41d5e562?q=80&w=1200&auto=format&fit=crop",
+          "caption": "Cottage Front View [Sample Placeholder]",
+          "displayOrder": 1
+        },
+        {
+          "imageUrl": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=1200&auto=format&fit=crop",
+          "caption": "Interior Bedding [Sample Placeholder]",
+          "displayOrder": 2
+        },
+        {
+          "imageUrl": "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=1200&auto=format&fit=crop",
+          "caption": "Porch & Green Surrounds [Sample Placeholder]",
+          "displayOrder": 3
+        }
+      ]
+    },
+    {
+      "name": "Deluxe Hillside Family Cottage",
+      "slug": "deluxe-hillside-family-cottage",
+      "roomType": "Deluxe Cottage",
+      "description": "Designed specifically for family vacations and group retreats exploring the Purulia hills. Features spacious double bedding, ample luggage area, natural ventilation, and an attached modern washroom.",
+      "price": 3200,
+      "maximumOccupancy": 4,
+      "bedConfiguration": "2 Double Beds",
+      "isAc": false,
+      "hasAttachedBath": true,
+      "extraBedAvailable": true,
+      "foodInclusion": "Complimentary morning tea; hearty thali lunches & dinners prepared fresh",
+      "amenities": "Attached Western Bathroom, Hot Water Facility, Garden View, Outdoor Seating, Campfire Area Access, Room Service",
+      "mainImage": "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=1200&auto=format&fit=crop",
+      "isActive": true,
+      "displayOrder": 2,
+      "images": [
+        {
+          "imageUrl": "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=1200&auto=format&fit=crop",
+          "caption": "Family Cottage Exterior [Sample Placeholder]",
+          "displayOrder": 1
+        },
+        {
+          "imageUrl": "https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=1200&auto=format&fit=crop",
+          "caption": "Spacious Room Layout [Sample Placeholder]",
+          "displayOrder": 2
+        }
+      ]
+    },
+    {
+      "name": "Standard Serenity Room",
+      "slug": "standard-serenity-room",
+      "roomType": "Standard Room",
+      "description": "Comfortable, quiet and budget-conscious nature lodging for solo travellers, couples, or nature photographers. Enjoy cool hill breezes, pure village silence, and immediate access to scenic walking paths.",
+      "price": 1800,
+      "maximumOccupancy": 2,
+      "bedConfiguration": "1 Double Bed",
+      "isAc": false,
+      "hasAttachedBath": true,
+      "extraBedAvailable": false,
+      "foodInclusion": "Complimentary morning tea; on-site dining available",
+      "amenities": "Attached Western Bathroom, Clean Linens, Ceiling Fan, Serene Green View, Secure Vehicle Parking",
+      "mainImage": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=1200&auto=format&fit=crop",
+      "isActive": true,
+      "displayOrder": 3,
+      "images": [
+        {
+          "imageUrl": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=1200&auto=format&fit=crop",
+          "caption": "Cozy Double Bedroom [Sample Placeholder]",
+          "displayOrder": 1
+        }
+      ]
+    }
+  ],
+  "facilities": [
+    {
+      "title": "Serene Lakeside Location",
+      "description": "Situated in Mamudi, just minutes away from scenic Murguma Dam and the serene Purulia hills.",
+      "icon": "Mountain",
+      "displayOrder": 1,
+      "isActive": true
+    },
+    {
+      "title": "Fresh Home-Cooked Food",
+      "description": "Wholesome, delicious local Bengali and Indian meals prepared freshly upon request.",
+      "icon": "Utensils",
+      "displayOrder": 2,
+      "isActive": true
+    },
+    {
+      "title": "Campfire & Stargazing",
+      "description": "Open lush grounds perfect for evening campfires, folk music, and unobstructed stargazing.",
+      "icon": "Flame",
+      "displayOrder": 3,
+      "isActive": true
+    },
+    {
+      "title": "Sightseeing Assistance",
+      "description": "Local guidance and transport arrangement to Ajodhya Hills, Bamni Falls, Marble Lake, and dams.",
+      "icon": "Compass",
+      "displayOrder": 4,
+      "isActive": true
+    },
+    {
+      "title": "Clean Attached Bathrooms",
+      "description": "Well-maintained modern western sanitation facilities with 24/7 running water.",
+      "icon": "Bath",
+      "displayOrder": 5,
+      "isActive": true
+    },
+    {
+      "title": "Secure On-Site Parking",
+      "description": "Spacious private parking area inside the property premises for your cars and bikes.",
+      "icon": "ShieldCheck",
+      "displayOrder": 6,
+      "isActive": true
+    }
+  ]
+}

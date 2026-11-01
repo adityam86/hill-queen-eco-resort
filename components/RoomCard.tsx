@@ -43,12 +43,19 @@ export default function RoomCard({
 
   const formattedPrice = `₹${room.price.toLocaleString('en-IN')}`;
 
+  // Check if photo is authentic or a temporary placeholder
+  const isAuthentic = Boolean(
+    room.mainImage &&
+    !room.mainImage.includes('unsplash.com') &&
+    !room.mainImage.includes('room-placeholder')
+  );
+
   return (
     <div className="bg-white rounded-2xl overflow-hidden border border-ivory-dark shadow-luxury luxury-card flex flex-col group">
       {/* Image Container with Badges */}
       <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-forest-dark">
         <Image
-          src={room.mainImage || 'https://images.unsplash.com/photo-1587061949409-02df41d5e562?q=80&w=1200'}
+          src={room.mainImage || '/images/room-placeholder.svg'}
           alt={room.name}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -63,10 +70,22 @@ export default function RoomCard({
           </span>
         </div>
 
-        {/* Sample Image Notice */}
+        {/* Image Status Notice */}
         <div className="absolute top-4 right-4 z-10">
-          <span className="px-2.5 py-0.5 rounded text-[10px] font-medium tracking-wide bg-black/65 text-ivory/80 backdrop-blur-sm border border-white/20">
-            Sample Photo
+          <span
+            className={`px-2.5 py-0.5 rounded text-[10px] font-medium tracking-wide backdrop-blur-sm border ${
+              isAuthentic
+                ? 'bg-gold/90 text-forest font-semibold border-gold flex items-center gap-1'
+                : 'bg-black/65 text-ivory/80 border-white/20'
+            }`}
+          >
+            {isAuthentic ? (
+              <>
+                <CheckCircle2 className="w-2.5 h-2.5" /> Authentic Photo
+              </>
+            ) : (
+              'Photo Coming Soon'
+            )}
           </span>
         </div>
 

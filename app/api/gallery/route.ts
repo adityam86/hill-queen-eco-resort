@@ -55,6 +55,42 @@ export async function POST(req: NextRequest) {
   }
 }
 
+export async function PUT(req: NextRequest) {
+  try {
+    const session = await getAdminSession();
+    if (!session?.userId) {
+      return NextResponse.json({ error: 'Unauthorized access' }, { status: 401 });
+    }
+
+    const { id, imageUrl, caption, category, displayOrder } = await req.json();
+
+    if (!id) {
+      return NextResponse.json({ error: 'Photo ID is required' }, { status: 400 });
+    }
+
+    const updated = await prisma.galleryImage.update({
+      where: { id },
+      data: {
+        imageUrl: imageUrl !== undefined ? imageUrl.trim() : undefined,
+        caption: caption !== undefined ? (caption ? caption.trim() : null) : undefined,
+        category: category !== undefined ? category.trim() : undefined,
+        displayOrder: displayOrder !== undefined ? parseInt(displayOrder, 10) : undefined,
+      },
+    });
+
+    revalidatePath('/gallery');
+    revalidatePath('/');
+
+    return NextResponse.json({ success: true, photo: updated });
+  } catch (error: any) {
+    console.error('Failed to update gallery photo:', error);
+    return NextResponse.json(
+      { error: 'Failed to update photo' },
+      { status: 500 }
+    );
+  }
+}
+
 export async function DELETE(req: NextRequest) {
   try {
     const session = await getAdminSession();

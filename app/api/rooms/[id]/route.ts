@@ -134,6 +134,13 @@ export async function DELETE(
       return NextResponse.json({ error: 'Unauthorized access' }, { status: 401 });
     }
 
+    if (session.role !== 'OWNER_ADMIN') {
+      return NextResponse.json(
+        { error: 'Forbidden: Only the resort owner (OWNER_ADMIN) can delete room records.' },
+        { status: 403 }
+      );
+    }
+
     const room = await prisma.room.findUnique({
       where: { id: params.id },
     });

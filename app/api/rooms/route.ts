@@ -39,6 +39,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized access' }, { status: 401 });
     }
 
+    if (session.role !== 'OWNER_ADMIN') {
+      return NextResponse.json(
+        { error: 'Forbidden: Only the resort owner (OWNER_ADMIN) can create new room categories.' },
+        { status: 403 }
+      );
+    }
+
     const body = await req.json();
     const {
       name,

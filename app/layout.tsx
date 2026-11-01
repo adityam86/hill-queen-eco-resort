@@ -27,14 +27,14 @@ export async function generateMetadata(): Promise<Metadata> {
       'Ajodhya Hills resort',
       'Purulia eco tourism stay',
     ],
-    metadataBase: new URL(settings.websiteUrl || 'https://hillqueenecoresort.com'),
+    metadataBase: new URL(settings.websiteUrl || 'https://hillqueenecoresorts.com'),
     alternates: {
       canonical: '/',
     },
     openGraph: {
       title: 'Hill Queen Eco Resort | Peaceful Luxury in Murguma, Purulia',
       description: 'Escape into nature. Experience serene cottages, fresh local dining, and quiet surroundings near Murguma Dam, Purulia.',
-      url: settings.websiteUrl || 'https://hillqueenecoresort.com',
+      url: settings.websiteUrl || 'https://hillqueenecoresorts.com',
       siteName: 'Hill Queen Eco Resort',
       images: [
         {
@@ -81,13 +81,10 @@ export default async function RootLayout({
       streetAddress: 'Mamudi',
       addressLocality: 'Murguma',
       addressRegion: 'Purulia, West Bengal',
+      postalCode: '723152',
       addressCountry: 'IN',
     },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: '23.3364',
-      longitude: '86.0645',
-    },
+    hasMap: settings.googleMapsUrl || 'https://share.google/yDmE0tmJM7PhlxVlN',
     priceRange: '₹1,800 - ₹3,500',
     checkinTime: settings.checkInTime,
     checkoutTime: settings.checkOutTime,

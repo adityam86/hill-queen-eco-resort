@@ -1,6 +1,6 @@
 # HILL QUEEN ECO RESORT — PRODUCTION-READY WEBSITE
 
-> **Official Website:** [https://hillqueenecoresort.com](https://hillqueenecoresort.com)  
+> **Official Website:** [https://hillqueenecoresorts.com](https://hillqueenecoresorts.com)  
 > **Location:** Mamudi, Murguma, Purulia, West Bengal, India  
 > **Business Model:** Luxury Nature / Eco-Resort Hospitality (Direct Enquiries via WhatsApp & Telephone — No Third-Party Booking Engine or Payment Gateway Fees)
 
@@ -117,7 +117,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the public website.
 
 - **Admin URL:** [http://localhost:3000/admin/login](http://localhost:3000/admin/login)
 - **Default Username:** `admin`
-- **Default Email:** `admin@hillqueenecoresort.com`
+- **Default Email:** `admin@hillqueenecoresorts.com`
 - **Default Password:** `AdminPassword@2026`
 
 *(Important: Change this password immediately after first login at `/admin/password` or via the secure CLI script below).*
@@ -180,7 +180,7 @@ Set your production `.env` with the MySQL connection string:
 DATABASE_URL="mysql://cpaneluser_resort:YourPassword@localhost:3306/cpaneluser_hillqueen"
 JWT_SECRET="generate-a-strong-32-character-random-secret"
 ADMIN_SESSION_COOKIE="hq_admin_session"
-NEXT_PUBLIC_SITE_URL="https://hillqueenecoresort.com"
+NEXT_PUBLIC_SITE_URL="https://hillqueenecoresorts.com"
 NODE_ENV="production"
 ```
 
@@ -209,7 +209,7 @@ Next.js outputs a standalone bundle in `.next/standalone`.
 3. Select **Node.js version** (20.x or 22.x).
 4. **Application mode:** `Production`.
 5. **Application root:** `hillqueen-app` (or path where files were uploaded).
-6. **Application URL:** `hillqueenecoresort.com`.
+6. **Application URL:** `hillqueenecoresorts.com`.
 7. **Application startup file:** `server.js` (or `.next/standalone/server.js`).
 8. Click **Create**.
 9. Run `npm install --omit=dev` and `node scripts/seed.mjs` via cPanel terminal.
@@ -217,13 +217,13 @@ Next.js outputs a standalone bundle in `.next/standalone`.
 
 #### Step 6: SSL Configuration
 1. In cPanel, navigate to **SSL/TLS Status**.
-2. Ensure **AutoSSL** or **Let's Encrypt** is active for `hillqueenecoresort.com` and `www.hillqueenecoresort.com`.
+2. Ensure **AutoSSL** or **Let's Encrypt** is active for `hillqueenecoresorts.com` and `www.hillqueenecoresorts.com`.
 3. Enable HTTPS redirect in cPanel Domains settings.
 
 ### Deployment Alternative: Cloud / VPS with cPanel DNS
 If your GoDaddy shared cPanel plan does not support persistent Node.js processes or Phusion Passenger:
 - Host the Next.js production build on a managed Node platform (e.g. Vercel, Railway, Render, or a DigitalOcean droplet).
-- Keep `hillqueenecoresort.com` on GoDaddy, and point the DNS **A record** / **CNAME** to the hosting server.
+- Keep `hillqueenecoresorts.com` on GoDaddy, and point the DNS **A record** / **CNAME** to the hosting server.
 - This provides 100% uptime, automated SSL, and zero cPanel Passenger process limitations.
 
 ---

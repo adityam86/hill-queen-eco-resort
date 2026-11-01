@@ -23,6 +23,13 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized access' }, { status: 401 });
     }
 
+    if (session.role !== 'OWNER_ADMIN') {
+      return NextResponse.json(
+        { error: 'Forbidden: Only the resort owner (OWNER_ADMIN) can modify global website settings.' },
+        { status: 403 }
+      );
+    }
+
     const body = await req.json();
     const existing = await prisma.websiteSettings.findFirst();
 

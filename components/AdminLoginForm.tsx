@@ -95,7 +95,7 @@ export default function AdminLoginForm() {
                   required
                   value={identifier}
                   onChange={(e) => setIdentifier(e.target.value)}
-                  placeholder="admin or admin@hillqueenecoresort.com"
+                  placeholder="Username or registered email"
                   className="w-full px-4 py-3 rounded-xl bg-forest/80 border border-gold/30 text-ivory placeholder-ivory/40 text-sm focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all"
                 />
               </div>

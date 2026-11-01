@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Output standalone helps easy deployment in cPanel Node.js or Docker/VPS
-  output: 'standalone',
+  // Output standalone helps easy deployment in cPanel Node.js or Docker/VPS (enabled when deploying to Docker/cPanel)
+  // output: 'standalone',
   images: {
     remotePatterns: [
       {

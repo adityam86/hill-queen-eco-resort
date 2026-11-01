@@ -24,21 +24,21 @@ export interface ResortSettings {
 export const DEFAULT_SETTINGS: ResortSettings = {
   resortName: "Hill Queen Eco Resort",
   tagline: "Escape Into Nature. Stay Close to Serenity.",
-  address: "Mamudi, Murguma, Purulia, West Bengal, India",
+  address: "Mamudi, Murguma, Purulia, West Bengal 723152, India",
   phonePrimary: "9735888106",
   phoneSecondary: "9733713255",
   phoneTertiary: "8670214030",
   whatsappNumber: "9735888106",
   email: "hillqueenecoresort@gmail.com",
-  websiteUrl: "https://hillqueenecoresort.com",
-  googleMapsUrl: "https://maps.google.com/?q=Murguma+Dam+Purulia+West+Bengal",
+  websiteUrl: "https://hillqueenecoresorts.com",
+  googleMapsUrl: "https://share.google/yDmE0tmJM7PhlxVlN",
   checkInTime: "11:00 AM",
   checkOutTime: "10:00 AM",
   heroHeading: "Discover Your Peaceful Escape.",
   heroSubheading: "Experience the beauty of nature and a relaxing stay at Hill Queen Eco Resort, Murguma, Purulia.",
   aboutText: `Nestled in the tranquil valley of Mamudi near the scenic Murguma Dam in Purulia, West Bengal, Hill Queen Eco Resort is a peaceful nature retreat designed for travellers seeking rest, clean mountain air, and authentic hospitality. Surrounded by the rolling ridges of the Ajodhya Hills and lush rural landscape, our eco-friendly resort offers comfortable cottage accommodations, home-cooked regional meals, and personalized care. Whether you are seeking a peaceful weekend get-away with family, exploring the hills, or unwinding by the lake, Hill Queen Eco Resort welcomes you to a serene home away from home.`,
   seoTitle: "Hill Queen Eco Resort | Luxury Nature Resort in Murguma, Purulia",
-  seoDescription: "Experience peaceful luxury at Hill Queen Eco Resort in Mamudi, Murguma, Purulia. Serene accommodation near Murguma Dam & Ajodhya Hills with authentic hospitality.",
+  seoDescription: "Experience peaceful luxury at Hill Queen Eco Resort in Mamudi, Murguma, Purulia, West Bengal 723152. Serene accommodation near Murguma Dam & Ajodhya Hills with authentic hospitality.",
 };
 
 export async function getResortSettings(): Promise<ResortSettings> {
@@ -99,4 +99,33 @@ export function buildWhatsAppLink(whatsappNumber: string, roomName?: string, pri
 export function buildTelLink(phone: string): string {
   const clean = phone.replace(/[^0-9+]/g, '');
   return `tel:${clean}`;
+}
+
+/**
+ * Builds an official Google Maps Embed URL based on verified resort coordinates/location
+ * without guessing property boundaries.
+ */
+export function buildMapEmbedUrl(googleMapsUrl?: string, address?: string): string {
+  if (googleMapsUrl && (googleMapsUrl.includes('output=embed') || googleMapsUrl.includes('/maps/embed'))) {
+    return googleMapsUrl;
+  }
+  const destination = 'Hill Queen Eco Resort, Mamudi, Murguma, Purulia, West Bengal 723152';
+  return `https://maps.google.com/maps?q=${encodeURIComponent(destination)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+}
+
+/**
+ * Builds an official Google Maps listing link for viewing the confirmed business profile
+ */
+export function buildGoogleMapsOpenUrl(googleMapsUrl?: string, address?: string): string {
+  if (googleMapsUrl && (googleMapsUrl.includes('share.google') || googleMapsUrl.includes('maps.google') || googleMapsUrl.includes('goo.gl'))) {
+    return googleMapsUrl;
+  }
+  return 'https://share.google/yDmE0tmJM7PhlxVlN';
+}
+
+/**
+ * Builds an official Google Maps directions URL directing navigation to Hill Queen Eco Resort
+ */
+export function buildGoogleMapsDirectionsUrl(): string {
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('Hill Queen Eco Resort, Mamudi, Murguma, Purulia, West Bengal 723152')}`;
 }

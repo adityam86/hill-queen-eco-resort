@@ -62,13 +62,23 @@ export default async function AdminDashboardPage() {
         </div>
 
         <div className="flex items-center gap-3">
-          <Link
-            href="/admin/rooms/new"
-            className="btn-gold px-5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 shadow-sm"
-          >
-            <PlusCircle className="w-4 h-4 fill-forest text-forest" />
-            <span>Add New Room</span>
-          </Link>
+          {session.role === 'OWNER_ADMIN' ? (
+            <Link
+              href="/admin/rooms/new"
+              className="btn-gold px-5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 shadow-sm"
+            >
+              <PlusCircle className="w-4 h-4 fill-forest text-forest" />
+              <span>Add New Room</span>
+            </Link>
+          ) : (
+            <Link
+              href="/admin/rooms"
+              className="btn-gold px-5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 shadow-sm"
+            >
+              <BedDouble className="w-4 h-4 text-forest" />
+              <span>Update Tariffs</span>
+            </Link>
+          )}
           <Link
             href="/"
             target="_blank"
@@ -223,12 +233,14 @@ export default async function AdminDashboardPage() {
             <h2 className="font-serif text-xl font-bold text-forest">
               Active Contact Numbers
             </h2>
-            <Link
-              href="/admin/settings"
-              className="text-xs text-gold-dark hover:underline font-medium"
-            >
-              Edit
-            </Link>
+            {session.role === 'OWNER_ADMIN' && (
+              <Link
+                href="/admin/settings"
+                className="text-xs text-gold-dark hover:underline font-medium"
+              >
+                Edit
+              </Link>
+            )}
           </div>
 
           <div className="space-y-3 text-xs sm:text-sm">

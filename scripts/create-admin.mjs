@@ -49,9 +49,11 @@ async function main() {
       data: {
         passwordHash,
         name: name || existing.name,
+        role: 'OWNER_ADMIN',
+        isActive: true,
       },
     });
-    console.log('✓ Admin password updated successfully.');
+    console.log('✓ Admin password updated successfully (Role: OWNER_ADMIN).');
   } else {
     await prisma.adminUser.create({
       data: {
@@ -59,10 +61,11 @@ async function main() {
         email,
         passwordHash,
         name: name || 'Resort Administrator',
-        role: 'ADMIN',
+        role: 'OWNER_ADMIN',
+        isActive: true,
       },
     });
-    console.log(`✓ Admin user "${username}" created successfully.`);
+    console.log(`✓ Admin user "${username}" created successfully with role OWNER_ADMIN.`);
   }
 
   rl.close();

@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import prisma from '@/lib/prisma';
 import { getResortSettings, buildTelLink, buildWhatsAppLink } from '@/lib/settings';
+import { DEFAULT_ROOMS, RoomData } from '@/lib/rooms';
 
 export const revalidate = 30;
 
@@ -30,9 +31,10 @@ interface RoomDetailPageProps {
 
 export async function generateMetadata({ params }: RoomDetailPageProps) {
   try {
-    const room = await prisma.room.findUnique({
-      where: { slug: params.slug },
-    });
+    const room =
+      (await prisma.room.findUnique({
+        where: { slug: params.slug },
+      })) || DEFAULT_ROOMS.find((r) => r.slug === params.slug);
     if (!room) return { title: 'Room Not Found | Hill Queen Eco Resort' };
 
     return {
@@ -40,6 +42,13 @@ export async function generateMetadata({ params }: RoomDetailPageProps) {
       description: `${room.name} at Hill Queen Eco Resort in Mamudi, Murguma, Purulia. ${room.description.slice(0, 150)}...`,
     };
   } catch (e) {
+    const fallback = DEFAULT_ROOMS.find((r) => r.slug === params.slug);
+    if (fallback) {
+      return {
+        title: `${fallback.name} | Hill Queen Eco Resort, Murguma, Purulia`,
+        description: `${fallback.name} at Hill Queen Eco Resort in Mamudi, Murguma, Purulia. ${fallback.description.slice(0, 150)}...`,
+      };
+    }
     return { title: 'Cottages | Hill Queen Eco Resort' };
   }
 }
@@ -47,9 +56,9 @@ export async function generateMetadata({ params }: RoomDetailPageProps) {
 export default async function RoomDetailPage({ params }: RoomDetailPageProps) {
   const settings = await getResortSettings();
 
-  let room = null;
+  let room: (RoomData & { images?: Array<{ id?: string; imageUrl: string; caption?: string | null; displayOrder?: number }> }) | null = null;
   try {
-    room = await prisma.room.findUnique({
+    const dbRoom = await prisma.room.findUnique({
       where: { slug: params.slug },
       include: {
         images: {
@@ -57,18 +66,26 @@ export default async function RoomDetailPage({ params }: RoomDetailPageProps) {
         },
       },
     });
+    if (dbRoom) {
+      room = dbRoom as unknown as (RoomData & { images?: Array<{ id?: string; imageUrl: string; caption?: string | null; displayOrder?: number }> });
+    }
   } catch (error) {
     console.error('Error fetching room by slug:', error);
   }
 
   if (!room) {
-    notFound();
-    return null;
+    const fallback = DEFAULT_ROOMS.find((r) => r.slug === params.slug);
+    if (fallback) {
+      room = fallback;
+    } else {
+      notFound();
+      return null;
+    }
   }
 
   const formattedPrice = `₹${room.price.toLocaleString('en-IN')}`;
-  const amenitiesList = room.amenities
-    ? room.amenities.split(',').map((a) => a.trim()).filter(Boolean)
+  const amenitiesList: string[] = room.amenities
+    ? (room.amenities as string).split(',').map((a: string) => a.trim()).filter(Boolean)
     : [];
 
   // Combine main image and additional images
@@ -120,18 +137,41 @@ export default async function RoomDetailPage({ params }: RoomDetailPageProps) {
 
             {/* Photo Showcase Gallery */}
             <div className="space-y-4">
-              <div className="relative h-72 sm:h-96 md:h-[460px] w-full rounded-3xl overflow-hidden border-2 border-ivory-dark shadow-luxury bg-forest-dark">
-                <Image
-                  src={allImages[0]?.imageUrl || 'https://images.unsplash.com/photo-1587061949409-02df41d5e562?q=80&w=1200'}
-                  alt={room.name}
-                  fill
-                  priority
-                  className="object-cover"
-                />
-                <span className="absolute bottom-4 right-4 text-[10px] bg-black/70 text-ivory px-3 py-1 rounded-full backdrop-blur-sm border border-white/20">
-                  Sample Photography Placeholder
-                </span>
-              </div>
+              {(() => {
+                const primaryImageUrl = allImages[0]?.imageUrl || '/images/room-placeholder.svg';
+                const isPrimaryAuthentic = Boolean(
+                  primaryImageUrl &&
+                  !primaryImageUrl.includes('unsplash.com') &&
+                  !primaryImageUrl.includes('room-placeholder')
+                );
+
+                return (
+                  <div className="relative h-72 sm:h-96 md:h-[460px] w-full rounded-3xl overflow-hidden border-2 border-ivory-dark shadow-luxury bg-forest-dark">
+                    <Image
+                      src={primaryImageUrl}
+                      alt={room.name}
+                      fill
+                      priority
+                      className="object-cover"
+                    />
+                    <span
+                      className={`absolute bottom-4 right-4 text-[10px] px-3 py-1 rounded-full backdrop-blur-sm border ${
+                        isPrimaryAuthentic
+                          ? 'bg-gold/90 text-forest font-semibold border-gold flex items-center gap-1'
+                          : 'bg-black/70 text-ivory border-white/20'
+                      }`}
+                    >
+                      {isPrimaryAuthentic ? (
+                        <>
+                          <CheckCircle2 className="w-3 h-3" /> Authentic Resort Photograph
+                        </>
+                      ) : (
+                        'Photograph Coming Soon'
+                      )}
+                    </span>
+                  </div>
+                );
+              })()}
 
               {/* Thumbnail Gallery (if additional images exist) */}
               {allImages.length > 1 && (

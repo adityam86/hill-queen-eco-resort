@@ -8,6 +8,9 @@ export default async function NewRoomPage() {
   if (!session) {
     redirect('/admin/login');
   }
+  if (session.role !== 'OWNER_ADMIN') {
+    redirect('/admin/rooms');
+  }
   return (
     <div className="p-6 sm:p-10 max-w-7xl mx-auto space-y-6">
       <div>

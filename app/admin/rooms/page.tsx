@@ -52,13 +52,15 @@ export default async function AdminRoomsPage() {
           </p>
         </div>
 
-        <Link
-          href="/admin/rooms/new"
-          className="btn-gold px-5 py-2.5 rounded-xl text-xs font-bold inline-flex items-center gap-2 shadow-sm self-start"
-        >
-          <PlusCircle className="w-4 h-4 fill-forest text-forest" />
-          <span>Add New Room Category</span>
-        </Link>
+        {session.role === 'OWNER_ADMIN' && (
+          <Link
+            href="/admin/rooms/new"
+            className="btn-gold px-5 py-2.5 rounded-xl text-xs font-bold inline-flex items-center gap-2 shadow-sm self-start"
+          >
+            <PlusCircle className="w-4 h-4 fill-forest text-forest" />
+            <span>Add New Room Category</span>
+          </Link>
+        )}
       </div>
 
       {/* Rooms Table / Cards */}
@@ -175,8 +177,10 @@ export default async function AdminRoomsPage() {
                           <Edit className="w-4 h-4" />
                         </Link>
 
-                        {/* Delete Room */}
-                        <RoomDeleteButton roomId={room.id} roomName={room.name} />
+                        {/* Delete Room (OWNER_ADMIN only) */}
+                        {session.role === 'OWNER_ADMIN' && (
+                          <RoomDeleteButton roomId={room.id} roomName={room.name} />
+                        )}
                       </div>
                     </td>
                   </tr>

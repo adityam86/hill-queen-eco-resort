@@ -13,6 +13,7 @@ import {
 import prisma from '@/lib/prisma';
 import { getResortSettings, buildTelLink, buildWhatsAppLink } from '@/lib/settings';
 import RoomCard, { RoomData } from '@/components/RoomCard';
+import { DEFAULT_ROOMS } from '@/lib/rooms';
 
 export const revalidate = 30; // Dynamic revalidation
 
@@ -31,7 +32,11 @@ export default async function RoomsPage() {
       orderBy: { displayOrder: 'asc' },
     })) as RoomData[];
   } catch (error) {
-    console.warn('Could not query rooms:', error);
+    console.warn('Could not query rooms, using fallback catalog:', error);
+  }
+
+  if (rooms.length === 0) {
+    rooms = DEFAULT_ROOMS;
   }
 
   return (

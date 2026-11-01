@@ -35,7 +35,7 @@ export default function RoomForm({ initialData, isEditing = false }: RoomFormPro
     extraBedAvailable: initialData?.extraBedAvailable || false,
     foodInclusion: initialData?.foodInclusion || 'Complimentary morning tea; dining available on order',
     amenities: initialData?.amenities || 'Attached Western Bathroom, 24/7 Running Water, Mountain View, Power Backup, Tea Maker',
-    mainImage: initialData?.mainImage || 'https://images.unsplash.com/photo-1587061949409-02df41d5e562?q=80&w=1200',
+    mainImage: initialData?.mainImage || '/images/room-placeholder.svg',
     isActive: initialData?.isActive !== undefined ? initialData.isActive : true,
     displayOrder: initialData?.displayOrder || 0,
   });

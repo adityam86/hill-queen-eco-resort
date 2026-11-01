@@ -13,7 +13,8 @@ model AdminUser {
   email        String   @unique
   passwordHash String
   name         String?
-  role         String   @default("ADMIN")
+  role         String   @default("STAFF") // "OWNER_ADMIN" or "STAFF"
+  isActive     Boolean  @default(true)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
@@ -77,7 +78,7 @@ model WebsiteSettings {
   phoneTertiary  String   @default("8670214030")
   whatsappNumber String   @default("9735888106")
   email          String   @default("hillqueenecoresort@gmail.com")
-  websiteUrl     String   @default("https://hillqueenecoresort.com")
+  websiteUrl     String   @default("https://hillqueenecoresorts.com")
   googleMapsUrl  String?  @db.Text
   checkInTime    String   @default("11:00 AM")
   checkOutTime   String   @default("10:00 AM")

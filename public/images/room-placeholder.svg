@@ -1,0 +1,84 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1200" y2="800" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0F1D19" />
+      <stop offset="50%" stop-color="#182B25" />
+      <stop offset="100%" stop-color="#10201A" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#C5A880" stop-opacity="0.3" />
+      <stop offset="50%" stop-color="#E5D3B3" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#C5A880" stop-opacity="0.3" />
+    </linearGradient>
+    <radialGradient id="glow" cx="600" cy="380" r="350" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#C5A880" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#182B25" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="800" fill="url(#bgGrad)" />
+  <circle cx="600" cy="380" r="350" fill="url(#glow)" />
+
+  <!-- Elegant Inner Border -->
+  <rect x="40" y="40" width="1120" height="720" rx="16" stroke="#C5A880" stroke-opacity="0.3" stroke-width="1.5" stroke-dasharray="6 4" fill="none" />
+  <rect x="54" y="54" width="1092" height="692" rx="12" stroke="#C5A880" stroke-opacity="0.15" stroke-width="1" fill="none" />
+
+  <!-- Corner Flourishes -->
+  <path d="M70 100 V70 H100" stroke="#C5A880" stroke-width="2" stroke-linecap="round" fill="none" />
+  <path d="M1130 100 V70 H1100" stroke="#C5A880" stroke-width="2" stroke-linecap="round" fill="none" />
+  <path d="M70 700 V730 H100" stroke="#C5A880" stroke-width="2" stroke-linecap="round" fill="none" />
+  <path d="M1130 700 V730 H1100" stroke="#C5A880" stroke-width="2" stroke-linecap="round" fill="none" />
+
+  <!-- Resort Crest / Emblem -->
+  <g transform="translate(600, 270)">
+    <!-- Outer Ring -->
+    <circle cx="0" cy="0" r="64" stroke="#C5A880" stroke-width="2" stroke-opacity="0.6" fill="#14241F" />
+    <circle cx="0" cy="0" r="56" stroke="#C5A880" stroke-width="1" stroke-opacity="0.3" stroke-dasharray="3 3" fill="none" />
+
+    <!-- Mountain Peaks & Rising Sun -->
+    <circle cx="0" cy="-8" r="16" fill="#C5A880" fill-opacity="0.3" />
+    <!-- Mountains -->
+    <path d="M-36 28 L-14 -10 L6 16 L20 -2 L40 28 Z" fill="#C5A880" fill-opacity="0.85" />
+    <path d="M-14 -10 L0 10 L-6 28 H-36 Z" fill="#E5D3B3" fill-opacity="0.4" />
+    <!-- Pine Trees / Nature Accent -->
+    <path d="M-2 18 L0 14 L2 18 M-3 22 L0 17 L3 22 M-4 26 L0 20 L4 26 M0 26 V30" stroke="#10201A" stroke-width="1.2" stroke-linecap="round" />
+  </g>
+
+  <!-- Resort Name Typography -->
+  <text x="600" y="400" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#F4EEDD" text-anchor="middle" letter-spacing="4">
+    HILL QUEEN ECO RESORT
+  </text>
+
+  <text x="600" y="435" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#C5A880" text-anchor="middle" letter-spacing="6">
+    MAMUDI • MURGUMA • PURULIA
+  </text>
+
+  <!-- Divider Line -->
+  <line x1="480" y1="465" x2="720" y2="465" stroke="url(#goldGrad)" stroke-width="1.5" />
+
+  <!-- Status Notice -->
+  <g transform="translate(600, 520)">
+    <!-- Pill Background -->
+    <rect x="-190" y="-18" width="380" height="36" rx="18" fill="#14241F" stroke="#C5A880" stroke-opacity="0.5" stroke-width="1" />
+    <!-- Camera Icon -->
+    <g transform="translate(-155, -8)">
+      <path d="M0 4 C0 2.9 0.9 2 2 2 H4 L5.5 0.5 C5.8 0.2 6.2 0 6.6 0 H11.4 C11.8 0 12.2 0.2 12.5 0.5 L14 2 H16 C17.1 2 18 2.9 18 4 V13 C18 14.1 17.1 15 16 15 H2 C0.9 15 0 14.1 0 13 Z" fill="none" stroke="#C5A880" stroke-width="1.5" stroke-linejoin="round" />
+      <circle cx="9" cy="8.5" r="3.5" stroke="#C5A880" stroke-width="1.5" fill="none" />
+    </g>
+    <text x="-135" y="5" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#F4EEDD" letter-spacing="0.5">
+      Authentic Photograph Coming Soon
+    </text>
+  </g>
+
+  <!-- Explanatory Subtitle -->
+  <text x="600" y="585" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" fill="#C5A880" fill-opacity="0.8" text-anchor="middle">
+    Original property photographs will be uploaded directly by resort management.
+  </text>
+
+  <!-- Footer Location -->
+  <text x="600" y="715" font-family="'Segoe UI', Roboto, sans-serif" font-size="11" fill="#F4EEDD" fill-opacity="0.4" text-anchor="middle" letter-spacing="2">
+    WEST BENGAL 723152 • NEAR MURGUMA DAM
+  </text>
+</svg>
+

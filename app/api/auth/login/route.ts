@@ -52,6 +52,16 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Check account active status
+    if (admin.isActive === false) {
+      return NextResponse.json(
+        {
+          error: 'This account has been deactivated. Please contact the resort owner.',
+        },
+        { status: 403 }
+      );
+    }
+
     // 3. Verify password hash
     const isValid = await verifyPassword(password, admin.passwordHash);
     if (!isValid) {
@@ -71,7 +81,7 @@ export async function POST(req: NextRequest) {
       userId: admin.id,
       username: admin.username,
       email: admin.email,
-      role: admin.role,
+      role: (admin.role === 'OWNER_ADMIN' ? 'OWNER_ADMIN' : 'STAFF'),
     });
 
     await setAdminSessionCookie(token);

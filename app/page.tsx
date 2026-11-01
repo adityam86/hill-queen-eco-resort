@@ -16,10 +16,19 @@ import {
   Sparkles,
   ExternalLink,
   CheckCircle2,
+  Navigation,
 } from 'lucide-react';
 import prisma from '@/lib/prisma';
-import { getResortSettings, buildTelLink, buildWhatsAppLink } from '@/lib/settings';
+import {
+  getResortSettings,
+  buildTelLink,
+  buildWhatsAppLink,
+  buildMapEmbedUrl,
+  buildGoogleMapsOpenUrl,
+  buildGoogleMapsDirectionsUrl,
+} from '@/lib/settings';
 import RoomCard, { RoomData } from '@/components/RoomCard';
+import { DEFAULT_ROOMS } from '@/lib/rooms';
 
 export const revalidate = 60; // Revalidate every minute or on-demand
 
@@ -35,7 +44,11 @@ export default async function HomePage() {
       take: 3,
     })) as RoomData[];
   } catch (error) {
-    console.warn('Could not query rooms for homepage:', error);
+    console.warn('Could not query rooms for homepage, using fallback rooms:', error);
+  }
+
+  if (rooms.length === 0) {
+    rooms = DEFAULT_ROOMS.slice(0, 3);
   }
 
   // Fetch facilities
@@ -134,7 +147,7 @@ export default async function HomePage() {
           {/* Nature Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-forest/80 border border-gold/40 text-gold text-xs sm:text-sm font-medium mb-6 backdrop-blur-md">
             <Sparkles className="w-4 h-4 text-gold" />
-            <span>MAMUDI • MURGUMA • PURULIA • WEST BENGAL</span>
+            <span>MAMUDI • MURGUMA • PURULIA • WEST BENGAL 723152</span>
           </div>
 
           {/* Main Brand Title & Tagline */}
@@ -477,6 +490,9 @@ export default async function HomePage() {
               <span className="absolute bottom-2 left-2 text-[10px] bg-forest-dark/80 text-ivory px-2 py-0.5 rounded">
                 Murguma Dam
               </span>
+              <span className="absolute top-2 right-2 text-[9px] bg-black/60 text-ivory/80 px-1.5 py-0.5 rounded backdrop-blur-sm">
+                Sample
+              </span>
             </div>
             <div className="relative h-60 sm:h-72 rounded-2xl overflow-hidden shadow-sm">
               <Image
@@ -487,6 +503,9 @@ export default async function HomePage() {
               />
               <span className="absolute bottom-2 left-2 text-[10px] bg-forest-dark/80 text-ivory px-2 py-0.5 rounded">
                 Cottage Front
+              </span>
+              <span className="absolute top-2 right-2 text-[9px] bg-black/60 text-ivory/80 px-1.5 py-0.5 rounded backdrop-blur-sm">
+                Sample
               </span>
             </div>
             <div className="relative h-60 sm:h-72 rounded-2xl overflow-hidden shadow-sm">
@@ -499,6 +518,9 @@ export default async function HomePage() {
               <span className="absolute bottom-2 left-2 text-[10px] bg-forest-dark/80 text-ivory px-2 py-0.5 rounded">
                 Cozy Interior
               </span>
+              <span className="absolute top-2 right-2 text-[9px] bg-black/60 text-ivory/80 px-1.5 py-0.5 rounded backdrop-blur-sm">
+                Sample
+              </span>
             </div>
             <div className="relative h-60 sm:h-72 rounded-2xl overflow-hidden shadow-sm">
               <Image
@@ -509,6 +531,9 @@ export default async function HomePage() {
               />
               <span className="absolute bottom-2 left-2 text-[10px] bg-forest-dark/80 text-ivory px-2 py-0.5 rounded">
                 Campfire & Night
+              </span>
+              <span className="absolute top-2 right-2 text-[9px] bg-black/60 text-ivory/80 px-1.5 py-0.5 rounded backdrop-blur-sm">
+                Sample
               </span>
             </div>
           </div>
@@ -559,27 +584,35 @@ export default async function HomePage() {
                 </div>
               </div>
 
-              {settings.googleMapsUrl && (
-                <div className="pt-2">
-                  <a
-                    href={settings.googleMapsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-gold px-6 py-3 rounded-full text-xs font-semibold inline-flex items-center gap-2"
-                  >
-                    <span>Open in Google Maps</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-              )}
+              <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                <a
+                  href={buildGoogleMapsDirectionsUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-gold px-6 py-3 rounded-full text-xs font-bold inline-flex items-center justify-center gap-2 shadow-sm"
+                >
+                  <Navigation className="w-3.5 h-3.5" />
+                  <span>Get Directions</span>
+                </a>
+
+                <a
+                  href={buildGoogleMapsOpenUrl(settings.googleMapsUrl, settings.address)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 rounded-full border border-forest/30 text-forest hover:bg-forest hover:text-ivory text-xs font-semibold inline-flex items-center justify-center gap-2 transition-colors"
+                >
+                  <span>Google Maps Listing</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              </div>
             </div>
 
             {/* Map Frame */}
             <div className="lg:col-span-7">
               <div className="w-full h-80 sm:h-96 rounded-3xl overflow-hidden border-2 border-ivory-dark shadow-luxury relative bg-forest-dark">
                 <iframe
-                  title="Hill Queen Eco Resort Murguma Location"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14639.467828776826!2d86.05581977934273!3d23.338720173678077!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f60b86a344d567%3A0xe989cbf446d337f7!2sMuruguma%20Dam!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                  title="Hill Queen Eco Resort Mamudi Murguma Location Map"
+                  src={buildMapEmbedUrl(settings.googleMapsUrl, settings.address)}
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}

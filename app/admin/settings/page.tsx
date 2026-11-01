@@ -11,6 +11,9 @@ export default async function AdminSettingsPage() {
   if (!session) {
     redirect('/admin/login');
   }
+  if (session.role !== 'OWNER_ADMIN') {
+    redirect('/admin');
+  }
 
   const settings = await getResortSettings();
 

@@ -11,8 +11,16 @@ import {
   ExternalLink,
   ShieldCheck,
   Send,
+  Navigation,
 } from 'lucide-react';
-import { getResortSettings, buildTelLink, buildWhatsAppLink } from '@/lib/settings';
+import {
+  getResortSettings,
+  buildTelLink,
+  buildWhatsAppLink,
+  buildMapEmbedUrl,
+  buildGoogleMapsOpenUrl,
+  buildGoogleMapsDirectionsUrl,
+} from '@/lib/settings';
 import ContactForm from '@/components/ContactForm';
 
 export const revalidate = 60;
@@ -68,7 +76,7 @@ export default async function ContactPage() {
                   {settings.resortName}
                 </h2>
                 <p className="text-xs text-forest/70 mt-1">
-                  Mamudi, Murguma, Purulia, West Bengal, India
+                  Mamudi, Murguma, Purulia, West Bengal 723152, India
                 </p>
               </div>
 
@@ -206,32 +214,42 @@ export default async function ContactPage() {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div>
               <span className="text-xs uppercase tracking-widest text-gold-dark font-semibold">
-                Google Maps Location
+                Confirmed Google Maps Location
               </span>
               <h2 className="font-serif text-2xl font-bold text-forest mt-1">
                 Find Hill Queen Eco Resort on the Map
               </h2>
               <p className="text-xs text-forest/70">
-                Mamudi, near Murguma Dam, Purulia District, West Bengal
+                Mamudi, Murguma, Purulia, West Bengal 723152
               </p>
             </div>
-            {settings.googleMapsUrl && (
+            <div className="flex flex-wrap items-center gap-2.5">
               <a
-                href={settings.googleMapsUrl}
+                href={buildGoogleMapsDirectionsUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-gold px-6 py-2.5 rounded-full text-xs font-semibold inline-flex items-center gap-2 self-start"
+                className="btn-gold px-5 py-2.5 rounded-full text-xs font-bold inline-flex items-center gap-2 shadow-sm"
               >
-                <span>Open in Google Maps App</span>
+                <Navigation className="w-3.5 h-3.5" />
+                <span>Get Directions</span>
+              </a>
+
+              <a
+                href={buildGoogleMapsOpenUrl(settings.googleMapsUrl, settings.address)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-2.5 rounded-full border border-forest/30 text-forest hover:bg-forest hover:text-ivory text-xs font-semibold inline-flex items-center gap-2 transition-colors"
+              >
+                <span>Google Maps Listing</span>
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
-            )}
+            </div>
           </div>
 
           <div className="w-full h-80 sm:h-[420px] rounded-2xl overflow-hidden border border-ivory-dark relative bg-forest-dark">
             <iframe
-              title="Hill Queen Eco Resort Murguma Map"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14639.467828776826!2d86.05581977934273!3d23.338720173678077!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f60b86a344d567%3A0xe989cbf446d337f7!2sMuruguma%20Dam!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+              title="Hill Queen Eco Resort Mamudi Murguma Map"
+              src={buildMapEmbedUrl(settings.googleMapsUrl, settings.address)}
               width="100%"
               height="100%"
               style={{ border: 0 }}

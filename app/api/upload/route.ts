@@ -14,6 +14,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized access' }, { status: 401 });
     }
 
+    if (session.role !== 'OWNER_ADMIN' && session.role !== 'STAFF') {
+      return NextResponse.json(
+        { error: 'Forbidden: Insufficient privileges to upload photographs.' },
+        { status: 403 }
+      );
+    }
+
     const formData = await req.formData();
     const file = formData.get('file') as File | null;
 
@@ -44,10 +51,13 @@ export async function POST(req: NextRequest) {
     const isJpeg = buffer.length > 3 && buffer[0] === 0xff && buffer[1] === 0xd8 && buffer[2] === 0xff;
     const isPng = buffer.length > 8 && buffer[0] === 0x89 && buffer[1] === 0x50 && buffer[2] === 0x4e && buffer[3] === 0x47;
     const isWebp = buffer.length > 12 && buffer.toString('utf8', 0, 4) === 'RIFF' && buffer.toString('utf8', 8, 12) === 'WEBP';
+    const isAvif = buffer.length > 12 &&
+      buffer.toString('utf8', 4, 8) === 'ftyp' &&
+      (buffer.toString('utf8', 8, 12) === 'avif' || buffer.toString('utf8', 8, 12) === 'avis');
 
-    if (!isJpeg && !isPng && !isWebp) {
+    if (!isJpeg && !isPng && !isWebp && !isAvif) {
       return NextResponse.json(
-        { error: 'File content does not match genuine image signatures.' },
+        { error: 'File content does not match genuine image signatures (JPG, PNG, WebP, AVIF).' },
         { status: 400 }
       );
     }

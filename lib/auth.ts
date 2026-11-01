@@ -3,23 +3,53 @@ import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
 import prisma from './prisma';
 
-const JWT_SECRET_STRING = process.env.JWT_SECRET || 'hill-queen-resort-super-secret-jwt-key-change-in-production-2026';
-const JWT_SECRET = new TextEncoder().encode(JWT_SECRET_STRING);
-const COOKIE_NAME = process.env.ADMIN_SESSION_COOKIE || 'hq_admin_session';
-const GATEKEEPER_COOKIE_NAME = process.env.GATEKEEPER_COOKIE_NAME || 'hq_gatekeeper_pass';
-export const ADMIN_SECRET_KEY = process.env.ADMIN_SECRET_KEY || 'hq-resort-murguma-2026';
+export type UserRole = 'OWNER_ADMIN' | 'STAFF';
 
 export interface AdminSessionPayload {
   userId: string;
   username: string;
   email: string;
-  role: string;
+  role: UserRole;
 }
 
-// In-memory rate limiting map: identifier -> { count, expiresAt }
+// 1. Secure Secret Resolution (No hardcoded fallback in production)
+function getJwtSecret(): Uint8Array {
+  const secret = process.env.JWT_SECRET;
+  if (!secret || secret.trim().length === 0) {
+    if (process.env.NODE_ENV === 'production') {
+      throw new Error('CRITICAL SECURITY ERROR: JWT_SECRET environment variable is required in production.');
+    }
+    // Safe dev fallback only
+    return new TextEncoder().encode('hq-resort-local-development-secret-key-32chars');
+  }
+  if (secret.length < 32 && process.env.NODE_ENV === 'production') {
+    throw new Error('CRITICAL SECURITY ERROR: JWT_SECRET must be at least 32 characters in production.');
+  }
+  return new TextEncoder().encode(secret);
+}
+
+export function getAdminSecretKey(): string {
+  const key = process.env.ADMIN_SECRET_KEY;
+  if (!key || key.trim().length === 0) {
+    if (process.env.NODE_ENV === 'production') {
+      throw new Error('CRITICAL SECURITY ERROR: ADMIN_SECRET_KEY environment variable is required in production.');
+    }
+    return 'hq-resort-murguma-2026';
+  }
+  return key;
+}
+
+const COOKIE_NAME = process.env.ADMIN_SESSION_COOKIE || 'hq_admin_session';
+const GATEKEEPER_COOKIE_NAME = process.env.GATEKEEPER_COOKIE_NAME || 'hq_gatekeeper_pass';
+
+// 2. In-Memory Rate Limiting
 const rateLimitMap = new Map<string, { count: number; expiresAt: number }>();
 
-export function checkRateLimit(identifier: string, maxAttempts = 5, windowMs = 15 * 60 * 1000): { allowed: boolean; remainingAttempts: number; retryAfterSec?: number } {
+export function checkRateLimit(
+  identifier: string,
+  maxAttempts = 5,
+  windowMs = 15 * 60 * 1000
+): { allowed: boolean; remainingAttempts: number; retryAfterSec?: number } {
   const now = Date.now();
   const entry = rateLimitMap.get(identifier);
 
@@ -41,10 +71,10 @@ export function resetRateLimit(identifier: string) {
   rateLimitMap.delete(identifier);
 }
 
-// Gatekeeper Pass Logic: verifies the private admin secret key
+// 3. Gatekeeper Token Verification
 export function verifySecretKey(inputKey: string): boolean {
   if (!inputKey) return false;
-  return inputKey.trim() === ADMIN_SECRET_KEY.trim();
+  return inputKey.trim() === getAdminSecretKey().trim();
 }
 
 export async function createGatekeeperToken(): Promise<string> {
@@ -52,14 +82,14 @@ export async function createGatekeeperToken(): Promise<string> {
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
     .setExpirationTime('2h')
-    .sign(JWT_SECRET);
+    .sign(getJwtSecret());
 }
 
 export async function verifyGatekeeperToken(token: string): Promise<boolean> {
   try {
-    const { payload } = await jwtVerify(token, JWT_SECRET);
+    const { payload } = await jwtVerify(token, getJwtSecret());
     return Boolean(payload?.gatekeeper);
-  } catch (error) {
+  } catch {
     return false;
   }
 }
@@ -92,12 +122,16 @@ export async function getGatekeeperPass(): Promise<boolean> {
     const token = cookieStore.get(GATEKEEPER_COOKIE_NAME)?.value;
     if (!token) return false;
     return await verifyGatekeeperToken(token);
-  } catch (err) {
+  } catch {
     return false;
   }
 }
 
+// 4. Password Security
 export async function hashPassword(password: string): Promise<string> {
+  if (!password || password.length < 8) {
+    throw new Error('Password must be at least 8 characters long.');
+  }
   const salt = await bcrypt.genSalt(12);
   return bcrypt.hash(password, salt);
 }
@@ -106,19 +140,20 @@ export async function verifyPassword(password: string, hash: string): Promise<bo
   return bcrypt.compare(password, hash);
 }
 
+// 5. Session Tokens & Cookies
 export async function createSessionToken(payload: AdminSessionPayload): Promise<string> {
   return new SignJWT({ ...payload })
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
     .setExpirationTime('24h')
-    .sign(JWT_SECRET);
+    .sign(getJwtSecret());
 }
 
 export async function verifySessionToken(token: string): Promise<AdminSessionPayload | null> {
   try {
-    const { payload } = await jwtVerify(token, JWT_SECRET);
+    const { payload } = await jwtVerify(token, getJwtSecret());
     return payload as unknown as AdminSessionPayload;
-  } catch (error) {
+  } catch {
     return null;
   }
 }
@@ -143,7 +178,6 @@ export async function clearAdminSessionCookie() {
     maxAge: 0,
     path: '/',
   });
-  // Also clear gatekeeper cookie on logout
   await clearGatekeeperCookie();
 }
 
@@ -153,7 +187,7 @@ export async function getAdminSession(): Promise<AdminSessionPayload | null> {
     const token = cookieStore.get(COOKIE_NAME)?.value;
     if (!token) return null;
     return await verifySessionToken(token);
-  } catch (err) {
+  } catch {
     return null;
   }
 }
@@ -171,11 +205,27 @@ export async function getCurrentAdmin() {
         email: true,
         name: true,
         role: true,
+        isActive: true,
         createdAt: true,
       },
     });
+
+    // If account was deleted or deactivated, revoke session immediately
+    if (!user || user.isActive === false) {
+      return null;
+    }
+
     return user;
   } catch (error) {
     return null;
   }
+}
+
+// 6. Role-Based Access Control (RBAC) Helpers
+export function isOwnerAdmin(session: AdminSessionPayload | null): boolean {
+  return session?.role === 'OWNER_ADMIN';
+}
+
+export function isStaffOrOwner(session: AdminSessionPayload | null): boolean {
+  return session?.role === 'OWNER_ADMIN' || session?.role === 'STAFF';
 }

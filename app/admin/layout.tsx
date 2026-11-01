@@ -12,6 +12,7 @@ import {
   LogOut,
   ExternalLink,
   Shield,
+  Users,
 } from 'lucide-react';
 import { getAdminSession, getCurrentAdmin, getGatekeeperPass } from '@/lib/auth';
 import AdminLogoutButton from '@/components/AdminLogoutButton';
@@ -59,8 +60,14 @@ export default async function AdminLayout({
             <span className="text-ivory/70 truncate">
               {admin?.name || session.username}
             </span>
-            <span className="px-2 py-0.5 rounded text-[10px] bg-gold/20 text-gold font-semibold uppercase">
-              Admin
+            <span
+              className={`px-2 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wider ${
+                session.role === 'OWNER_ADMIN'
+                  ? 'bg-gold/20 text-gold border border-gold/30'
+                  : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+              }`}
+            >
+              {session.role === 'OWNER_ADMIN' ? 'Owner Admin' : 'Staff'}
             </span>
           </div>
 
@@ -82,13 +89,15 @@ export default async function AdminLayout({
               <span>Rooms & Tariffs</span>
             </Link>
 
-            <Link
-              href="/admin/rooms/new"
-              className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-forest text-ivory/80 hover:text-gold transition-colors"
-            >
-              <PlusCircle className="w-4 h-4 text-gold" />
-              <span>Add New Room</span>
-            </Link>
+            {session.role === 'OWNER_ADMIN' && (
+              <Link
+                href="/admin/rooms/new"
+                className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-forest text-ivory/80 hover:text-gold transition-colors"
+              >
+                <PlusCircle className="w-4 h-4 text-gold" />
+                <span>Add New Room</span>
+              </Link>
+            )}
 
             <Link
               href="/admin/gallery"
@@ -98,13 +107,25 @@ export default async function AdminLayout({
               <span>Photo Gallery</span>
             </Link>
 
-            <Link
-              href="/admin/settings"
-              className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-forest text-ivory/80 hover:text-gold transition-colors"
-            >
-              <Settings className="w-4 h-4 text-gold" />
-              <span>Website Settings</span>
-            </Link>
+            {session.role === 'OWNER_ADMIN' && (
+              <Link
+                href="/admin/staff"
+                className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-forest text-ivory/80 hover:text-gold transition-colors"
+              >
+                <Users className="w-4 h-4 text-gold" />
+                <span>Staff Management</span>
+              </Link>
+            )}
+
+            {session.role === 'OWNER_ADMIN' && (
+              <Link
+                href="/admin/settings"
+                className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-forest text-ivory/80 hover:text-gold transition-colors"
+              >
+                <Settings className="w-4 h-4 text-gold" />
+                <span>Website Settings</span>
+              </Link>
+            )}
 
             <Link
               href="/admin/password"

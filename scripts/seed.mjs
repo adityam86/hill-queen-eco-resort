@@ -13,28 +13,28 @@ async function main() {
       data: {
         resortName: "Hill Queen Eco Resort",
         tagline: "Escape Into Nature. Stay Close to Serenity.",
-        address: "Mamudi, Murguma, Purulia, West Bengal, India",
+        address: "Mamudi, Murguma, Purulia, West Bengal 723152, India",
         phonePrimary: "9735888106",
         phoneSecondary: "9733713255",
         phoneTertiary: "8670214030",
         whatsappNumber: "9735888106",
         email: "hillqueenecoresort@gmail.com",
-        websiteUrl: "https://hillqueenecoresort.com",
-        googleMapsUrl: "https://maps.google.com/?q=Murguma+Dam+Purulia+West+Bengal",
+        websiteUrl: "https://hillqueenecoresorts.com",
+        googleMapsUrl: "https://share.google/yDmE0tmJM7PhlxVlN",
         checkInTime: "11:00 AM",
         checkOutTime: "10:00 AM",
         heroHeading: "Discover Your Peaceful Escape.",
         heroSubheading: "Experience the beauty of nature and a relaxing stay at Hill Queen Eco Resort, Murguma, Purulia.",
         aboutText: "Nestled in the tranquil valley of Mamudi near the scenic Murguma Dam in Purulia, West Bengal, Hill Queen Eco Resort is a peaceful nature retreat designed for travellers seeking rest, clean mountain air, and authentic hospitality. Surrounded by the rolling ridges of the Ajodhya Hills and lush rural landscape, our eco-friendly resort offers comfortable cottage accommodations, home-cooked regional meals, and personalized care. Whether you are seeking a peaceful weekend get-away with family, exploring the hills, or unwinding by the lake, Hill Queen Eco Resort welcomes you to a serene home away from home.",
         seoTitle: "Hill Queen Eco Resort | Luxury Nature Resort in Murguma, Purulia",
-        seoDescription: "Experience peaceful luxury at Hill Queen Eco Resort in Mamudi, Murguma, Purulia. Serene accommodation near Murguma Dam & Ajodhya Hills with authentic hospitality.",
+        seoDescription: "Experience peaceful luxury at Hill Queen Eco Resort in Mamudi, Murguma, Purulia, West Bengal 723152. Serene accommodation near Murguma Dam & Ajodhya Hills with authentic hospitality.",
       },
     });
     console.log('✓ Created initial Website Settings with verified contact information');
   }
 
   // 2. Seed Default Admin User
-  const adminEmail = 'admin@hillqueenecoresort.com';
+  const adminEmail = 'admin@hillqueenecoresorts.com';
   const existingAdmin = await prisma.adminUser.findUnique({
     where: { email: adminEmail },
   });
@@ -49,11 +49,11 @@ async function main() {
         email: adminEmail,
         passwordHash,
         name: 'Resort Administrator',
-        role: 'ADMIN',
+        role: 'OWNER_ADMIN',
       },
     });
     console.log('✓ Created default admin user:');
-    console.log('   Email: admin@hillqueenecoresort.com');
+    console.log('   Email: admin@hillqueenecoresorts.com');
     console.log('   Username: admin');
     console.log('   Password: AdminPassword@2026');
   }
@@ -181,52 +181,100 @@ async function main() {
     await prisma.galleryImage.createMany({
       data: [
         {
-          imageUrl: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
-          caption: "Murguma Dam and surrounding hills during golden sunset [Sample Placeholder]",
-          category: "Nearby Attractions",
+          imageUrl: "https://images.unsplash.com/photo-1587061949409-02df41d5e562?q=80&w=1200&auto=format&fit=crop",
+          caption: "[Preview Placeholder] Eco-cottage exterior with veranda and natural stone pathway",
+          category: "Resort exterior and entrance",
           displayOrder: 1,
         },
         {
-          imageUrl: "https://images.unsplash.com/photo-1587061949409-02df41d5e562?q=80&w=1200&auto=format&fit=crop",
-          caption: "Eco Cottage Surrounded by Greeneries [Sample Placeholder]",
-          category: "Resort Exterior",
+          imageUrl: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=1200&auto=format&fit=crop",
+          caption: "[Preview Placeholder] Rustic cottage entrance surrounded by quiet forested hillocks",
+          category: "Resort exterior and entrance",
           displayOrder: 2,
         },
         {
-          imageUrl: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=1200&auto=format&fit=crop",
-          caption: "Warm and inviting cottage interior [Sample Placeholder]",
-          category: "Rooms",
+          imageUrl: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=1200&auto=format&fit=crop",
+          caption: "[Preview Placeholder] Independent hillside family cottages nestled among sal groves",
+          category: "Rooms and cottages",
           displayOrder: 3,
         },
         {
-          imageUrl: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=1200&auto=format&fit=crop",
-          caption: "Pristine nature trails and rural tranquility in Mamudi [Sample Placeholder]",
-          category: "Property Surroundings",
+          imageUrl: "https://images.unsplash.com/photo-1510798831971-661eb04b3739?q=80&w=1200&auto=format&fit=crop",
+          caption: "[Preview Placeholder] Private cottage porch overlooking serene rural landscapes",
+          category: "Rooms and cottages",
           displayOrder: 4,
         },
         {
-          imageUrl: "https://images.unsplash.com/photo-1613769049987-b31b641f25b1?q=80&w=1200&auto=format&fit=crop",
-          caption: "Freshly prepared wholesome regional Bengali cuisine [Sample Placeholder]",
-          category: "Food",
+          imageUrl: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=1200&auto=format&fit=crop",
+          caption: "[Preview Placeholder] Cozy bedroom with comfortable wooden double bed and reading lamp",
+          category: "Room interiors",
           displayOrder: 5,
         },
         {
-          imageUrl: "https://images.unsplash.com/photo-1510312305653-8ed496efae75?q=80&w=1200&auto=format&fit=crop",
-          caption: "Evening campfire under the starry night sky [Sample Placeholder]",
-          category: "Facilities",
+          imageUrl: "https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=1200&auto=format&fit=crop",
+          caption: "[Preview Placeholder] Clean interior layout with window views of surrounding hills",
+          category: "Room interiors",
           displayOrder: 6,
         },
         {
-          imageUrl: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=1200&auto=format&fit=crop",
-          caption: "Cottage veranda overlooking lush greenery [Sample Placeholder]",
-          category: "Resort Exterior",
+          imageUrl: "https://images.unsplash.com/photo-1613769049987-b31b641f25b1?q=80&w=1200&auto=format&fit=crop",
+          caption: "[Preview Placeholder] Fresh regional Bengali thali meals and traditional home-style cooking",
+          category: "Restaurant and dining",
           displayOrder: 7,
         },
         {
-          imageUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop",
-          caption: "Serene lakeside reflection near Murguma Dam [Sample Placeholder]",
-          category: "Nearby Attractions",
+          imageUrl: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?q=80&w=1200&auto=format&fit=crop",
+          caption: "[Preview Placeholder] Morning tea and wholesome breakfast freshly prepared on order",
+          category: "Restaurant and dining",
           displayOrder: 8,
+        },
+        {
+          imageUrl: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
+          caption: "[Preview Placeholder] Sunset panorama across Murguma Lake and the Ajodhya ridges",
+          category: "Mountain and lake views",
+          displayOrder: 9,
+        },
+        {
+          imageUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop",
+          caption: "[Preview Placeholder] Peaceful early morning water reflections near Mamudi valley",
+          category: "Mountain and lake views",
+          displayOrder: 10,
+        },
+        {
+          imageUrl: "https://images.unsplash.com/photo-1584467735871-8e85353a8413?q=80&w=1200&auto=format&fit=crop",
+          caption: "[Preview Placeholder] Open grassy courtyard for peaceful afternoon relaxation and nature walks",
+          category: "Gardens and outdoor areas",
+          displayOrder: 11,
+        },
+        {
+          imageUrl: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=80&w=1200&auto=format&fit=crop",
+          caption: "[Preview Placeholder] Rustic open-air garden spaces flanked by native green flora",
+          category: "Gardens and outdoor areas",
+          displayOrder: 12,
+        },
+        {
+          imageUrl: "https://images.unsplash.com/photo-1510312305653-8ed496efae75?q=80&w=1200&auto=format&fit=crop",
+          caption: "[Preview Placeholder] Evening outdoor campfire gathering under the clear, star-lit Purulia sky",
+          category: "Activities and experiences",
+          displayOrder: 13,
+        },
+        {
+          imageUrl: "https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=1200&auto=format&fit=crop",
+          caption: "[Preview Placeholder] Morning nature trails through peaceful forested village pathways",
+          category: "Activities and experiences",
+          displayOrder: 14,
+        },
+        {
+          imageUrl: "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?q=80&w=1200&auto=format&fit=crop",
+          caption: "[Attraction Guide] Cascading mountain streams at Bamni and Turga Waterfalls (approx. 24 km)",
+          category: "Nearby tourist attractions",
+          displayOrder: 15,
+        },
+        {
+          imageUrl: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1200&auto=format&fit=crop",
+          caption: "[Attraction Guide] Ajodhya Hills viewpoint overlooking the vast forested plateau (approx. 18 km)",
+          category: "Nearby tourist attractions",
+          displayOrder: 16,
         },
       ],
     });

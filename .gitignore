@@ -25,9 +25,18 @@ yarn-error.log*
 # Environment files
 .env
 .env*.local
+.env.production
+
+# Archive packages
+*.zip
+*.tar.gz
+*.tgz
 
 # TypeScript build info
 *.tsbuildinfo
+
+# Scratch scripts
+scratch/
 
 # SQLite local database files
 prisma/*.db

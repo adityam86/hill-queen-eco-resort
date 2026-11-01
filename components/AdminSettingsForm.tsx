@@ -14,21 +14,21 @@ export default function AdminSettingsForm({ initialSettings }: SettingsFormProps
   const [formData, setFormData] = useState({
     resortName: initialSettings.resortName || 'Hill Queen Eco Resort',
     tagline: initialSettings.tagline || 'Escape Into Nature. Stay Close to Serenity.',
-    address: initialSettings.address || 'Mamudi, Murguma, Purulia, West Bengal, India',
+    address: initialSettings.address || 'Mamudi, Murguma, Purulia, West Bengal 723152, India',
     phonePrimary: initialSettings.phonePrimary || '9735888106',
     phoneSecondary: initialSettings.phoneSecondary || '9733713255',
     phoneTertiary: initialSettings.phoneTertiary || '8670214030',
     whatsappNumber: initialSettings.whatsappNumber || '9735888106',
     email: initialSettings.email || 'hillqueenecoresort@gmail.com',
-    websiteUrl: initialSettings.websiteUrl || 'https://hillqueenecoresort.com',
-    googleMapsUrl: initialSettings.googleMapsUrl || 'https://maps.google.com/?q=Murguma+Dam+Purulia+West+Bengal',
+    websiteUrl: initialSettings.websiteUrl || 'https://hillqueenecoresorts.com',
+    googleMapsUrl: initialSettings.googleMapsUrl || 'https://share.google/yDmE0tmJM7PhlxVlN',
     checkInTime: initialSettings.checkInTime || '11:00 AM',
     checkOutTime: initialSettings.checkOutTime || '10:00 AM',
     heroHeading: initialSettings.heroHeading || 'Discover Your Peaceful Escape.',
     heroSubheading: initialSettings.heroSubheading || 'Experience the beauty of nature and a relaxing stay at Hill Queen Eco Resort, Murguma, Purulia.',
     aboutText: initialSettings.aboutText || '',
     seoTitle: initialSettings.seoTitle || 'Hill Queen Eco Resort | Luxury Nature Resort in Murguma, Purulia',
-    seoDescription: initialSettings.seoDescription || 'Experience peaceful luxury at Hill Queen Eco Resort in Mamudi, Murguma, Purulia. Serene accommodation near Murguma Dam & Ajodhya Hills with authentic hospitality.',
+    seoDescription: initialSettings.seoDescription || 'Experience peaceful luxury at Hill Queen Eco Resort in Mamudi, Murguma, Purulia, West Bengal 723152. Serene accommodation near Murguma Dam & Ajodhya Hills with authentic hospitality.',
   });
 
   const [saving, setSaving] = useState(false);
@@ -184,7 +184,7 @@ export default function AdminSettingsForm({ initialSettings }: SettingsFormProps
             required
             value={formData.address}
             onChange={handleChange}
-            placeholder="Mamudi, Murguma, Purulia, West Bengal, India"
+            placeholder="Mamudi, Murguma, Purulia, West Bengal 723152, India"
             className="w-full px-4 py-2.5 rounded-xl border border-ivory-dark bg-ivory/20 text-forest text-sm focus:outline-none focus:border-gold"
           />
         </div>
@@ -200,7 +200,7 @@ export default function AdminSettingsForm({ initialSettings }: SettingsFormProps
               name="websiteUrl"
               value={formData.websiteUrl}
               onChange={handleChange}
-              placeholder="https://hillqueenecoresort.com"
+              placeholder="https://hillqueenecoresorts.com"
               className="w-full px-4 py-2.5 rounded-xl border border-ivory-dark bg-ivory/20 text-forest text-sm focus:outline-none focus:border-gold"
             />
           </div>
@@ -208,16 +208,19 @@ export default function AdminSettingsForm({ initialSettings }: SettingsFormProps
           {/* Google Maps Link */}
           <div>
             <label className="block text-xs font-semibold text-forest uppercase tracking-wider mb-1.5">
-              Google Maps Location URL
+              Google Maps Location Link / Coordinates (Supplied by Resort Owner)
             </label>
             <input
               type="text"
               name="googleMapsUrl"
               value={formData.googleMapsUrl}
               onChange={handleChange}
-              placeholder="https://maps.google.com/?q=..."
+              placeholder="https://share.google/yDmE0tmJM7PhlxVlN"
               className="w-full px-4 py-2.5 rounded-xl border border-ivory-dark bg-ivory/20 text-forest text-sm focus:outline-none focus:border-gold"
             />
+            <span className="text-[11px] text-forest/60 mt-1 block">
+              Enter the official Google Maps link. The homepage and contact page embed this verified location without guessing coordinates.
+            </span>
           </div>
         </div>
 
