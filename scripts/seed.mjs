@@ -1,6 +1,16 @@
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 
+if (!process.env.DATABASE_URL) {
+  const fallbackUrl =
+    process.env.POSTGRES_PRISMA_URL ||
+    process.env.POSTGRES_URL ||
+    process.env.STORAGE_URL;
+  if (fallbackUrl) {
+    process.env.DATABASE_URL = fallbackUrl;
+  }
+}
+
 const prisma = new PrismaClient();
 
 async function main() {
