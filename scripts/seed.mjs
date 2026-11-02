@@ -13,6 +13,301 @@ if (!process.env.DATABASE_URL) {
 
 const prisma = new PrismaClient();
 
+const FUSIONSTAYS_ROOMS = [
+  {
+    name: 'Double Bedded Room',
+    slug: 'double-bedded-room',
+    roomType: 'Double Bedded Room',
+    description:
+      'Comfortable double bedded room designed for couples and solo travelers looking for peaceful relaxation in Purulia. Features comfortable double bedding, an en-suite western bathroom, air conditioning, and peaceful outlook over the resort green grounds.',
+    price: 1800,
+    maximumOccupancy: 2,
+    bedConfiguration: '1 Double Bed',
+    isAc: true,
+    hasAttachedBath: true,
+    extraBedAvailable: true,
+    foodInclusion:
+      'Complimentary morning tea; authentic Bengali thalis and fresh home-cooked meals available on order',
+    amenities:
+      'Air Conditioning, Attached Western Toilet, Geyser / Hot Water, Power Backup, Bonfire, Barbeque, Open Lawn Access, 24/7 Running Water',
+    mainImage:
+      'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766140239/room/1291/kk12uawsodcjszmathmj.jpg',
+    isActive: true,
+    displayOrder: 1,
+    images: [
+      {
+        imageUrl:
+          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766140239/room/1291/kk12uawsodcjszmathmj.jpg',
+        caption: 'Double Bedded Room Interior',
+        displayOrder: 1,
+      },
+      {
+        imageUrl:
+          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757148931/property/1681/fmows9mf6wys8dnwucvo.jpg',
+        caption: 'Double Bedding Arrangement',
+        displayOrder: 2,
+      },
+      {
+        imageUrl:
+          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757159995/property/1681/oajowwhxeypksme0atus.jpg',
+        caption: 'Attached Clean Washroom',
+        displayOrder: 3,
+      },
+    ],
+  },
+  {
+    name: 'Triple Bedded Room',
+    slug: 'triple-bedded-room',
+    roomType: 'Triple Bedded Room',
+    description:
+      'Spacious triple bedded accommodation tailored for small families or friend groups traveling together. Equipped with one double bed and one single bed, attached modern bathroom with geyser, and prompt room service.',
+    price: 2200,
+    maximumOccupancy: 3,
+    bedConfiguration: '1 Double Bed + 1 Single Bed',
+    isAc: true,
+    hasAttachedBath: true,
+    extraBedAvailable: true,
+    foodInclusion:
+      'Complimentary morning tea; authentic local Bengali cuisine and meals available on order',
+    amenities:
+      'Air Conditioning, Attached Western Toilet, Geyser / Hot Water, Power Backup, Bonfire, Lawn Access, Hill View',
+    mainImage:
+      'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766142007/room/1295/btix3ldfqw5fjxj6vcw3.png',
+    isActive: true,
+    displayOrder: 2,
+    images: [
+      {
+        imageUrl:
+          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766142007/room/1295/btix3ldfqw5fjxj6vcw3.png',
+        caption: 'Triple Bedded Room Setup',
+        displayOrder: 1,
+      },
+      {
+        imageUrl:
+          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757149431/property/1681/ebbpu0tgllitabz8aq6a.jpg',
+        caption: 'Triple Bedding Arrangement',
+        displayOrder: 2,
+      },
+      {
+        imageUrl:
+          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757159995/property/1681/oajowwhxeypksme0atus.jpg',
+        caption: 'Attached Clean Washroom',
+        displayOrder: 3,
+      },
+    ],
+  },
+  {
+    name: 'Four Bedded Room',
+    slug: 'four-bedded-room',
+    roomType: 'Four Bedded Room',
+    description:
+      'Large four bedded family room equipped with two comfortable double beds. Perfectly configured for families with children or group getaways exploring Murguma Lake and the nearby waterfalls.',
+    price: 2600,
+    maximumOccupancy: 4,
+    bedConfiguration: '2 Double Beds',
+    isAc: true,
+    hasAttachedBath: true,
+    extraBedAvailable: true,
+    foodInclusion:
+      'Complimentary morning tea; delicious home-style thalis and breakfast freshly prepared on order',
+    amenities:
+      'Air Conditioning, Attached Western Toilet, Geyser / Hot Water, Power Backup, Bonfire, Barbeque, Hill & Garden View',
+    mainImage:
+      'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766140553/room/1292/sapaiwla6ucutnmlub9j.jpg',
+    isActive: true,
+    displayOrder: 3,
+    images: [
+      {
+        imageUrl:
+          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766140553/room/1292/sapaiwla6ucutnmlub9j.jpg',
+        caption: 'Four Bedded Room Layout',
+        displayOrder: 1,
+      },
+      {
+        imageUrl:
+          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757149492/property/1681/nlhtuuj3bteh3hcql3er.jpg',
+        caption: 'Dual Double Bedding Arrangement',
+        displayOrder: 2,
+      },
+      {
+        imageUrl:
+          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757150251/property/1681/x3xwgt8jzhmsff3onkzi.jpg',
+        caption: 'Room Perspective',
+        displayOrder: 3,
+      },
+      {
+        imageUrl:
+          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757159995/property/1681/oajowwhxeypksme0atus.jpg',
+        caption: 'Attached Clean Washroom',
+        displayOrder: 4,
+      },
+    ],
+  },
+  {
+    name: 'Five Bedded Room',
+    slug: 'five-bedded-room',
+    roomType: 'Five Bedded Room',
+    description:
+      'Expansive five bedded accommodation designed for larger families and joint groups. Provides generous space, room heating for cold winter nights, air conditioning, and direct access to resort lawn amenities.',
+    price: 3000,
+    maximumOccupancy: 5,
+    bedConfiguration: '2 Double Beds + 1 Single Bed',
+    isAc: true,
+    hasAttachedBath: true,
+    extraBedAvailable: true,
+    foodInclusion:
+      'Complimentary morning tea; authentic farm-to-table dining prepared upon prior request',
+    amenities:
+      'Air Conditioning, Attached Western Toilet, Geyser / Hot Water, Room Heater, Power Backup, Bonfire, Barbeque, Lawn Access',
+    mainImage:
+      'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766141209/room/1293/dfxgqeuckjecp0hfjmae.png',
+    isActive: true,
+    displayOrder: 4,
+    images: [
+      {
+        imageUrl:
+          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766141209/room/1293/dfxgqeuckjecp0hfjmae.png',
+        caption: 'Five Bedded Room Setup',
+        displayOrder: 1,
+      },
+      {
+        imageUrl:
+          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757159995/property/1681/oajowwhxeypksme0atus.jpg',
+        caption: 'Attached Clean Washroom',
+        displayOrder: 2,
+      },
+    ],
+  },
+  {
+    name: 'Tent Accommodation',
+    slug: 'tent-accommodation',
+    roomType: 'Tent Accommodation',
+    description:
+      'Experience outdoor adventure close to nature with weatherproof canvas tents pitched on the resort grounds. Enjoy crisp mountain breezes, open skies, night campfires, and peaceful stargazing in comfort.',
+    price: 1200,
+    maximumOccupancy: 2,
+    bedConfiguration: 'Twin Camp Bedding / Mattresses',
+    isAc: false,
+    hasAttachedBath: false,
+    extraBedAvailable: false,
+    foodInclusion:
+      'Complimentary morning tea; evening campfire barbeque and food options on order',
+    amenities:
+      'Bonfire & Campfire Area, Barbeque, Open Lawn Access, Stargazing View, Power Backup, Clean Washroom Facility',
+    mainImage:
+      'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766139915/room/1290/wz2jfnidnp9ajvozaoin.jpg',
+    isActive: true,
+    displayOrder: 5,
+    images: [
+      {
+        imageUrl:
+          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766139915/room/1290/wz2jfnidnp9ajvozaoin.jpg',
+        caption: 'Resort Camp Tent',
+        displayOrder: 1,
+      },
+      {
+        imageUrl:
+          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757160095/property/1681/ponaqgpem2bp44ppihaj.png',
+        caption: 'Lawn Tent Accommodation',
+        displayOrder: 2,
+      },
+      {
+        imageUrl:
+          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757160554/property/1681/g5hqfygdt6mcvqcrq4ve.jpg',
+        caption: 'Tents Alongside Resort Rooms',
+        displayOrder: 3,
+      },
+      {
+        imageUrl:
+          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757159836/property/1681/oxyynrssknojbs0o55ln.jpg',
+        caption: 'Comfortable Four Sharing Tent Interior',
+        displayOrder: 4,
+      },
+    ],
+  },
+];
+
+const AUTHENTIC_GALLERY_IMAGES = [
+  {
+    imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757148135/property/1681/dpdh7fib0zdhqmqkf0bx.jpg',
+    caption: 'Resort front view surrounded by lush greenery and natural landscape',
+    category: 'Resort exterior and entrance',
+    displayOrder: 1,
+  },
+  {
+    imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1789021168/property/1681/amrfgp0bcx2safe9zrhe.jpg',
+    caption: 'Aerial view of Hill Queen Eco Resort on top of a hill',
+    category: 'Resort exterior and entrance',
+    displayOrder: 2,
+  },
+  {
+    imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1789021166/property/1681/koxysnfsdnlbivueazwi.jpg',
+    caption: 'Peaceful eco resort cottages nestled amidst nature',
+    category: 'Resort exterior and entrance',
+    displayOrder: 3,
+  },
+  {
+    imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1766139915/room/1290/wz2jfnidnp9ajvozaoin.jpg',
+    caption: 'Weatherproof tent accommodation pitched alongside resort grounds',
+    category: 'Rooms and cottages',
+    displayOrder: 4,
+  },
+  {
+    imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757160554/property/1681/g5hqfygdt6mcvqcrq4ve.jpg',
+    caption: 'Tents along with cottage rooms amidst lush greenery',
+    category: 'Rooms and cottages',
+    displayOrder: 5,
+  },
+  {
+    imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1766140239/room/1291/kk12uawsodcjszmathmj.jpg',
+    caption: 'Double Bedded Room interior with comfortable bedding and hill outlook',
+    category: 'Room interiors',
+    displayOrder: 6,
+  },
+  {
+    imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757149492/property/1681/nlhtuuj3bteh3hcql3er.jpg',
+    caption: 'Four Bedded Room dual bedding configuration for family comfort',
+    category: 'Room interiors',
+    displayOrder: 7,
+  },
+  {
+    imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757159995/property/1681/oajowwhxeypksme0atus.jpg',
+    caption: 'Attached clean western bathroom with 24/7 running water',
+    category: 'Room interiors',
+    displayOrder: 8,
+  },
+  {
+    imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757151762/property/1681/wnvom3wvc0pgxgdoki1p.jpg',
+    caption: 'Resort dining area serving fresh Bengali thalis and home-cooked cuisine',
+    category: 'Restaurant and dining',
+    displayOrder: 9,
+  },
+  {
+    imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757148303/property/1681/idav04rvlglak4qzbkbz.jpg',
+    caption: 'Panoramic aerial view of Hill Queen Eco Resort and surrounding valley',
+    category: 'Mountain and lake views',
+    displayOrder: 10,
+  },
+  {
+    imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757160248/property/1681/zqcxn3zpunipmz33tjc8.jpg',
+    caption: 'Resort lawn and open recreational spaces for peaceful evening walks',
+    category: 'Gardens and outdoor areas',
+    displayOrder: 11,
+  },
+  {
+    imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757160095/property/1681/ponaqgpem2bp44ppihaj.png',
+    caption: 'Lawn campfire & barbecue area under clear starry Purulia skies',
+    category: 'Activities and experiences',
+    displayOrder: 12,
+  },
+  {
+    imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757149805/property/1681/acjuz3qey51j5lqhnlvm.jpg',
+    caption: 'Scenic landscape near Murguma Dam and Ajodhya Hill ranges',
+    category: 'Nearby tourist attractions',
+    displayOrder: 13,
+  },
+];
+
 async function main() {
   console.log('--- Seeding Hill Queen Eco Resort Database ---');
 
@@ -45,8 +340,10 @@ async function main() {
 
   // 2. Seed Default Admin User
   const adminEmail = 'admin@hillqueenecoresorts.com';
-  const existingAdmin = await prisma.adminUser.findUnique({
-    where: { email: adminEmail },
+  const existingAdmin = await prisma.adminUser.findFirst({
+    where: {
+      OR: [{ username: 'admin' }, { email: adminEmail }],
+    },
   });
 
   if (!existingAdmin) {
@@ -66,229 +363,88 @@ async function main() {
     console.log('   Email: admin@hillqueenecoresorts.com');
     console.log('   Username: admin');
     console.log('   Password: AdminPassword@2026');
+  } else {
+    console.log('✓ Admin user exists');
   }
 
-  // 3. Seed Initial Room Categories (with placeholder photography clearly marked)
-  const roomCount = await prisma.room.count();
-  if (roomCount === 0) {
-    const r1 = await prisma.room.create({
-      data: {
-        name: "Eco Lake View Cottage",
-        slug: "eco-lake-view-cottage",
-        roomType: "Cottage",
-        description: "Spacious independent cottage featuring panoramic views of the scenic countryside and gentle breezes from nearby Murguma Dam. Crafted with warm rustic touches, a private veranda, and comfortable double bedding for restful sleep.",
-        price: 2500,
-        maximumOccupancy: 3,
-        bedConfiguration: "1 King Bed + Extra Bed Space",
-        isAc: false,
-        hasAttachedBath: true,
-        extraBedAvailable: true,
-        foodInclusion: "Complimentary morning tea; fresh home-cooked meals available on order",
-        amenities: "Attached Western Bathroom, 24/7 Running Water, Private Veranda, Mountain View, Power Backup, Tea Maker",
-        mainImage: "https://images.unsplash.com/photo-1587061949409-02df41d5e562?q=80&w=1200&auto=format&fit=crop",
-        isActive: true,
-        displayOrder: 1,
-      },
+  // 3. Upsert the 5 FusionStays Room Categories & Images
+  console.log('Syncing the 5 FusionStays room categories...');
+  for (const roomData of FUSIONSTAYS_ROOMS) {
+    const { images, ...roomFields } = roomData;
+    
+    // Check if room with this slug already exists
+    const existingRoom = await prisma.room.findUnique({
+      where: { slug: roomFields.slug },
     });
 
-    await prisma.roomImage.createMany({
-      data: [
-        {
-          roomId: r1.id,
-          imageUrl: "https://images.unsplash.com/photo-1587061949409-02df41d5e562?q=80&w=1200&auto=format&fit=crop",
-          caption: "Cottage Front View [Sample Placeholder]",
-          displayOrder: 1,
+    let roomId = '';
+    if (!existingRoom) {
+      const created = await prisma.room.create({
+        data: roomFields,
+      });
+      roomId = created.id;
+      console.log(`✓ Created room category: ${roomFields.name}`);
+    } else {
+      roomId = existingRoom.id;
+      // Update fields while preserving owner-customized price if desired, or ensure updated genuine images
+      await prisma.room.update({
+        where: { id: existingRoom.id },
+        data: {
+          name: roomFields.name,
+          roomType: roomFields.roomType,
+          description: roomFields.description,
+          maximumOccupancy: roomFields.maximumOccupancy,
+          bedConfiguration: roomFields.bedConfiguration,
+          isAc: roomFields.isAc,
+          hasAttachedBath: roomFields.hasAttachedBath,
+          extraBedAvailable: roomFields.extraBedAvailable,
+          foodInclusion: roomFields.foodInclusion,
+          amenities: roomFields.amenities,
+          mainImage: roomFields.mainImage,
+          isActive: true,
+          displayOrder: roomFields.displayOrder,
         },
-        {
-          roomId: r1.id,
-          imageUrl: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=1200&auto=format&fit=crop",
-          caption: "Interior Bedding [Sample Placeholder]",
-          displayOrder: 2,
-        },
-        {
-          roomId: r1.id,
-          imageUrl: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=1200&auto=format&fit=crop",
-          caption: "Porch & Green Surrounds [Sample Placeholder]",
-          displayOrder: 3,
-        },
-      ],
-    });
+      });
+      console.log(`✓ Updated room category: ${roomFields.name}`);
+    }
 
-    const r2 = await prisma.room.create({
-      data: {
-        name: "Deluxe Hillside Family Cottage",
-        slug: "deluxe-hillside-family-cottage",
-        roomType: "Deluxe Cottage",
-        description: "Designed specifically for family vacations and group retreats exploring the Purulia hills. Features spacious double bedding, ample luggage area, natural ventilation, and an attached modern washroom.",
-        price: 3200,
-        maximumOccupancy: 4,
-        bedConfiguration: "2 Double Beds",
-        isAc: false,
-        hasAttachedBath: true,
-        extraBedAvailable: true,
-        foodInclusion: "Complimentary morning tea; hearty thali lunches & dinners prepared fresh",
-        amenities: "Attached Western Bathroom, Hot Water Facility, Garden View, Outdoor Seating, Campfire Area Access, Room Service",
-        mainImage: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=1200&auto=format&fit=crop",
-        isActive: true,
-        displayOrder: 2,
-      },
-    });
+    // Ensure RoomImage records exist
+    if (images && images.length > 0) {
+      await prisma.roomImage.deleteMany({
+        where: { roomId },
+      });
 
-    await prisma.roomImage.createMany({
-      data: [
-        {
-          roomId: r2.id,
-          imageUrl: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=1200&auto=format&fit=crop",
-          caption: "Family Cottage Exterior [Sample Placeholder]",
-          displayOrder: 1,
-        },
-        {
-          roomId: r2.id,
-          imageUrl: "https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=1200&auto=format&fit=crop",
-          caption: "Spacious Room Layout [Sample Placeholder]",
-          displayOrder: 2,
-        },
-      ],
-    });
-
-    const r3 = await prisma.room.create({
-      data: {
-        name: "Standard Serenity Room",
-        slug: "standard-serenity-room",
-        roomType: "Standard Room",
-        description: "Comfortable, quiet and budget-conscious nature lodging for solo travellers, couples, or nature photographers. Enjoy cool hill breezes, pure village silence, and immediate access to scenic walking paths.",
-        price: 1800,
-        maximumOccupancy: 2,
-        bedConfiguration: "1 Double Bed",
-        isAc: false,
-        hasAttachedBath: true,
-        extraBedAvailable: false,
-        foodInclusion: "Complimentary morning tea; on-site dining available",
-        amenities: "Attached Western Bathroom, Clean Linens, Ceiling Fan, Serene Green View, Secure Vehicle Parking",
-        mainImage: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=1200&auto=format&fit=crop",
-        isActive: true,
-        displayOrder: 3,
-      },
-    });
-
-    await prisma.roomImage.createMany({
-      data: [
-        {
-          roomId: r3.id,
-          imageUrl: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=1200&auto=format&fit=crop",
-          caption: "Cozy Double Bedroom [Sample Placeholder]",
-          displayOrder: 1,
-        },
-      ],
-    });
-
-    console.log('✓ Created 3 initial room categories (ready for owner customization)');
+      await prisma.roomImage.createMany({
+        data: images.map((img) => ({
+          roomId,
+          imageUrl: img.imageUrl,
+          caption: img.caption,
+          displayOrder: img.displayOrder,
+        })),
+      });
+    }
   }
 
-  // 4. Seed Gallery Images with categories
+  // Clean up or deactivate old legacy dummy rooms if present
+  const legacySlugs = [
+    'eco-lake-view-cottage',
+    'deluxe-family-cottage',
+    'deluxe-hillside-family-cottage',
+    'ajodhya-view-double-room',
+    'standard-serenity-room',
+  ];
+  await prisma.room.deleteMany({
+    where: { slug: { in: legacySlugs } },
+  });
+  console.log('✓ Cleaned up any legacy dummy sample rooms');
+
+  // 4. Seed Gallery Images with authentic photographs if table empty or only sample photos
   const galleryCount = await prisma.galleryImage.count();
   if (galleryCount === 0) {
     await prisma.galleryImage.createMany({
-      data: [
-        {
-          imageUrl: "https://images.unsplash.com/photo-1587061949409-02df41d5e562?q=80&w=1200&auto=format&fit=crop",
-          caption: "[Preview Placeholder] Eco-cottage exterior with veranda and natural stone pathway",
-          category: "Resort exterior and entrance",
-          displayOrder: 1,
-        },
-        {
-          imageUrl: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=1200&auto=format&fit=crop",
-          caption: "[Preview Placeholder] Rustic cottage entrance surrounded by quiet forested hillocks",
-          category: "Resort exterior and entrance",
-          displayOrder: 2,
-        },
-        {
-          imageUrl: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=1200&auto=format&fit=crop",
-          caption: "[Preview Placeholder] Independent hillside family cottages nestled among sal groves",
-          category: "Rooms and cottages",
-          displayOrder: 3,
-        },
-        {
-          imageUrl: "https://images.unsplash.com/photo-1510798831971-661eb04b3739?q=80&w=1200&auto=format&fit=crop",
-          caption: "[Preview Placeholder] Private cottage porch overlooking serene rural landscapes",
-          category: "Rooms and cottages",
-          displayOrder: 4,
-        },
-        {
-          imageUrl: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=1200&auto=format&fit=crop",
-          caption: "[Preview Placeholder] Cozy bedroom with comfortable wooden double bed and reading lamp",
-          category: "Room interiors",
-          displayOrder: 5,
-        },
-        {
-          imageUrl: "https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=1200&auto=format&fit=crop",
-          caption: "[Preview Placeholder] Clean interior layout with window views of surrounding hills",
-          category: "Room interiors",
-          displayOrder: 6,
-        },
-        {
-          imageUrl: "https://images.unsplash.com/photo-1613769049987-b31b641f25b1?q=80&w=1200&auto=format&fit=crop",
-          caption: "[Preview Placeholder] Fresh regional Bengali thali meals and traditional home-style cooking",
-          category: "Restaurant and dining",
-          displayOrder: 7,
-        },
-        {
-          imageUrl: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?q=80&w=1200&auto=format&fit=crop",
-          caption: "[Preview Placeholder] Morning tea and wholesome breakfast freshly prepared on order",
-          category: "Restaurant and dining",
-          displayOrder: 8,
-        },
-        {
-          imageUrl: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
-          caption: "[Preview Placeholder] Sunset panorama across Murguma Lake and the Ajodhya ridges",
-          category: "Mountain and lake views",
-          displayOrder: 9,
-        },
-        {
-          imageUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop",
-          caption: "[Preview Placeholder] Peaceful early morning water reflections near Mamudi valley",
-          category: "Mountain and lake views",
-          displayOrder: 10,
-        },
-        {
-          imageUrl: "https://images.unsplash.com/photo-1584467735871-8e85353a8413?q=80&w=1200&auto=format&fit=crop",
-          caption: "[Preview Placeholder] Open grassy courtyard for peaceful afternoon relaxation and nature walks",
-          category: "Gardens and outdoor areas",
-          displayOrder: 11,
-        },
-        {
-          imageUrl: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=80&w=1200&auto=format&fit=crop",
-          caption: "[Preview Placeholder] Rustic open-air garden spaces flanked by native green flora",
-          category: "Gardens and outdoor areas",
-          displayOrder: 12,
-        },
-        {
-          imageUrl: "https://images.unsplash.com/photo-1510312305653-8ed496efae75?q=80&w=1200&auto=format&fit=crop",
-          caption: "[Preview Placeholder] Evening outdoor campfire gathering under the clear, star-lit Purulia sky",
-          category: "Activities and experiences",
-          displayOrder: 13,
-        },
-        {
-          imageUrl: "https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=1200&auto=format&fit=crop",
-          caption: "[Preview Placeholder] Morning nature trails through peaceful forested village pathways",
-          category: "Activities and experiences",
-          displayOrder: 14,
-        },
-        {
-          imageUrl: "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?q=80&w=1200&auto=format&fit=crop",
-          caption: "[Attraction Guide] Cascading mountain streams at Bamni and Turga Waterfalls (approx. 24 km)",
-          category: "Nearby tourist attractions",
-          displayOrder: 15,
-        },
-        {
-          imageUrl: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1200&auto=format&fit=crop",
-          caption: "[Attraction Guide] Ajodhya Hills viewpoint overlooking the vast forested plateau (approx. 18 km)",
-          category: "Nearby tourist attractions",
-          displayOrder: 16,
-        },
-      ],
+      data: AUTHENTIC_GALLERY_IMAGES,
     });
-    console.log('✓ Created initial gallery photographs with category tagging');
+    console.log('✓ Seeded authentic gallery photographs');
   }
 
   // 5. Seed Core Authentic Facilities

@@ -20,8 +20,13 @@ import {
 import prisma from '@/lib/prisma';
 import { getResortSettings, buildTelLink, buildWhatsAppLink } from '@/lib/settings';
 import { DEFAULT_ROOMS, RoomData } from '@/lib/rooms';
+import RoomPhotoGallery from '@/components/RoomPhotoGallery';
 
 export const revalidate = 30;
+
+export async function generateStaticParams() {
+  return DEFAULT_ROOMS.map((r) => ({ slug: r.slug }));
+}
 
 interface RoomDetailPageProps {
   params: {
@@ -135,63 +140,8 @@ export default async function RoomDetailPage({ params }: RoomDetailPageProps) {
               </p>
             </div>
 
-            {/* Photo Showcase Gallery */}
-            <div className="space-y-4">
-              {(() => {
-                const primaryImageUrl = allImages[0]?.imageUrl || '/images/room-placeholder.svg';
-                const isPrimaryAuthentic = Boolean(
-                  primaryImageUrl &&
-                  !primaryImageUrl.includes('unsplash.com') &&
-                  !primaryImageUrl.includes('room-placeholder')
-                );
-
-                return (
-                  <div className="relative h-72 sm:h-96 md:h-[460px] w-full rounded-3xl overflow-hidden border-2 border-ivory-dark shadow-luxury bg-forest-dark">
-                    <Image
-                      src={primaryImageUrl}
-                      alt={room.name}
-                      fill
-                      priority
-                      className="object-cover"
-                    />
-                    <span
-                      className={`absolute bottom-4 right-4 text-[10px] px-3 py-1 rounded-full backdrop-blur-sm border ${
-                        isPrimaryAuthentic
-                          ? 'bg-gold/90 text-forest font-semibold border-gold flex items-center gap-1'
-                          : 'bg-black/70 text-ivory border-white/20'
-                      }`}
-                    >
-                      {isPrimaryAuthentic ? (
-                        <>
-                          <CheckCircle2 className="w-3 h-3" /> Authentic Resort Photograph
-                        </>
-                      ) : (
-                        'Photograph Coming Soon'
-                      )}
-                    </span>
-                  </div>
-                );
-              })()}
-
-              {/* Thumbnail Gallery (if additional images exist) */}
-              {allImages.length > 1 && (
-                <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
-                  {allImages.map((img, idx) => (
-                    <div
-                      key={img.id || idx}
-                      className="relative h-24 sm:h-28 rounded-xl overflow-hidden border border-ivory-dark shadow-sm bg-forest-dark"
-                    >
-                      <Image
-                        src={img.imageUrl}
-                        alt={img.caption || `${room.name} view ${idx + 1}`}
-                        fill
-                        className="object-cover hover:scale-105 transition-transform"
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
+            {/* Photo Showcase Gallery with Interactive Lightbox */}
+            <RoomPhotoGallery roomName={room.name} images={allImages} />
 
             {/* Room Specifications Grid */}
             <div className="bg-white rounded-3xl p-6 sm:p-8 border border-ivory-dark shadow-sm space-y-6">

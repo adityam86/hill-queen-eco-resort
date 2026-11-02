@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
+import { DEFAULT_ROOMS } from '@/lib/rooms';
 
 export const dynamic = 'force-dynamic';
 
@@ -98,9 +99,69 @@ export async function GET(req: NextRequest) {
       });
     }
 
+    // Seed or synchronize the 5 official FusionStays room categories
+    for (const roomData of DEFAULT_ROOMS) {
+      const { images, ...roomFields } = roomData;
+      const existing = await prisma.room.findUnique({
+        where: { slug: roomFields.slug },
+      });
+      let roomId = '';
+      if (!existing) {
+        const created = await prisma.room.create({ data: roomFields });
+        roomId = created.id;
+      } else {
+        roomId = existing.id;
+        await prisma.room.update({
+          where: { id: existing.id },
+          data: {
+            name: roomFields.name,
+            roomType: roomFields.roomType,
+            description: roomFields.description,
+            maximumOccupancy: roomFields.maximumOccupancy,
+            bedConfiguration: roomFields.bedConfiguration,
+            isAc: roomFields.isAc,
+            hasAttachedBath: roomFields.hasAttachedBath,
+            extraBedAvailable: roomFields.extraBedAvailable,
+            foodInclusion: roomFields.foodInclusion,
+            amenities: roomFields.amenities,
+            mainImage: roomFields.mainImage,
+            isActive: true,
+            displayOrder: roomFields.displayOrder,
+          },
+        });
+      }
+
+      if (images && images.length > 0) {
+        await prisma.roomImage.deleteMany({ where: { roomId } });
+        await prisma.roomImage.createMany({
+          data: images.map((img) => ({
+            roomId,
+            imageUrl: img.imageUrl,
+            caption: img.caption,
+            displayOrder: img.displayOrder,
+          })),
+        });
+      }
+    }
+
+    // Clean up old legacy dummy rooms
+    await prisma.room.deleteMany({
+      where: {
+        slug: {
+          in: [
+            'eco-lake-view-cottage',
+            'deluxe-family-cottage',
+            'deluxe-hillside-family-cottage',
+            'ajodhya-view-double-room',
+            'standard-serenity-room',
+          ],
+        },
+      },
+    });
+
     return NextResponse.json({
       success: true,
-      message: 'Admin account and website settings successfully initialized in production!',
+      message: 'Admin account, website settings, and 5 room categories successfully initialized in production!',
       loginUrl: 'https://hill-queen-eco-resort.vercel.app/admin/login',
       credentials: {
         username: 'admin',

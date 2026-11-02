@@ -93,7 +93,7 @@ export default async function AdminRoomsPage() {
                 <div className="flex items-center gap-3">
                   <div className="relative w-16 h-16 rounded-xl overflow-hidden bg-forest-dark shrink-0 border border-ivory-dark">
                     <Image
-                      src={room.mainImage || 'https://images.unsplash.com/photo-1587061949409-02df41d5e562?q=80&w=300'}
+                      src={room.mainImage || '/images/room-placeholder.svg'}
                       alt={room.name}
                       fill
                       className="object-cover"
@@ -168,7 +168,7 @@ export default async function AdminRoomsPage() {
                         <div className="flex items-center gap-3">
                           <div className="relative w-14 h-14 rounded-xl overflow-hidden bg-forest-dark shrink-0 border border-ivory-dark">
                             <Image
-                              src={room.mainImage || 'https://images.unsplash.com/photo-1587061949409-02df41d5e562?q=80&w=300'}
+                              src={room.mainImage || '/images/room-placeholder.svg'}
                               alt={room.name}
                               fill
                               className="object-cover"

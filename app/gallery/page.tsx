@@ -27,151 +27,158 @@ export default async function GalleryPage() {
     console.warn('Could not fetch gallery images from DB:', error);
   }
 
-  // Curated, tasteful placeholder photographs for each of the 8 categories
-  // Explicitly labeled so visitors are never misled before the resort owner uploads authentic on-property photos
+  // Genuine property photographs sourced from Hill Queen Eco Resort property catalog
   const defaultPhotos: GalleryPhoto[] = [
     // 1. Resort exterior and entrance
     {
       id: 'ext-1',
-      imageUrl: 'https://images.unsplash.com/photo-1587061949409-02df41d5e562?q=80&w=1200&auto=format&fit=crop',
-      caption: '[Preview Placeholder] Eco-cottage exterior with veranda and natural stone pathway',
+      imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757148135/property/1681/dpdh7fib0zdhqmqkf0bx.jpg',
+      caption: 'Resort front view surrounded by lush greenery and natural landscape',
       category: 'Resort exterior and entrance',
       displayOrder: 1,
-      isPlaceholder: true,
+      isPlaceholder: false,
     },
     {
       id: 'ext-2',
-      imageUrl: 'https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=1200&auto=format&fit=crop',
-      caption: '[Preview Placeholder] Rustic cottage entrance surrounded by quiet forested hillocks',
+      imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1789021168/property/1681/amrfgp0bcx2safe9zrhe.jpg',
+      caption: 'Aerial view of Hill Queen Eco Resort on top of a hill',
       category: 'Resort exterior and entrance',
       displayOrder: 2,
-      isPlaceholder: true,
+      isPlaceholder: false,
+    },
+    {
+      id: 'ext-3',
+      imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1789021166/property/1681/koxysnfsdnlbivueazwi.jpg',
+      caption: 'Peaceful eco resort cottages nestled amidst nature',
+      category: 'Resort exterior and entrance',
+      displayOrder: 3,
+      isPlaceholder: false,
     },
 
     // 2. Rooms and cottages
     {
       id: 'room-1',
-      imageUrl: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=1200&auto=format&fit=crop',
-      caption: '[Preview Placeholder] Independent hillside family cottages nestled among sal groves',
+      imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1766139915/room/1290/wz2jfnidnp9ajvozaoin.jpg',
+      caption: 'Weatherproof tent accommodation pitched alongside resort grounds',
       category: 'Rooms and cottages',
-      displayOrder: 3,
-      isPlaceholder: true,
+      displayOrder: 4,
+      isPlaceholder: false,
     },
     {
       id: 'room-2',
-      imageUrl: 'https://images.unsplash.com/photo-1510798831971-661eb04b3739?q=80&w=1200&auto=format&fit=crop',
-      caption: '[Preview Placeholder] Private cottage porch overlooking serene rural landscapes',
+      imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757160554/property/1681/g5hqfygdt6mcvqcrq4ve.jpg',
+      caption: 'Tents along with cottage rooms amidst lush greenery',
       category: 'Rooms and cottages',
-      displayOrder: 4,
-      isPlaceholder: true,
+      displayOrder: 5,
+      isPlaceholder: false,
+    },
+    {
+      id: 'room-3',
+      imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757160411/property/1681/sdpnkcqg5tadhtsd4pni.jpg',
+      caption: 'Resort cottages and camping lawn layout',
+      category: 'Rooms and cottages',
+      displayOrder: 6,
+      isPlaceholder: false,
     },
 
     // 3. Room interiors
     {
       id: 'int-1',
-      imageUrl: 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=1200&auto=format&fit=crop',
-      caption: '[Preview Placeholder] Cozy bedroom with comfortable wooden double bed and reading lamp',
+      imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1766140239/room/1291/kk12uawsodcjszmathmj.jpg',
+      caption: 'Double Bedded Room interior with comfortable mattress and hill views',
       category: 'Room interiors',
-      displayOrder: 5,
-      isPlaceholder: true,
+      displayOrder: 7,
+      isPlaceholder: false,
     },
     {
       id: 'int-2',
-      imageUrl: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=1200&auto=format&fit=crop',
-      caption: '[Preview Placeholder] Clean interior layout with window views of surrounding hills',
+      imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757149492/property/1681/nlhtuuj3bteh3hcql3er.jpg',
+      caption: 'Four Bedded Room dual bedding configuration for family comfort',
       category: 'Room interiors',
-      displayOrder: 6,
-      isPlaceholder: true,
+      displayOrder: 8,
+      isPlaceholder: false,
+    },
+    {
+      id: 'int-3',
+      imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757159995/property/1681/oajowwhxeypksme0atus.jpg',
+      caption: 'Attached clean western bathroom with 24/7 running water',
+      category: 'Room interiors',
+      displayOrder: 9,
+      isPlaceholder: false,
     },
 
     // 4. Restaurant and dining
     {
       id: 'dine-1',
-      imageUrl: 'https://images.unsplash.com/photo-1613769049987-b31b641f25b1?q=80&w=1200&auto=format&fit=crop',
-      caption: '[Preview Placeholder] Fresh regional Bengali thali meals and traditional home-style cooking',
+      imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757151762/property/1681/wnvom3wvc0pgxgdoki1p.jpg',
+      caption: 'Resort dining area serving fresh Bengali thalis and home-cooked cuisine',
       category: 'Restaurant and dining',
-      displayOrder: 7,
-      isPlaceholder: true,
-    },
-    {
-      id: 'dine-2',
-      imageUrl: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?q=80&w=1200&auto=format&fit=crop',
-      caption: '[Preview Placeholder] Morning tea and wholesome breakfast freshly prepared on order',
-      category: 'Restaurant and dining',
-      displayOrder: 8,
-      isPlaceholder: true,
+      displayOrder: 10,
+      isPlaceholder: false,
     },
 
     // 5. Mountain and lake views
     {
       id: 'view-1',
-      imageUrl: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop',
-      caption: '[Preview Placeholder] Sunset panorama across Murguma Lake and the Ajodhya ridges',
+      imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757148303/property/1681/idav04rvlglak4qzbkbz.jpg',
+      caption: 'Panoramic aerial view of Hill Queen Eco Resort and surrounding valley',
       category: 'Mountain and lake views',
-      displayOrder: 9,
-      isPlaceholder: true,
+      displayOrder: 11,
+      isPlaceholder: false,
     },
     {
       id: 'view-2',
-      imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop',
-      caption: '[Preview Placeholder] Peaceful early morning water reflections near Mamudi valley',
+      imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757148858/property/1681/ih5j3evg6b3apr3516yl.jpg',
+      caption: 'View of the resort property overlooking the Purulia hills',
       category: 'Mountain and lake views',
-      displayOrder: 10,
-      isPlaceholder: true,
+      displayOrder: 12,
+      isPlaceholder: false,
     },
 
     // 6. Gardens and outdoor areas
     {
       id: 'gard-1',
-      imageUrl: 'https://images.unsplash.com/photo-1584467735871-8e85353a8413?q=80&w=1200&auto=format&fit=crop',
-      caption: '[Preview Placeholder] Open grassy courtyard for peaceful afternoon relaxation and nature walks',
+      imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757160248/property/1681/zqcxn3zpunipmz33tjc8.jpg',
+      caption: 'Resort lawn and open recreational spaces for peaceful evening walks',
       category: 'Gardens and outdoor areas',
-      displayOrder: 11,
-      isPlaceholder: true,
+      displayOrder: 13,
+      isPlaceholder: false,
     },
     {
       id: 'gard-2',
-      imageUrl: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=80&w=1200&auto=format&fit=crop',
-      caption: '[Preview Placeholder] Rustic open-air garden spaces flanked by native green flora',
+      imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757160188/property/1681/u6vhqsmxlfcfkjxber0h.jpg',
+      caption: 'Kids play area and garden swings on property',
       category: 'Gardens and outdoor areas',
-      displayOrder: 12,
-      isPlaceholder: true,
+      displayOrder: 14,
+      isPlaceholder: false,
     },
 
     // 7. Activities and experiences
     {
       id: 'act-1',
-      imageUrl: 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?q=80&w=1200&auto=format&fit=crop',
-      caption: '[Preview Placeholder] Evening outdoor campfire gathering under the clear, star-lit Purulia sky',
+      imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757160095/property/1681/ponaqgpem2bp44ppihaj.png',
+      caption: 'Lawn campfire & barbecue area under clear starry Purulia skies',
       category: 'Activities and experiences',
-      displayOrder: 13,
-      isPlaceholder: true,
+      displayOrder: 15,
+      isPlaceholder: false,
     },
     {
       id: 'act-2',
-      imageUrl: 'https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=1200&auto=format&fit=crop',
-      caption: '[Preview Placeholder] Morning nature trails through peaceful forested village pathways',
+      imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757159836/property/1681/oxyynrssknojbs0o55ln.jpg',
+      caption: 'Comfortable four sharing camping tent interior',
       category: 'Activities and experiences',
-      displayOrder: 14,
-      isPlaceholder: true,
+      displayOrder: 16,
+      isPlaceholder: false,
     },
 
     // 8. Nearby tourist attractions
     {
       id: 'att-1',
-      imageUrl: 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?q=80&w=1200&auto=format&fit=crop',
-      caption: '[Attraction Guide] Cascading mountain streams at Bamni and Turga Waterfalls (approx. 24 km)',
+      imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757149805/property/1681/acjuz3qey51j5lqhnlvm.jpg',
+      caption: 'Scenic landscape near Murguma Dam and Ajodhya Hill ranges',
       category: 'Nearby tourist attractions',
-      displayOrder: 15,
-      isPlaceholder: true,
-    },
-    {
-      id: 'att-2',
-      imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1200&auto=format&fit=crop',
-      caption: '[Attraction Guide] Ajodhya Hills viewpoint overlooking the vast forested plateau (approx. 18 km)',
-      category: 'Nearby tourist attractions',
-      displayOrder: 16,
-      isPlaceholder: true,
+      displayOrder: 17,
+      isPlaceholder: false,
     },
   ];
 
@@ -183,8 +190,8 @@ export default async function GalleryPage() {
       <section className="relative py-20 sm:py-24 bg-forest-dark text-ivory overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop"
-            alt="Murguma landscape"
+            src="https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1789021168/property/1681/amrfgp0bcx2safe9zrhe.jpg"
+            alt="Aerial view of Hill Queen Eco Resort"
             fill
             priority
             className="object-cover opacity-25"

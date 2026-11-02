@@ -216,6 +216,11 @@ export default function RoomForm({ initialData, isEditing = false }: RoomFormPro
               onChange={handleInputChange}
               className="w-full px-4 py-2.5 rounded-xl border border-ivory-dark bg-ivory/20 text-forest text-sm focus:outline-none focus:border-gold"
             >
+              <option value="Double Bedded Room">Double Bedded Room</option>
+              <option value="Triple Bedded Room">Triple Bedded Room</option>
+              <option value="Four Bedded Room">Four Bedded Room</option>
+              <option value="Five Bedded Room">Five Bedded Room</option>
+              <option value="Tent Accommodation">Tent Accommodation</option>
               <option value="Cottage">Cottage</option>
               <option value="Deluxe Cottage">Deluxe Cottage</option>
               <option value="Family Cottage">Family Cottage</option>

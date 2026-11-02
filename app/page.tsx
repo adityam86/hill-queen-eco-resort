@@ -41,14 +41,13 @@ export default async function HomePage() {
     rooms = (await prisma.room.findMany({
       where: { isActive: true },
       orderBy: { displayOrder: 'asc' },
-      take: 3,
     })) as RoomData[];
   } catch (error) {
     console.warn('Could not query rooms for homepage, using fallback rooms:', error);
   }
 
   if (rooms.length === 0) {
-    rooms = DEFAULT_ROOMS.slice(0, 3);
+    rooms = DEFAULT_ROOMS;
   }
 
   // Fetch facilities
@@ -132,8 +131,8 @@ export default async function HomePage() {
         {/* Background Image with Dark/Warm Gradient Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2000&auto=format&fit=crop"
-            alt="Murguma hills and lake landscape"
+            src="https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1789021168/property/1681/amrfgp0bcx2safe9zrhe.jpg"
+            alt="Hill Queen Eco Resort hill aerial landscape"
             fill
             priority
             className="object-cover opacity-35 scale-105 animate-pulse duration-10000"
