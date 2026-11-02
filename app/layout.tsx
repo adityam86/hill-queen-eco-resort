@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -6,6 +6,13 @@ import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import MobileActionDrawer from '@/components/MobileActionDrawer';
 import SecretDoorTrigger from '@/components/SecretDoorTrigger';
 import { getResortSettings } from '@/lib/settings';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: '#182B25',
+};
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getResortSettings();

@@ -33,6 +33,7 @@ export default function GalleryLightbox({
 }: GalleryLightboxProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [activePhotoIndex, setActivePhotoIndex] = useState<number | null>(null);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
 
   const filteredPhotos =
     selectedCategory === 'All'
@@ -71,6 +72,20 @@ export default function GalleryLightbox({
     }
   }, [activePhotoIndex, filteredPhotos.length]);
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX === null) return;
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) nextPhoto();
+      else prevPhoto();
+    }
+    setTouchStartX(null);
+  };
+
   // Keyboard navigation for lightbox
   useEffect(() => {
     if (activePhotoIndex === null) return;
@@ -91,10 +106,10 @@ export default function GalleryLightbox({
   return (
     <div>
       {/* Category Filter Pills (8 Sections) */}
-      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 mb-10 max-w-5xl mx-auto">
+      <div className="flex items-center sm:justify-center gap-2 sm:gap-2.5 mb-8 sm:mb-10 max-w-5xl mx-auto overflow-x-auto pb-2 px-2 sm:flex-wrap">
         <button
           onClick={() => setSelectedCategory('All')}
-          className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all ${
+          className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap transition-all shrink-0 ${
             selectedCategory === 'All'
               ? 'btn-gold shadow-md'
               : 'bg-white text-forest border border-ivory-dark hover:border-gold hover:text-gold'
@@ -108,7 +123,7 @@ export default function GalleryLightbox({
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all ${
+              className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium whitespace-nowrap transition-all shrink-0 ${
                 selectedCategory === cat
                   ? 'btn-gold shadow-md'
                   : 'bg-white text-forest border border-ivory-dark hover:border-gold hover:text-gold'
@@ -251,8 +266,10 @@ export default function GalleryLightbox({
 
           {/* Main Image Container */}
           <div
-            className="relative max-w-5xl max-h-[88vh] w-full h-[72vh] flex flex-col items-center justify-center"
+            className="relative max-w-5xl max-h-[88vh] w-full h-[72vh] flex flex-col items-center justify-center touch-pan-y"
             onClick={(e) => e.stopPropagation()}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
           >
             <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl">
               <Image

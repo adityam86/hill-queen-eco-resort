@@ -21,6 +21,9 @@
     scroll-behavior: smooth;
     color: #182B25;
     background-color: #FAF7EF;
+    overflow-x: hidden;
+    max-width: 100vw;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
@@ -28,6 +31,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    max-width: 100vw;
+    -webkit-tap-highlight-color: transparent;
   }
 
   h1, h2, h3, h4, .font-serif {

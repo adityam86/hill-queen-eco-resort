@@ -424,10 +424,10 @@ export default function AdminGalleryManager({ initialPhotos }: AdminGalleryManag
           </div>
 
           {/* Filter Pills */}
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 sm:flex-wrap max-w-full">
             <button
               onClick={() => setSelectedCategory('All')}
-              className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+              className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap shrink-0 transition-all ${
                 selectedCategory === 'All'
                   ? 'bg-forest text-gold'
                   : 'bg-ivory text-forest hover:bg-forest hover:text-ivory'
@@ -439,7 +439,7 @@ export default function AdminGalleryManager({ initialPhotos }: AdminGalleryManag
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap shrink-0 transition-all ${
                   selectedCategory === cat
                     ? 'bg-forest text-gold'
                     : 'bg-ivory text-forest hover:bg-forest hover:text-ivory'

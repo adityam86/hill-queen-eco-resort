@@ -82,111 +82,177 @@ export default async function AdminRoomsPage() {
           </Link>
         </div>
       ) : (
-        <div className="bg-white rounded-3xl border border-ivory-dark shadow-sm overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs sm:text-sm">
-              <thead className="bg-[#FAF7EF] text-forest/70 uppercase text-[11px] font-semibold border-b border-ivory-dark">
-                <tr>
-                  <th className="py-4 px-6">Room / Cottage</th>
-                  <th className="py-4 px-6">Tariff / Night</th>
-                  <th className="py-4 px-6">Type & Occupancy</th>
-                  <th className="py-4 px-6">Status</th>
-                  <th className="py-4 px-6">Order</th>
-                  <th className="py-4 px-6 text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-ivory-dark text-forest">
-                {rooms.map((room) => (
-                  <tr key={room.id} className="hover:bg-ivory/20 transition-colors">
-                    {/* Room Info & Thumbnail */}
-                    <td className="py-4 px-6">
-                      <div className="flex items-center gap-3">
-                        <div className="relative w-14 h-14 rounded-xl overflow-hidden bg-forest-dark shrink-0 border border-ivory-dark">
-                          <Image
-                            src={room.mainImage || 'https://images.unsplash.com/photo-1587061949409-02df41d5e562?q=80&w=300'}
-                            alt={room.name}
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
-                        <div>
-                          <strong className="block font-serif text-sm font-bold text-forest hover:text-gold-dark">
-                            <Link href={`/admin/rooms/${room.id}/edit`}>{room.name}</Link>
-                          </strong>
-                          <span className="text-[11px] text-forest/60">
-                            /{room.slug}
-                          </span>
-                        </div>
-                      </div>
-                    </td>
-
-                    {/* Price in INR */}
-                    <td className="py-4 px-6">
-                      <div className="flex items-baseline gap-1">
-                        <span className="font-serif text-base font-bold text-forest">
-                          ₹{room.price.toLocaleString('en-IN')}
-                        </span>
-                        <span className="text-[10px] text-forest/60">/ night</span>
-                      </div>
-                    </td>
-
-                    {/* Type & Occupancy */}
-                    <td className="py-4 px-6">
-                      <div className="space-y-0.5">
-                        <span className="px-2 py-0.5 rounded text-[10px] font-medium bg-ivory text-forest border border-ivory-dark inline-block">
-                          {room.roomType || 'Cottage'}
-                        </span>
-                        <div className="text-[11px] text-forest/70 flex items-center gap-1">
-                          <Users className="w-3 h-3 text-gold-dark" />
-                          <span>Max {room.maximumOccupancy} Guests</span>
-                        </div>
-                      </div>
-                    </td>
-
-                    {/* Active Toggle */}
-                    <td className="py-4 px-6">
-                      <RoomStatusToggle roomId={room.id} initialStatus={room.isActive} />
-                    </td>
-
-                    {/* Display Order */}
-                    <td className="py-4 px-6">
-                      <span className="text-xs font-semibold text-forest/80">
-                        #{room.displayOrder}
+        <div className="space-y-4">
+          {/* Mobile Card View (Visible on phones below md) */}
+          <div className="block md:hidden space-y-3">
+            {rooms.map((room) => (
+              <div
+                key={room.id}
+                className="bg-white p-4 rounded-2xl border border-ivory-dark shadow-sm space-y-3"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="relative w-16 h-16 rounded-xl overflow-hidden bg-forest-dark shrink-0 border border-ivory-dark">
+                    <Image
+                      src={room.mainImage || 'https://images.unsplash.com/photo-1587061949409-02df41d5e562?q=80&w=300'}
+                      alt={room.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <strong className="block font-serif text-base font-bold text-forest truncate">
+                      <Link href={`/admin/rooms/${room.id}/edit`}>{room.name}</Link>
+                    </strong>
+                    <div className="flex items-center gap-2 mt-1">
+                      <span className="px-2 py-0.5 rounded text-[10px] font-medium bg-ivory text-forest border border-ivory-dark">
+                        {room.roomType || 'Cottage'}
                       </span>
-                    </td>
+                      <span className="text-xs font-semibold text-gold-dark">
+                        ₹{room.price.toLocaleString('en-IN')}<span className="text-[10px] text-forest/60 font-normal">/night</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
 
-                    {/* Actions */}
-                    <td className="py-4 px-6 text-right">
-                      <div className="flex items-center justify-end gap-2">
-                        {/* Live preview link */}
-                        <Link
-                          href={`/rooms/${room.slug}`}
-                          target="_blank"
-                          title="View on Public Website"
-                          className="p-2 rounded-lg text-forest/70 hover:text-gold hover:bg-ivory border border-transparent hover:border-ivory-dark transition-colors"
-                        >
-                          <Eye className="w-4 h-4" />
-                        </Link>
+                <div className="flex items-center justify-between text-xs pt-2 border-t border-ivory-dark/60">
+                  <div className="text-[11px] text-forest/70 flex items-center gap-1">
+                    <Users className="w-3.5 h-3.5 text-gold-dark" />
+                    <span>Up to {room.maximumOccupancy} Guests</span>
+                  </div>
+                  <RoomStatusToggle roomId={room.id} initialStatus={room.isActive} />
+                </div>
 
-                        {/* Edit Room */}
-                        <Link
-                          href={`/admin/rooms/${room.id}/edit`}
-                          title="Edit Details & Tariffs"
-                          className="p-2 rounded-lg text-forest hover:text-gold-dark hover:bg-ivory border border-transparent hover:border-ivory-dark transition-colors"
-                        >
-                          <Edit className="w-4 h-4" />
-                        </Link>
+                <div className="flex items-center justify-end gap-2 pt-1 border-t border-ivory-dark/40">
+                  <Link
+                    href={`/rooms/${room.slug}`}
+                    target="_blank"
+                    className="px-3 py-1.5 rounded-lg text-forest/70 hover:text-gold hover:bg-ivory border border-ivory-dark text-xs font-medium flex items-center gap-1.5"
+                  >
+                    <Eye className="w-3.5 h-3.5" />
+                    <span>View</span>
+                  </Link>
+                  <Link
+                    href={`/admin/rooms/${room.id}/edit`}
+                    className="px-3 py-1.5 rounded-lg bg-forest text-gold hover:bg-forest/90 text-xs font-semibold flex items-center gap-1.5"
+                  >
+                    <Edit className="w-3.5 h-3.5" />
+                    <span>Edit</span>
+                  </Link>
+                  {session.role === 'OWNER_ADMIN' && (
+                    <RoomDeleteButton roomId={room.id} roomName={room.name} />
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
 
-                        {/* Delete Room (OWNER_ADMIN only) */}
-                        {session.role === 'OWNER_ADMIN' && (
-                          <RoomDeleteButton roomId={room.id} roomName={room.name} />
-                        )}
-                      </div>
-                    </td>
+          {/* Desktop Table View (Visible on md and above) */}
+          <div className="hidden md:block bg-white rounded-3xl border border-ivory-dark shadow-sm overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs sm:text-sm">
+                <thead className="bg-[#FAF7EF] text-forest/70 uppercase text-[11px] font-semibold border-b border-ivory-dark">
+                  <tr>
+                    <th className="py-4 px-6">Room / Cottage</th>
+                    <th className="py-4 px-6">Tariff / Night</th>
+                    <th className="py-4 px-6">Type & Occupancy</th>
+                    <th className="py-4 px-6">Status</th>
+                    <th className="py-4 px-6">Order</th>
+                    <th className="py-4 px-6 text-right">Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-ivory-dark text-forest">
+                  {rooms.map((room) => (
+                    <tr key={room.id} className="hover:bg-ivory/20 transition-colors">
+                      {/* Room Info & Thumbnail */}
+                      <td className="py-4 px-6">
+                        <div className="flex items-center gap-3">
+                          <div className="relative w-14 h-14 rounded-xl overflow-hidden bg-forest-dark shrink-0 border border-ivory-dark">
+                            <Image
+                              src={room.mainImage || 'https://images.unsplash.com/photo-1587061949409-02df41d5e562?q=80&w=300'}
+                              alt={room.name}
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+                          <div>
+                            <strong className="block font-serif text-sm font-bold text-forest hover:text-gold-dark">
+                              <Link href={`/admin/rooms/${room.id}/edit`}>{room.name}</Link>
+                            </strong>
+                            <span className="text-[11px] text-forest/60">
+                              /{room.slug}
+                            </span>
+                          </div>
+                        </div>
+                      </td>
+
+                      {/* Price in INR */}
+                      <td className="py-4 px-6">
+                        <div className="flex items-baseline gap-1">
+                          <span className="font-serif text-base font-bold text-forest">
+                            ₹{room.price.toLocaleString('en-IN')}
+                          </span>
+                          <span className="text-[10px] text-forest/60">/ night</span>
+                        </div>
+                      </td>
+
+                      {/* Type & Occupancy */}
+                      <td className="py-4 px-6">
+                        <div className="space-y-0.5">
+                          <span className="px-2 py-0.5 rounded text-[10px] font-medium bg-ivory text-forest border border-ivory-dark inline-block">
+                            {room.roomType || 'Cottage'}
+                          </span>
+                          <div className="text-[11px] text-forest/70 flex items-center gap-1">
+                            <Users className="w-3 h-3 text-gold-dark" />
+                            <span>Max {room.maximumOccupancy} Guests</span>
+                          </div>
+                        </div>
+                      </td>
+
+                      {/* Active Toggle */}
+                      <td className="py-4 px-6">
+                        <RoomStatusToggle roomId={room.id} initialStatus={room.isActive} />
+                      </td>
+
+                      {/* Display Order */}
+                      <td className="py-4 px-6">
+                        <span className="text-xs font-semibold text-forest/80">
+                          #{room.displayOrder}
+                        </span>
+                      </td>
+
+                      {/* Actions */}
+                      <td className="py-4 px-6 text-right">
+                        <div className="flex items-center justify-end gap-2">
+                          {/* Live preview link */}
+                          <Link
+                            href={`/rooms/${room.slug}`}
+                            target="_blank"
+                            title="View on Public Website"
+                            className="p-2 rounded-lg text-forest/70 hover:text-gold hover:bg-ivory border border-transparent hover:border-ivory-dark transition-colors"
+                          >
+                            <Eye className="w-4 h-4" />
+                          </Link>
+
+                          {/* Edit Room */}
+                          <Link
+                            href={`/admin/rooms/${room.id}/edit`}
+                            title="Edit Details & Tariffs"
+                            className="p-2 rounded-lg text-forest hover:text-gold-dark hover:bg-ivory border border-transparent hover:border-ivory-dark transition-colors"
+                          >
+                            <Edit className="w-4 h-4" />
+                          </Link>
+
+                          {/* Delete Room (OWNER_ADMIN only) */}
+                          {session.role === 'OWNER_ADMIN' && (
+                            <RoomDeleteButton roomId={room.id} roomName={room.name} />
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       )}
