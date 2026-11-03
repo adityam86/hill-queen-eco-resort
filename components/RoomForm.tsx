@@ -12,8 +12,17 @@ import {
   Plus,
   Trash2,
   ImageIcon,
+  Star,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
 import Link from 'next/link';
+
+interface RoomGalleryItem {
+  id?: string;
+  imageUrl: string;
+  caption?: string;
+}
 
 interface RoomFormProps {
   initialData?: any;
@@ -25,25 +34,30 @@ export default function RoomForm({ initialData, isEditing = false }: RoomFormPro
 
   const [formData, setFormData] = useState({
     name: initialData?.name || '',
-    roomType: initialData?.roomType || 'Cottage',
-    price: initialData?.price !== undefined ? initialData.price.toString() : '2500',
+    roomType: initialData?.roomType || 'Double Bedded Room',
+    price: initialData?.price !== undefined ? initialData.price.toString() : '2000',
     description: initialData?.description || '',
     maximumOccupancy: initialData?.maximumOccupancy || 2,
-    bedConfiguration: initialData?.bedConfiguration || '1 King Bed',
-    isAc: initialData?.isAc || false,
+    bedConfiguration: initialData?.bedConfiguration || '1 Double Bed',
+    isAc: initialData?.isAc !== undefined ? initialData.isAc : true,
     hasAttachedBath: initialData?.hasAttachedBath !== undefined ? initialData.hasAttachedBath : true,
     extraBedAvailable: initialData?.extraBedAvailable || false,
-    foodInclusion: initialData?.foodInclusion || 'Complimentary morning tea; dining available on order',
-    amenities: initialData?.amenities || 'Attached Western Bathroom, 24/7 Running Water, Mountain View, Power Backup, Tea Maker',
-    mainImage: initialData?.mainImage || '/images/room-placeholder.svg',
+    foodInclusion: initialData?.foodInclusion || 'Complimentary morning tea; authentic Bengali meals available on order',
+    amenities: initialData?.amenities || 'Air Conditioning, Attached Western Toilet, Geyser / Hot Water, Power Backup, Bonfire, Lawn Access',
+    mainImage: initialData?.mainImage || '/images/placeholders/double-bedded-room.svg',
     isActive: initialData?.isActive !== undefined ? initialData.isActive : true,
     displayOrder: initialData?.displayOrder || 0,
   });
 
-  const [additionalImages, setAdditionalImages] = useState<string[]>(
-    initialData?.images?.map((img: any) => img.imageUrl) || []
+  const [additionalImages, setAdditionalImages] = useState<RoomGalleryItem[]>(
+    initialData?.images?.map((img: any) =>
+      typeof img === 'string'
+        ? { imageUrl: img, caption: '' }
+        : { id: img.id, imageUrl: img.imageUrl, caption: img.caption || '' }
+    ) || []
   );
   const [newImageUrl, setNewImageUrl] = useState('');
+  const [newImageCaption, setNewImageCaption] = useState('');
 
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -85,7 +99,7 @@ export default function RoomForm({ initialData, isEditing = false }: RoomFormPro
       if (isMain) {
         setFormData((prev) => ({ ...prev, mainImage: data.url }));
       } else {
-        setAdditionalImages((prev) => [...prev, data.url]);
+        setAdditionalImages((prev) => [...prev, { imageUrl: data.url, caption: '' }]);
       }
     } catch (err: any) {
       setError(err.message || 'Image upload failed');
@@ -96,12 +110,46 @@ export default function RoomForm({ initialData, isEditing = false }: RoomFormPro
 
   const handleAddImageUrl = () => {
     if (!newImageUrl.trim()) return;
-    setAdditionalImages([...additionalImages, newImageUrl.trim()]);
+    setAdditionalImages((prev) => [
+      ...prev,
+      { imageUrl: newImageUrl.trim(), caption: newImageCaption.trim() },
+    ]);
     setNewImageUrl('');
+    setNewImageCaption('');
+  };
+
+  const handleCaptionChange = (index: number, caption: string) => {
+    setAdditionalImages((prev) =>
+      prev.map((item, idx) => (idx === index ? { ...item, caption } : item))
+    );
+  };
+
+  const handleSetAsCover = (index: number) => {
+    const chosen = additionalImages[index];
+    const previousCover = formData.mainImage;
+    setFormData((prev) => ({ ...prev, mainImage: chosen.imageUrl }));
+    // Swap previous cover image into the gallery at this slot
+    setAdditionalImages((prev) =>
+      prev.map((item, idx) =>
+        idx === index ? { ...item, imageUrl: previousCover } : item
+      )
+    );
+  };
+
+  const handleMoveImage = (index: number, direction: 'left' | 'right') => {
+    const targetIdx = direction === 'left' ? index - 1 : index + 1;
+    if (targetIdx < 0 || targetIdx >= additionalImages.length) return;
+    setAdditionalImages((prev) => {
+      const updated = [...prev];
+      const temp = updated[index];
+      updated[index] = updated[targetIdx];
+      updated[targetIdx] = temp;
+      return updated;
+    });
   };
 
   const handleRemoveImage = (index: number) => {
-    setAdditionalImages(additionalImages.filter((_, idx) => idx !== index));
+    setAdditionalImages((prev) => prev.filter((_, idx) => idx !== index));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -115,8 +163,9 @@ export default function RoomForm({ initialData, isEditing = false }: RoomFormPro
       price: parseFloat(formData.price),
       maximumOccupancy: parseInt(formData.maximumOccupancy.toString(), 10),
       displayOrder: parseInt(formData.displayOrder.toString(), 10),
-      images: additionalImages.map((url, idx) => ({
-        imageUrl: url,
+      images: additionalImages.map((item, idx) => ({
+        imageUrl: item.imageUrl,
+        caption: item.caption || null,
         displayOrder: idx + 1,
       })),
     };
@@ -414,27 +463,39 @@ export default function RoomForm({ initialData, isEditing = false }: RoomFormPro
 
       {/* 3. Photographs & Gallery */}
       <div className="bg-white p-6 sm:p-8 rounded-3xl border border-ivory-dark shadow-sm space-y-6">
-        <h2 className="font-serif text-lg font-bold text-forest border-b border-ivory-dark pb-3">
-          3. Room Photographs
-        </h2>
-
-        {/* Main Image */}
         <div>
-          <label className="block text-xs font-semibold text-forest uppercase tracking-wider mb-1.5">
-            Main Room Photograph URL or Upload
-          </label>
+          <h2 className="font-serif text-lg font-bold text-forest border-b border-ivory-dark pb-3">
+            3. Room Photographs & Visual Gallery
+          </h2>
+          <p className="text-xs text-forest/70 mt-1">
+            Manage genuine property photographs for this room category. You can set the main cover image, add gallery photos, edit descriptive captions, reorder pictures, or replace them anytime.
+          </p>
+        </div>
+
+        {/* Main Cover Image */}
+        <div className="p-5 rounded-2xl bg-ivory/30 border border-ivory-dark">
+          <div className="flex items-center justify-between mb-2">
+            <label className="block text-xs font-semibold text-forest uppercase tracking-wider">
+              Primary Cover Photograph (Shown on cards & catalogue) *
+            </label>
+            <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-gold bg-forest-dark px-2.5 py-0.5 rounded-full">
+              <Star className="w-3 h-3 fill-gold text-gold" />
+              <span>Active Cover</span>
+            </span>
+          </div>
+
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
             <input
               type="text"
               name="mainImage"
               value={formData.mainImage}
               onChange={handleInputChange}
-              placeholder="https://... or upload local image file below"
-              className="flex-1 px-4 py-2.5 rounded-xl border border-ivory-dark bg-ivory/20 text-forest text-sm focus:outline-none focus:border-gold"
+              placeholder="/images/... or https://... or upload below"
+              className="flex-1 px-4 py-2.5 rounded-xl border border-ivory-dark bg-white text-forest text-sm focus:outline-none focus:border-gold"
             />
             <label className="btn-forest px-4 py-2.5 rounded-xl text-xs font-semibold cursor-pointer inline-flex items-center gap-2 shrink-0">
               <Upload className="w-4 h-4 text-gold" />
-              <span>{uploading ? 'Uploading...' : 'Upload Image File'}</span>
+              <span>{uploading ? 'Uploading...' : 'Upload Cover Photo'}</span>
               <input
                 type="file"
                 accept="image/*"
@@ -446,69 +507,160 @@ export default function RoomForm({ initialData, isEditing = false }: RoomFormPro
 
           {/* Main image preview */}
           {formData.mainImage && (
-            <div className="mt-3 relative w-48 h-32 rounded-xl overflow-hidden border border-ivory-dark bg-forest-dark">
+            <div className="mt-3 relative w-full sm:w-64 h-36 rounded-xl overflow-hidden border border-ivory-dark bg-forest-dark shadow-sm">
               <Image
                 src={formData.mainImage}
-                alt="Main image preview"
+                alt="Main cover image preview"
                 fill
                 className="object-cover"
               />
+              <span className="absolute bottom-2 left-2 text-[10px] bg-black/70 backdrop-blur-sm text-ivory px-2 py-0.5 rounded">
+                Current Main Photo
+              </span>
             </div>
           )}
         </div>
 
-        {/* Additional Images */}
-        <div className="pt-4 border-t border-ivory-dark space-y-4">
-          <label className="block text-xs font-semibold text-forest uppercase tracking-wider">
-            Additional Room Photographs
-          </label>
-
-          <div className="flex gap-2">
-            <input
-              type="text"
-              value={newImageUrl}
-              onChange={(e) => setNewImageUrl(e.target.value)}
-              placeholder="Paste photo URL here"
-              className="flex-1 px-4 py-2 rounded-xl border border-ivory-dark bg-ivory/20 text-forest text-xs focus:outline-none focus:border-gold"
-            />
-            <button
-              type="button"
-              onClick={handleAddImageUrl}
-              className="px-4 py-2 rounded-xl bg-forest text-ivory text-xs font-semibold hover:bg-olive"
-            >
-              Add URL
-            </button>
-            <label className="btn-forest px-4 py-2 rounded-xl text-xs font-semibold cursor-pointer inline-flex items-center gap-1.5 shrink-0">
-              <Upload className="w-3.5 h-3.5 text-gold" />
-              <span>Upload</span>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => handleFileUpload(e, false)}
-                className="hidden"
-              />
+        {/* Additional Images Section */}
+        <div className="pt-4 border-t border-ivory-dark space-y-5">
+          <div>
+            <label className="block text-xs font-semibold text-forest uppercase tracking-wider mb-1">
+              Add Additional Room Photographs
             </label>
+            <p className="text-xs text-forest/65">
+              Add interior perspectives, bathroom views, private veranda, or bed arrangements.
+            </p>
+          </div>
+
+          {/* Input Controls */}
+          <div className="p-4 rounded-2xl bg-white border border-ivory-dark shadow-sm space-y-3">
+            <div className="grid grid-cols-1 sm:grid-cols-12 gap-3">
+              <input
+                type="text"
+                value={newImageUrl}
+                onChange={(e) => setNewImageUrl(e.target.value)}
+                placeholder="Paste photograph URL or use device upload button"
+                className="sm:col-span-7 px-4 py-2 rounded-xl border border-ivory-dark bg-ivory/20 text-forest text-xs focus:outline-none focus:border-gold"
+              />
+              <input
+                type="text"
+                value={newImageCaption}
+                onChange={(e) => setNewImageCaption(e.target.value)}
+                placeholder="Caption (e.g. Attached Clean Bathroom)"
+                className="sm:col-span-5 px-4 py-2 rounded-xl border border-ivory-dark bg-ivory/20 text-forest text-xs focus:outline-none focus:border-gold"
+              />
+            </div>
+
+            <div className="flex items-center gap-3 justify-end pt-1">
+              <button
+                type="button"
+                onClick={handleAddImageUrl}
+                disabled={!newImageUrl.trim()}
+                className="btn-gold px-4 py-2 rounded-xl text-xs font-semibold disabled:opacity-40 inline-flex items-center gap-1.5"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>Add Photo by URL</span>
+              </button>
+              <label className="btn-forest px-4 py-2 rounded-xl text-xs font-semibold cursor-pointer inline-flex items-center gap-1.5">
+                <Upload className="w-3.5 h-3.5 text-gold" />
+                <span>{uploading ? 'Uploading...' : 'Upload from Device'}</span>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handleFileUpload(e, false)}
+                  className="hidden"
+                />
+              </label>
+            </div>
           </div>
 
           {/* Additional Photos List */}
-          {additionalImages.length > 0 && (
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-              {additionalImages.map((url, idx) => (
-                <div
-                  key={idx}
-                  className="relative h-24 rounded-xl overflow-hidden border border-ivory-dark group"
-                >
-                  <Image src={url} alt={`Photo ${idx + 1}`} fill className="object-cover" />
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveImage(idx)}
-                    className="absolute top-1.5 right-1.5 p-1 rounded-full bg-red-600 text-white opacity-0 group-hover:opacity-100 transition-opacity"
-                    title="Remove Image"
+          {additionalImages.length > 0 ? (
+            <div className="space-y-3">
+              <span className="text-xs font-semibold text-forest uppercase tracking-wider block">
+                Attached Room Gallery ({additionalImages.length} Photographs)
+              </span>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                {additionalImages.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="p-3 bg-white rounded-2xl border border-ivory-dark shadow-sm space-y-2.5 flex flex-col justify-between group"
                   >
-                    <Trash2 className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-              ))}
+                    <div>
+                      {/* Thumbnail with overlay badge */}
+                      <div className="relative h-36 w-full rounded-xl overflow-hidden border border-ivory-dark bg-forest-dark">
+                        <Image
+                          src={item.imageUrl}
+                          alt={item.caption || `Room photo ${idx + 1}`}
+                          fill
+                          className="object-cover"
+                        />
+                        <span className="absolute top-2 left-2 text-[10px] bg-black/70 backdrop-blur-sm text-gold px-2 py-0.5 rounded font-semibold">
+                          #{idx + 1}
+                        </span>
+                      </div>
+
+                      {/* Caption Input */}
+                      <div className="mt-2.5">
+                        <input
+                          type="text"
+                          value={item.caption || ''}
+                          onChange={(e) => handleCaptionChange(idx, e.target.value)}
+                          placeholder="Photo caption (e.g. Washroom)"
+                          className="w-full px-3 py-1.5 rounded-lg border border-ivory-dark bg-ivory/20 text-forest text-xs focus:outline-none focus:border-gold"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Action Toolbar */}
+                    <div className="pt-2 border-t border-ivory-dark flex items-center justify-between text-xs">
+                      <button
+                        type="button"
+                        onClick={() => handleSetAsCover(idx)}
+                        className="inline-flex items-center gap-1 text-[11px] font-semibold text-gold-dark hover:text-forest transition-colors"
+                        title="Make this photo the main room cover"
+                      >
+                        <Star className="w-3.5 h-3.5" />
+                        <span>Set as Cover</span>
+                      </button>
+
+                      <div className="flex items-center gap-1">
+                        <button
+                          type="button"
+                          onClick={() => handleMoveImage(idx, 'left')}
+                          disabled={idx === 0}
+                          className="p-1.5 rounded-lg bg-ivory text-forest hover:bg-forest hover:text-white disabled:opacity-30 transition-colors"
+                          title="Move Earlier"
+                        >
+                          <ChevronLeft className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleMoveImage(idx, 'right')}
+                          disabled={idx === additionalImages.length - 1}
+                          className="p-1.5 rounded-lg bg-ivory text-forest hover:bg-forest hover:text-white disabled:opacity-30 transition-colors"
+                          title="Move Later"
+                        >
+                          <ChevronRight className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveImage(idx)}
+                          className="p-1.5 rounded-lg bg-red-50 text-red-600 hover:bg-red-600 hover:text-white transition-colors ml-1"
+                          title="Remove Image"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="p-6 rounded-2xl bg-ivory/30 border border-ivory-dark text-center text-xs text-forest/70">
+              No additional photographs attached yet. Upload images above to show detailed interior and bathroom views.
             </div>
           )}
         </div>

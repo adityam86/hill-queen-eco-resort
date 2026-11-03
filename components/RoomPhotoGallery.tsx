@@ -250,3 +250,4 @@ export default function RoomPhotoGallery({ roomName, images }: RoomPhotoGalleryP
     </div>
   );
 }
+

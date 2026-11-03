@@ -62,36 +62,48 @@ export default async function HomePage() {
     facilities = [];
   }
 
-  // Fallback verified facilities if table is empty
+  // Fallback verified facilities matching property amenities
   const defaultFacilities = [
     {
-      title: 'Serene Lakeside Location',
-      description: 'Nestled in Mamudi valley, right near the peaceful waters of Murguma Dam and the Ajodhya hill ranges.',
-      icon: Mountain,
-    },
-    {
-      title: 'Fresh Home-Style Dining',
-      description: 'Hygienic and flavorful local Bengali and North Indian dishes cooked fresh to order with care.',
+      title: 'Restaurant & Dining Area',
+      description: 'Hygienic and flavorful local Bengali thalis, fresh morning tea, and home-cooked meals prepared on order.',
+      image: '/images/placeholders/facility-dining.svg',
+      tag: 'Homely Cuisine',
       icon: Utensils,
     },
     {
-      title: 'Campfire & Starry Nights',
-      description: 'Lush open outdoor grounds ideal for peaceful evening gatherings, acoustic moments, and clear night skies.',
-      icon: Flame,
-    },
-    {
-      title: 'Sightseeing Guidance',
-      description: 'Assistance for exploring Bamni Falls, Marble Lake, Ajodhya Hills, and Purulia tribal heritage spots.',
-      icon: Compass,
-    },
-    {
-      title: 'Clean Attached Bathrooms',
-      description: 'Modern western toilets with continuous 24/7 running water and proper hygiene in every room.',
+      title: 'Modern Attached Bathrooms',
+      description: 'Clean western sanitation with continuous 24/7 running water and hot water geysers in all rooms.',
+      image: '/images/placeholders/facility-bathroom.svg',
+      tag: '24/7 Running Water',
       icon: Bath,
     },
     {
-      title: 'Secure Vehicle Parking',
-      description: 'Safe on-premises parking space for four-wheelers and motorcycles with on-site staff.',
+      title: 'Garden & Open Lawns',
+      description: 'Lush green open spaces and natural courtyards for peaceful morning strolls, tea, and outdoor relaxation.',
+      image: '/images/placeholders/facility-gardens.svg',
+      tag: 'Nature Spaces',
+      icon: Mountain,
+    },
+    {
+      title: "Children's Play Area",
+      description: 'Safe outdoor garden pathways and play zones for families traveling with children in a quiet country setting.',
+      image: '/images/placeholders/facility-kidsplay.svg',
+      tag: 'Family Friendly',
+      icon: Sparkles,
+    },
+    {
+      title: 'Bonfire & Outdoor Campfire',
+      description: 'Spacious open grounds ideal for evening campfire sessions, acoustic moments, and clear night stargazing.',
+      image: '/images/placeholders/facility-bonfire.svg',
+      tag: 'Stargazing Nights',
+      icon: Flame,
+    },
+    {
+      title: 'Secure On-Site Parking',
+      description: 'Safe on-premises private parking space for cars and motorcycles with staff assistance upon arrival.',
+      image: '/images/placeholders/facility-parking.svg',
+      tag: 'Safe & Gated',
       icon: ShieldCheck,
     },
   ];
@@ -131,11 +143,11 @@ export default async function HomePage() {
         {/* Background Image with Dark/Warm Gradient Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1789021168/property/1681/amrfgp0bcx2safe9zrhe.jpg"
+            src="/images/placeholders/hero-resort.svg"
             alt="Hill Queen Eco Resort hill aerial landscape"
             fill
             priority
-            className="object-cover opacity-35 scale-105 animate-pulse duration-10000"
+            className="object-cover opacity-35 scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-forest-dark via-forest-dark/70 to-forest-dark/40" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-forest-dark/30 to-forest-dark" />
@@ -260,7 +272,7 @@ export default async function HomePage() {
             <div className="lg:col-span-5 relative">
               <div className="relative h-[420px] sm:h-[480px] rounded-3xl overflow-hidden shadow-luxury border-4 border-white">
                 <Image
-                  src="https://images.unsplash.com/photo-1587061949409-02df41d5e562?q=80&w=1200&auto=format&fit=crop"
+                  src="/images/placeholders/about-resort.svg"
                   alt="Hill Queen Eco Resort cottage preview"
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
@@ -370,17 +382,38 @@ export default async function HomePage() {
               return (
                 <div
                   key={idx}
-                  className="bg-white p-8 rounded-2xl border border-ivory-dark shadow-sm hover:shadow-luxury transition-all duration-300 group"
+                  className="bg-white rounded-3xl border border-ivory-dark shadow-sm hover:shadow-luxury transition-all duration-300 group overflow-hidden flex flex-col"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-forest/5 text-forest flex items-center justify-center mb-5 group-hover:bg-forest group-hover:text-gold transition-colors">
-                    <IconComponent className="w-6 h-6" />
+                  <div className="relative h-48 w-full bg-forest-dark overflow-hidden">
+                    <Image
+                      src={facility.image}
+                      alt={facility.title}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-forest-dark/80 via-transparent to-black/20" />
+                    <span className="absolute top-3 right-3 text-[10px] bg-forest-dark/80 backdrop-blur-sm text-gold px-2.5 py-0.5 rounded-full border border-gold/30 font-semibold tracking-wider uppercase">
+                      {facility.tag}
+                    </span>
+                    <div className="absolute bottom-3 left-3 w-10 h-10 rounded-xl bg-forest/90 text-gold flex items-center justify-center border border-gold/30">
+                      <IconComponent className="w-5 h-5" />
+                    </div>
                   </div>
-                  <h3 className="font-serif text-lg font-bold text-forest mb-2">
-                    {facility.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-forest/75 leading-relaxed">
-                    {facility.description}
-                  </p>
+                  <div className="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 className="font-serif text-lg font-bold text-forest mb-2">
+                        {facility.title}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-forest/75 leading-relaxed">
+                        {facility.description}
+                      </p>
+                    </div>
+                    <div className="pt-4 mt-4 border-t border-ivory-dark flex items-center justify-between text-[11px] text-forest/60">
+                      <span>Hill Queen Eco Resort</span>
+                      <span className="text-gold font-medium">Verified Facility</span>
+                    </div>
+                  </div>
                 </div>
               );
             })}
@@ -479,60 +512,64 @@ export default async function HomePage() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="relative h-60 sm:h-72 rounded-2xl overflow-hidden shadow-sm">
+            <div className="relative h-60 sm:h-72 rounded-2xl overflow-hidden shadow-sm group">
               <Image
-                src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800&auto=format&fit=crop"
-                alt="Murguma lake sunset"
+                src="/images/placeholders/gallery-resort-exterior.svg"
+                alt="Hill Queen Eco Resort exterior view"
                 fill
-                className="object-cover hover:scale-105 transition-transform duration-500"
+                sizes="(max-width: 640px) 50vw, 25vw"
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <span className="absolute bottom-2 left-2 text-[10px] bg-forest-dark/80 text-ivory px-2 py-0.5 rounded">
-                Murguma Dam
+              <span className="absolute bottom-2 left-2 text-[10px] bg-forest-dark/85 text-ivory px-2.5 py-1 rounded-md font-medium border border-gold/30">
+                Resort & Exterior
               </span>
-              <span className="absolute top-2 right-2 text-[9px] bg-black/60 text-ivory/80 px-1.5 py-0.5 rounded backdrop-blur-sm">
-                Sample
+              <span className="absolute top-2 right-2 text-[9px] bg-forest-dark/80 text-gold px-2 py-0.5 rounded backdrop-blur-sm border border-gold/30">
+                Preview
               </span>
             </div>
-            <div className="relative h-60 sm:h-72 rounded-2xl overflow-hidden shadow-sm">
+            <div className="relative h-60 sm:h-72 rounded-2xl overflow-hidden shadow-sm group">
               <Image
-                src="https://images.unsplash.com/photo-1587061949409-02df41d5e562?q=80&w=800&auto=format&fit=crop"
-                alt="Cottage view"
+                src="/images/placeholders/gallery-rooms.svg"
+                alt="Hill Queen Eco Resort Cottages & Rooms"
                 fill
-                className="object-cover hover:scale-105 transition-transform duration-500"
+                sizes="(max-width: 640px) 50vw, 25vw"
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <span className="absolute bottom-2 left-2 text-[10px] bg-forest-dark/80 text-ivory px-2 py-0.5 rounded">
-                Cottage Front
+              <span className="absolute bottom-2 left-2 text-[10px] bg-forest-dark/85 text-ivory px-2.5 py-1 rounded-md font-medium border border-gold/30">
+                Cottages & Rooms
               </span>
-              <span className="absolute top-2 right-2 text-[9px] bg-black/60 text-ivory/80 px-1.5 py-0.5 rounded backdrop-blur-sm">
-                Sample
+              <span className="absolute top-2 right-2 text-[9px] bg-forest-dark/80 text-gold px-2 py-0.5 rounded backdrop-blur-sm border border-gold/30">
+                Preview
               </span>
             </div>
-            <div className="relative h-60 sm:h-72 rounded-2xl overflow-hidden shadow-sm">
+            <div className="relative h-60 sm:h-72 rounded-2xl overflow-hidden shadow-sm group">
               <Image
-                src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=800&auto=format&fit=crop"
-                alt="Room interior"
+                src="/images/placeholders/gallery-tent-stay.svg"
+                alt="Tent camping experience at Hill Queen Eco Resort"
                 fill
-                className="object-cover hover:scale-105 transition-transform duration-500"
+                sizes="(max-width: 640px) 50vw, 25vw"
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <span className="absolute bottom-2 left-2 text-[10px] bg-forest-dark/80 text-ivory px-2 py-0.5 rounded">
-                Cozy Interior
+              <span className="absolute bottom-2 left-2 text-[10px] bg-forest-dark/85 text-ivory px-2.5 py-1 rounded-md font-medium border border-gold/30">
+                Tent Camping Stay
               </span>
-              <span className="absolute top-2 right-2 text-[9px] bg-black/60 text-ivory/80 px-1.5 py-0.5 rounded backdrop-blur-sm">
-                Sample
+              <span className="absolute top-2 right-2 text-[9px] bg-forest-dark/80 text-gold px-2 py-0.5 rounded backdrop-blur-sm border border-gold/30">
+                Preview
               </span>
             </div>
-            <div className="relative h-60 sm:h-72 rounded-2xl overflow-hidden shadow-sm">
+            <div className="relative h-60 sm:h-72 rounded-2xl overflow-hidden shadow-sm group">
               <Image
-                src="https://images.unsplash.com/photo-1510312305653-8ed496efae75?q=80&w=800&auto=format&fit=crop"
-                alt="Evening campfire"
+                src="/images/placeholders/facility-dining.svg"
+                alt="Fresh home-cooked Bengali dining"
                 fill
-                className="object-cover hover:scale-105 transition-transform duration-500"
+                sizes="(max-width: 640px) 50vw, 25vw"
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <span className="absolute bottom-2 left-2 text-[10px] bg-forest-dark/80 text-ivory px-2 py-0.5 rounded">
-                Campfire & Night
+              <span className="absolute bottom-2 left-2 text-[10px] bg-forest-dark/85 text-ivory px-2.5 py-1 rounded-md font-medium border border-gold/30">
+                Dining & Kitchen
               </span>
-              <span className="absolute top-2 right-2 text-[9px] bg-black/60 text-ivory/80 px-1.5 py-0.5 rounded backdrop-blur-sm">
-                Sample
+              <span className="absolute top-2 right-2 text-[9px] bg-forest-dark/80 text-gold px-2 py-0.5 rounded backdrop-blur-sm border border-gold/30">
+                Preview
               </span>
             </div>
           </div>

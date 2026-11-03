@@ -45,7 +45,7 @@ export default async function RoomsPage() {
       <section className="relative py-20 sm:py-24 bg-forest-dark text-ivory overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757148135/property/1681/dpdh7fib0zdhqmqkf0bx.jpg"
+            src="/images/placeholders/hero-resort.svg"
             alt="Hill Queen Eco Resort Cottages & Grounds"
             fill
             priority

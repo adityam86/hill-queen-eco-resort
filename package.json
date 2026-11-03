@@ -19,6 +19,7 @@
     "db:export": "node scripts/export-data.mjs",
     "db:import": "node scripts/import-mysql-data.mjs",
     "db:switch": "node scripts/switch-db.mjs",
+    "import-photos": "node scripts/import-owner-photos.mjs",
     "package:godaddy": "node scripts/build-godaddy-package.mjs"
   },
   "engines": {

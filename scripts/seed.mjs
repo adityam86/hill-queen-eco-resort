@@ -30,27 +30,23 @@ const FUSIONSTAYS_ROOMS = [
       'Complimentary morning tea; authentic Bengali thalis and fresh home-cooked meals available on order',
     amenities:
       'Air Conditioning, Attached Western Toilet, Geyser / Hot Water, Power Backup, Bonfire, Barbeque, Open Lawn Access, 24/7 Running Water',
-    mainImage:
-      'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766140239/room/1291/kk12uawsodcjszmathmj.jpg',
+    mainImage: '/images/placeholders/double-bedded-room.svg',
     isActive: true,
     displayOrder: 1,
     images: [
       {
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766140239/room/1291/kk12uawsodcjszmathmj.jpg',
-        caption: 'Double Bedded Room Interior',
+        imageUrl: '/images/placeholders/double-bedded-room.svg',
+        caption: 'Double Bedded Room (Awaiting Owner Photo)',
         displayOrder: 1,
       },
       {
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757148931/property/1681/fmows9mf6wys8dnwucvo.jpg',
-        caption: 'Double Bedding Arrangement',
+        imageUrl: '/images/placeholders/facility-bathroom.svg',
+        caption: 'Attached Modern Western Bathroom',
         displayOrder: 2,
       },
       {
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757159995/property/1681/oajowwhxeypksme0atus.jpg',
-        caption: 'Attached Clean Washroom',
+        imageUrl: '/images/placeholders/facility-gardens.svg',
+        caption: 'Open Courtyard & Garden View',
         displayOrder: 3,
       },
     ],
@@ -71,27 +67,23 @@ const FUSIONSTAYS_ROOMS = [
       'Complimentary morning tea; authentic local Bengali cuisine and meals available on order',
     amenities:
       'Air Conditioning, Attached Western Toilet, Geyser / Hot Water, Power Backup, Bonfire, Lawn Access, Hill View',
-    mainImage:
-      'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766142007/room/1295/btix3ldfqw5fjxj6vcw3.png',
+    mainImage: '/images/placeholders/triple-bedded-room.svg',
     isActive: true,
     displayOrder: 2,
     images: [
       {
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766142007/room/1295/btix3ldfqw5fjxj6vcw3.png',
-        caption: 'Triple Bedded Room Setup',
+        imageUrl: '/images/placeholders/triple-bedded-room.svg',
+        caption: 'Triple Bedded Room (Awaiting Owner Photo)',
         displayOrder: 1,
       },
       {
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757149431/property/1681/ebbpu0tgllitabz8aq6a.jpg',
-        caption: 'Triple Bedding Arrangement',
+        imageUrl: '/images/placeholders/facility-bathroom.svg',
+        caption: 'Attached Modern Western Bathroom',
         displayOrder: 2,
       },
       {
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757159995/property/1681/oajowwhxeypksme0atus.jpg',
-        caption: 'Attached Clean Washroom',
+        imageUrl: '/images/placeholders/facility-gardens.svg',
+        caption: 'Surrounding Green Grounds',
         displayOrder: 3,
       },
     ],
@@ -112,34 +104,24 @@ const FUSIONSTAYS_ROOMS = [
       'Complimentary morning tea; delicious home-style thalis and breakfast freshly prepared on order',
     amenities:
       'Air Conditioning, Attached Western Toilet, Geyser / Hot Water, Power Backup, Bonfire, Barbeque, Hill & Garden View',
-    mainImage:
-      'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766140553/room/1292/sapaiwla6ucutnmlub9j.jpg',
+    mainImage: '/images/placeholders/four-bedded-room.svg',
     isActive: true,
     displayOrder: 3,
     images: [
       {
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766140553/room/1292/sapaiwla6ucutnmlub9j.jpg',
-        caption: 'Four Bedded Room Layout',
+        imageUrl: '/images/placeholders/four-bedded-room.svg',
+        caption: 'Four Bedded Room (Awaiting Owner Photo)',
         displayOrder: 1,
       },
       {
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757149492/property/1681/nlhtuuj3bteh3hcql3er.jpg',
-        caption: 'Dual Double Bedding Arrangement',
+        imageUrl: '/images/placeholders/facility-bathroom.svg',
+        caption: 'Attached Modern Western Bathroom',
         displayOrder: 2,
       },
       {
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757150251/property/1681/x3xwgt8jzhmsff3onkzi.jpg',
-        caption: 'Room Perspective',
+        imageUrl: '/images/placeholders/facility-gardens.svg',
+        caption: 'Resort Garden & Courtyard',
         displayOrder: 3,
-      },
-      {
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757159995/property/1681/oajowwhxeypksme0atus.jpg',
-        caption: 'Attached Clean Washroom',
-        displayOrder: 4,
       },
     ],
   },
@@ -159,22 +141,24 @@ const FUSIONSTAYS_ROOMS = [
       'Complimentary morning tea; authentic farm-to-table dining prepared upon prior request',
     amenities:
       'Air Conditioning, Attached Western Toilet, Geyser / Hot Water, Room Heater, Power Backup, Bonfire, Barbeque, Lawn Access',
-    mainImage:
-      'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766141209/room/1293/dfxgqeuckjecp0hfjmae.png',
+    mainImage: '/images/placeholders/five-bedded-room.svg',
     isActive: true,
     displayOrder: 4,
     images: [
       {
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766141209/room/1293/dfxgqeuckjecp0hfjmae.png',
-        caption: 'Five Bedded Room Setup',
+        imageUrl: '/images/placeholders/five-bedded-room.svg',
+        caption: 'Five Bedded Room (Awaiting Owner Photo)',
         displayOrder: 1,
       },
       {
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757159995/property/1681/oajowwhxeypksme0atus.jpg',
-        caption: 'Attached Clean Washroom',
+        imageUrl: '/images/placeholders/facility-bathroom.svg',
+        caption: 'Attached Modern Western Bathroom',
         displayOrder: 2,
+      },
+      {
+        imageUrl: '/images/placeholders/facility-gardens.svg',
+        caption: 'Resort Mountain View Grounds',
+        displayOrder: 3,
       },
     ],
   },
@@ -194,34 +178,24 @@ const FUSIONSTAYS_ROOMS = [
       'Complimentary morning tea; evening campfire barbeque and food options on order',
     amenities:
       'Bonfire & Campfire Area, Barbeque, Open Lawn Access, Stargazing View, Power Backup, Clean Washroom Facility',
-    mainImage:
-      'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766139915/room/1290/wz2jfnidnp9ajvozaoin.jpg',
+    mainImage: '/images/placeholders/tent-accommodation.svg',
     isActive: true,
     displayOrder: 5,
     images: [
       {
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766139915/room/1290/wz2jfnidnp9ajvozaoin.jpg',
-        caption: 'Resort Camp Tent',
+        imageUrl: '/images/placeholders/tent-accommodation.svg',
+        caption: 'Weatherproof Tent Accommodation (Awaiting Owner Photo)',
         displayOrder: 1,
       },
       {
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757160095/property/1681/ponaqgpem2bp44ppihaj.png',
-        caption: 'Lawn Tent Accommodation',
+        imageUrl: '/images/placeholders/facility-bonfire.svg',
+        caption: 'Campfire & Lawn Ground',
         displayOrder: 2,
       },
       {
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757160554/property/1681/g5hqfygdt6mcvqcrq4ve.jpg',
-        caption: 'Tents Alongside Resort Rooms',
+        imageUrl: '/images/placeholders/facility-gardens.svg',
+        caption: 'Surrounding Nature & Campsite',
         displayOrder: 3,
-      },
-      {
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757159836/property/1681/oxyynrssknojbs0o55ln.jpg',
-        caption: 'Comfortable Four Sharing Tent Interior',
-        displayOrder: 4,
       },
     ],
   },
@@ -229,82 +203,106 @@ const FUSIONSTAYS_ROOMS = [
 
 const AUTHENTIC_GALLERY_IMAGES = [
   {
-    imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757148135/property/1681/dpdh7fib0zdhqmqkf0bx.jpg',
+    imageUrl: '/images/placeholders/gallery-resort-exterior.svg',
     caption: 'Resort front view surrounded by lush greenery and natural landscape',
-    category: 'Resort exterior and entrance',
+    category: 'Resort & Exterior',
     displayOrder: 1,
   },
   {
-    imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1789021168/property/1681/amrfgp0bcx2safe9zrhe.jpg',
-    caption: 'Aerial view of Hill Queen Eco Resort on top of a hill',
-    category: 'Resort exterior and entrance',
+    imageUrl: '/images/placeholders/hero-resort.svg',
+    caption: 'Aerial view of Hill Queen Eco Resort in Mamudi valley',
+    category: 'Resort & Exterior',
     displayOrder: 2,
   },
   {
-    imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1789021166/property/1681/koxysnfsdnlbivueazwi.jpg',
+    imageUrl: '/images/placeholders/about-resort.svg',
     caption: 'Peaceful eco resort cottages nestled amidst nature',
-    category: 'Resort exterior and entrance',
+    category: 'Resort & Exterior',
     displayOrder: 3,
   },
   {
-    imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1766139915/room/1290/wz2jfnidnp9ajvozaoin.jpg',
-    caption: 'Weatherproof tent accommodation pitched alongside resort grounds',
-    category: 'Rooms and cottages',
+    imageUrl: '/images/placeholders/double-bedded-room.svg',
+    caption: 'Double Bedded Room interior with comfortable bedding and hill outlook',
+    category: 'Rooms',
     displayOrder: 4,
   },
   {
-    imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757160554/property/1681/g5hqfygdt6mcvqcrq4ve.jpg',
-    caption: 'Tents along with cottage rooms amidst lush greenery',
-    category: 'Rooms and cottages',
+    imageUrl: '/images/placeholders/triple-bedded-room.svg',
+    caption: 'Triple Bedded Room setup with double and single bed',
+    category: 'Rooms',
     displayOrder: 5,
   },
   {
-    imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1766140239/room/1291/kk12uawsodcjszmathmj.jpg',
-    caption: 'Double Bedded Room interior with comfortable bedding and hill outlook',
-    category: 'Room interiors',
+    imageUrl: '/images/placeholders/four-bedded-room.svg',
+    caption: 'Four Bedded Room dual bedding configuration for family comfort',
+    category: 'Rooms',
     displayOrder: 6,
   },
   {
-    imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757149492/property/1681/nlhtuuj3bteh3hcql3er.jpg',
-    caption: 'Four Bedded Room dual bedding configuration for family comfort',
-    category: 'Room interiors',
+    imageUrl: '/images/placeholders/five-bedded-room.svg',
+    caption: 'Five Bedded Room spacious living space',
+    category: 'Rooms',
     displayOrder: 7,
   },
   {
-    imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757159995/property/1681/oajowwhxeypksme0atus.jpg',
-    caption: 'Attached clean western bathroom with 24/7 running water',
-    category: 'Room interiors',
+    imageUrl: '/images/placeholders/tent-accommodation.svg',
+    caption: 'Weatherproof canvas tent accommodation pitched on resort grounds',
+    category: 'Tent Stay',
     displayOrder: 8,
   },
   {
-    imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757151762/property/1681/wnvom3wvc0pgxgdoki1p.jpg',
-    caption: 'Resort dining area serving fresh Bengali thalis and home-cooked cuisine',
-    category: 'Restaurant and dining',
+    imageUrl: '/images/placeholders/gallery-tent-stay.svg',
+    caption: 'Tent camping experience with campfire grounds and starry skies',
+    category: 'Tent Stay',
     displayOrder: 9,
   },
   {
-    imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757148303/property/1681/idav04rvlglak4qzbkbz.jpg',
-    caption: 'Panoramic aerial view of Hill Queen Eco Resort and surrounding valley',
-    category: 'Mountain and lake views',
+    imageUrl: '/images/placeholders/facility-dining.svg',
+    caption: 'Resort dining area serving fresh Bengali thalis and home-cooked cuisine',
+    category: 'Dining',
     displayOrder: 10,
   },
   {
-    imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757160248/property/1681/zqcxn3zpunipmz33tjc8.jpg',
-    caption: 'Resort lawn and open recreational spaces for peaceful evening walks',
-    category: 'Gardens and outdoor areas',
+    imageUrl: '/images/placeholders/gallery-dining.svg',
+    caption: 'Fresh home-style cooking and morning tea',
+    category: 'Dining',
     displayOrder: 11,
   },
   {
-    imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757160095/property/1681/ponaqgpem2bp44ppihaj.png',
-    caption: 'Lawn campfire & barbecue area under clear starry Purulia skies',
-    category: 'Activities and experiences',
+    imageUrl: '/images/placeholders/facility-bathroom.svg',
+    caption: 'Clean attached western bathrooms with 24/7 running water and geyser',
+    category: 'Facilities',
     displayOrder: 12,
   },
   {
-    imageUrl: 'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757149805/property/1681/acjuz3qey51j5lqhnlvm.jpg',
-    caption: 'Scenic landscape near Murguma Dam and Ajodhya Hill ranges',
-    category: 'Nearby tourist attractions',
+    imageUrl: '/images/placeholders/facility-gardens.svg',
+    caption: 'Resort lawn and open recreational spaces for peaceful evening walks',
+    category: 'Facilities',
     displayOrder: 13,
+  },
+  {
+    imageUrl: '/images/placeholders/facility-kidsplay.svg',
+    caption: 'Kids play area and garden grounds for family recreation',
+    category: 'Facilities',
+    displayOrder: 14,
+  },
+  {
+    imageUrl: '/images/placeholders/facility-bonfire.svg',
+    caption: 'Lawn campfire & barbecue area under clear starry Purulia skies',
+    category: 'Facilities',
+    displayOrder: 15,
+  },
+  {
+    imageUrl: '/images/placeholders/facility-parking.svg',
+    caption: 'Secure on-site parking for guest vehicles',
+    category: 'Facilities',
+    displayOrder: 16,
+  },
+  {
+    imageUrl: '/images/placeholders/gallery-nature.svg',
+    caption: 'Scenic landscape near Murguma Dam and Ajodhya Hill ranges',
+    category: 'Nature & Surroundings',
+    displayOrder: 17,
   },
 ];
 

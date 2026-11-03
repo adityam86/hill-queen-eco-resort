@@ -41,30 +41,26 @@ export const DEFAULT_ROOMS: RoomData[] = [
       'Complimentary morning tea; authentic Bengali thalis and fresh home-cooked meals available on order',
     amenities:
       'Air Conditioning, Attached Western Toilet, Geyser / Hot Water, Power Backup, Bonfire, Barbeque, Open Lawn Access, 24/7 Running Water',
-    mainImage:
-      'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766140239/room/1291/kk12uawsodcjszmathmj.jpg',
+    mainImage: '/images/placeholders/double-bedded-room.svg',
     isActive: true,
     displayOrder: 1,
     images: [
       {
         id: 'dbr-1',
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766140239/room/1291/kk12uawsodcjszmathmj.jpg',
-        caption: 'Double Bedded Room Interior',
+        imageUrl: '/images/placeholders/double-bedded-room.svg',
+        caption: 'Double Bedded Room (Awaiting Owner Photo)',
         displayOrder: 1,
       },
       {
         id: 'dbr-2',
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757148931/property/1681/fmows9mf6wys8dnwucvo.jpg',
-        caption: 'Double Bedding Arrangement',
+        imageUrl: '/images/placeholders/facility-bathroom.svg',
+        caption: 'Attached Modern Western Bathroom',
         displayOrder: 2,
       },
       {
         id: 'dbr-3',
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757159995/property/1681/oajowwhxeypksme0atus.jpg',
-        caption: 'Attached Clean Washroom',
+        imageUrl: '/images/placeholders/facility-gardens.svg',
+        caption: 'Open Courtyard & Garden View',
         displayOrder: 3,
       },
     ],
@@ -86,30 +82,26 @@ export const DEFAULT_ROOMS: RoomData[] = [
       'Complimentary morning tea; authentic local Bengali cuisine and meals available on order',
     amenities:
       'Air Conditioning, Attached Western Toilet, Geyser / Hot Water, Power Backup, Bonfire, Lawn Access, Hill View',
-    mainImage:
-      'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766142007/room/1295/btix3ldfqw5fjxj6vcw3.png',
+    mainImage: '/images/placeholders/triple-bedded-room.svg',
     isActive: true,
     displayOrder: 2,
     images: [
       {
         id: 'tbr-1',
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766142007/room/1295/btix3ldfqw5fjxj6vcw3.png',
-        caption: 'Triple Bedded Room Setup',
+        imageUrl: '/images/placeholders/triple-bedded-room.svg',
+        caption: 'Triple Bedded Room (Awaiting Owner Photo)',
         displayOrder: 1,
       },
       {
         id: 'tbr-2',
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757149431/property/1681/ebbpu0tgllitabz8aq6a.jpg',
-        caption: 'Triple Bedding Arrangement',
+        imageUrl: '/images/placeholders/facility-bathroom.svg',
+        caption: 'Attached Modern Western Bathroom',
         displayOrder: 2,
       },
       {
         id: 'tbr-3',
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757159995/property/1681/oajowwhxeypksme0atus.jpg',
-        caption: 'Attached Clean Washroom',
+        imageUrl: '/images/placeholders/facility-gardens.svg',
+        caption: 'Surrounding Green Grounds',
         displayOrder: 3,
       },
     ],
@@ -131,38 +123,27 @@ export const DEFAULT_ROOMS: RoomData[] = [
       'Complimentary morning tea; delicious home-style thalis and breakfast freshly prepared on order',
     amenities:
       'Air Conditioning, Attached Western Toilet, Geyser / Hot Water, Power Backup, Bonfire, Barbeque, Hill & Garden View',
-    mainImage:
-      'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766140553/room/1292/sapaiwla6ucutnmlub9j.jpg',
+    mainImage: '/images/placeholders/four-bedded-room.svg',
     isActive: true,
     displayOrder: 3,
     images: [
       {
         id: 'fbr-1',
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766140553/room/1292/sapaiwla6ucutnmlub9j.jpg',
-        caption: 'Four Bedded Room Layout',
+        imageUrl: '/images/placeholders/four-bedded-room.svg',
+        caption: 'Four Bedded Room (Awaiting Owner Photo)',
         displayOrder: 1,
       },
       {
         id: 'fbr-2',
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757149492/property/1681/nlhtuuj3bteh3hcql3er.jpg',
-        caption: 'Dual Double Bedding Arrangement',
+        imageUrl: '/images/placeholders/facility-bathroom.svg',
+        caption: 'Attached Modern Western Bathroom',
         displayOrder: 2,
       },
       {
         id: 'fbr-3',
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757150251/property/1681/x3xwgt8jzhmsff3onkzi.jpg',
-        caption: 'Room Perspective',
+        imageUrl: '/images/placeholders/facility-gardens.svg',
+        caption: 'Resort Garden & Courtyard',
         displayOrder: 3,
-      },
-      {
-        id: 'fbr-4',
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757159995/property/1681/oajowwhxeypksme0atus.jpg',
-        caption: 'Attached Clean Washroom',
-        displayOrder: 4,
       },
     ],
   },
@@ -183,24 +164,27 @@ export const DEFAULT_ROOMS: RoomData[] = [
       'Complimentary morning tea; authentic farm-to-table dining prepared upon prior request',
     amenities:
       'Air Conditioning, Attached Western Toilet, Geyser / Hot Water, Room Heater, Power Backup, Bonfire, Barbeque, Lawn Access',
-    mainImage:
-      'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766141209/room/1293/dfxgqeuckjecp0hfjmae.png',
+    mainImage: '/images/placeholders/five-bedded-room.svg',
     isActive: true,
     displayOrder: 4,
     images: [
       {
         id: 'vbr-1',
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766141209/room/1293/dfxgqeuckjecp0hfjmae.png',
-        caption: 'Five Bedded Room Setup',
+        imageUrl: '/images/placeholders/five-bedded-room.svg',
+        caption: 'Five Bedded Room (Awaiting Owner Photo)',
         displayOrder: 1,
       },
       {
         id: 'vbr-2',
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757159995/property/1681/oajowwhxeypksme0atus.jpg',
-        caption: 'Attached Clean Washroom',
+        imageUrl: '/images/placeholders/facility-bathroom.svg',
+        caption: 'Attached Modern Western Bathroom',
         displayOrder: 2,
+      },
+      {
+        id: 'vbr-3',
+        imageUrl: '/images/placeholders/facility-gardens.svg',
+        caption: 'Resort Mountain View Grounds',
+        displayOrder: 3,
       },
     ],
   },
@@ -221,38 +205,27 @@ export const DEFAULT_ROOMS: RoomData[] = [
       'Complimentary morning tea; evening campfire barbeque and food options on order',
     amenities:
       'Bonfire & Campfire Area, Barbeque, Open Lawn Access, Stargazing View, Power Backup, Clean Washroom Facility',
-    mainImage:
-      'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766139915/room/1290/wz2jfnidnp9ajvozaoin.jpg',
+    mainImage: '/images/placeholders/tent-accommodation.svg',
     isActive: true,
     displayOrder: 5,
     images: [
       {
         id: 'tent-1',
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive,w_750,h_500/v1766139915/room/1290/wz2jfnidnp9ajvozaoin.jpg',
-        caption: 'Resort Camp Tent',
+        imageUrl: '/images/placeholders/tent-accommodation.svg',
+        caption: 'Weatherproof Tent Accommodation (Awaiting Owner Photo)',
         displayOrder: 1,
       },
       {
         id: 'tent-2',
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757160095/property/1681/ponaqgpem2bp44ppihaj.png',
-        caption: 'Lawn Tent Accommodation',
+        imageUrl: '/images/placeholders/facility-bonfire.svg',
+        caption: 'Campfire & Lawn Ground',
         displayOrder: 2,
       },
       {
         id: 'tent-3',
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757160554/property/1681/g5hqfygdt6mcvqcrq4ve.jpg',
-        caption: 'Tents Alongside Resort Rooms',
+        imageUrl: '/images/placeholders/facility-gardens.svg',
+        caption: 'Surrounding Nature & Campsite',
         displayOrder: 3,
-      },
-      {
-        id: 'tent-4',
-        imageUrl:
-          'https://res.cloudinary.com/fusionstays/image/upload/c_fill,e_sharpen:100,q_auto,f_auto,fl_progressive/v1757159836/property/1681/oxyynrssknojbs0o55ln.jpg',
-        caption: 'Comfortable Four Sharing Tent Interior',
-        displayOrder: 4,
       },
     ],
   },
