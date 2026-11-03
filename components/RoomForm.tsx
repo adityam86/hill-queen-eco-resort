@@ -44,7 +44,7 @@ export default function RoomForm({ initialData, isEditing = false }: RoomFormPro
     extraBedAvailable: initialData?.extraBedAvailable || false,
     foodInclusion: initialData?.foodInclusion || 'Complimentary morning tea; authentic Bengali meals available on order',
     amenities: initialData?.amenities || 'Air Conditioning, Attached Western Toilet, Geyser / Hot Water, Power Backup, Bonfire, Lawn Access',
-    mainImage: initialData?.mainImage || '/images/placeholders/double-bedded-room.svg',
+    mainImage: initialData?.mainImage || '/images/rooms/double-bedded-room.jpg',
     isActive: initialData?.isActive !== undefined ? initialData.isActive : true,
     displayOrder: initialData?.displayOrder || 0,
   });

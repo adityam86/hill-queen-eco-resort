@@ -27,154 +27,210 @@ export default async function GalleryPage() {
     console.warn('Could not fetch gallery images from DB:', error);
   }
 
-  // Bespoke property placeholders and authentic photographs for the 6 official categories
+  // Authentic property photographs for the 6 official categories
   const defaultPhotos: GalleryPhoto[] = [
     // 1. Resort & Exterior
     {
       id: 'ext-1',
-      imageUrl: '/images/placeholders/gallery-resort-exterior.svg',
-      caption: 'Hill Queen Eco Resort property view nestled amidst greenery and Purulia hills',
+      imageUrl: '/images/resort/resort-front.jpg',
+      caption: 'Resort front view surrounded by lush greenery and natural landscape',
       category: 'Resort & Exterior',
       displayOrder: 1,
-      isPlaceholder: true,
+      isPlaceholder: false,
     },
     {
       id: 'ext-2',
-      imageUrl: '/images/placeholders/hero-resort.svg',
-      caption: 'Hilltop aerial perspective of the resort in the tranquil valley of Mamudi',
+      imageUrl: '/images/resort/hero-aerial.jpg',
+      caption: 'Aerial view of Hill Queen Eco Resort situated on top of a hill in Mamudi',
       category: 'Resort & Exterior',
       displayOrder: 2,
-      isPlaceholder: true,
+      isPlaceholder: false,
     },
     {
       id: 'ext-3',
-      imageUrl: '/images/placeholders/about-resort.svg',
-      caption: 'Eco cottages surrounded by sal trees and fresh mountain breezes',
+      imageUrl: '/images/resort/cottages-nature.jpg',
+      caption: 'Peaceful eco resort cottages nestled amidst nature and sal trees',
       category: 'Resort & Exterior',
       displayOrder: 3,
-      isPlaceholder: true,
+      isPlaceholder: false,
+    },
+    {
+      id: 'ext-4',
+      imageUrl: '/images/facilities/grounds-layout.jpg',
+      caption: 'Resort cottages and camping lawn layout',
+      category: 'Resort & Exterior',
+      displayOrder: 4,
+      isPlaceholder: false,
     },
 
     // 2. Rooms
     {
       id: 'room-1',
-      imageUrl: '/images/placeholders/double-bedded-room.svg',
-      caption: 'Double Bedded Room with air conditioning and serene hillside outlook',
+      imageUrl: '/images/rooms/double-bedded-room.jpg',
+      caption: 'Double Bedded Room interior with comfortable bedding and peaceful hill outlook',
       category: 'Rooms',
-      displayOrder: 4,
-      isPlaceholder: true,
+      displayOrder: 5,
+      isPlaceholder: false,
     },
     {
       id: 'room-2',
-      imageUrl: '/images/placeholders/triple-bedded-room.svg',
-      caption: 'Triple Bedded Room equipped with double bed and single bed for small families',
+      imageUrl: '/images/rooms/double-bedding.jpg',
+      caption: 'Double Bedding arrangement for couples and solo travelers',
       category: 'Rooms',
-      displayOrder: 5,
-      isPlaceholder: true,
+      displayOrder: 6,
+      isPlaceholder: false,
     },
     {
       id: 'room-3',
-      imageUrl: '/images/placeholders/four-bedded-room.svg',
-      caption: 'Four Bedded Room dual bed arrangement suited for family holidays',
+      imageUrl: '/images/rooms/triple-bedded-room.png',
+      caption: 'Triple Bedded Room setup with double and single bed',
       category: 'Rooms',
-      displayOrder: 6,
-      isPlaceholder: true,
+      displayOrder: 7,
+      isPlaceholder: false,
     },
     {
       id: 'room-4',
-      imageUrl: '/images/placeholders/five-bedded-room.svg',
-      caption: 'Five Bedded Room spacious living quarters with room heating',
+      imageUrl: '/images/rooms/triple-bedding.jpg',
+      caption: 'Triple Bedding configuration for small families',
       category: 'Rooms',
-      displayOrder: 7,
-      isPlaceholder: true,
+      displayOrder: 8,
+      isPlaceholder: false,
+    },
+    {
+      id: 'room-5',
+      imageUrl: '/images/rooms/four-bedded-room.jpg',
+      caption: 'Four Bedded Room dual bedding configuration for family comfort',
+      category: 'Rooms',
+      displayOrder: 9,
+      isPlaceholder: false,
+    },
+    {
+      id: 'room-6',
+      imageUrl: '/images/rooms/four-bedding.jpg',
+      caption: 'Four Bedded Room dual double beds layout',
+      category: 'Rooms',
+      displayOrder: 10,
+      isPlaceholder: false,
+    },
+    {
+      id: 'room-7',
+      imageUrl: '/images/rooms/four-perspective.jpg',
+      caption: 'Four Bedded Room spacious interior perspective',
+      category: 'Rooms',
+      displayOrder: 11,
+      isPlaceholder: false,
+    },
+    {
+      id: 'room-8',
+      imageUrl: '/images/rooms/five-bedded-room.png',
+      caption: 'Five Bedded Room spacious quarters with room heater and lawn access',
+      category: 'Rooms',
+      displayOrder: 12,
+      isPlaceholder: false,
     },
 
     // 3. Tent Stay
     {
       id: 'tent-1',
-      imageUrl: '/images/placeholders/tent-accommodation.svg',
-      caption: 'Weatherproof canvas tent pitched on green grounds for nature camping',
+      imageUrl: '/images/rooms/tent-accommodation.jpg',
+      caption: 'Weatherproof tent accommodation pitched alongside resort grounds',
       category: 'Tent Stay',
-      displayOrder: 8,
-      isPlaceholder: true,
+      displayOrder: 13,
+      isPlaceholder: false,
     },
     {
       id: 'tent-2',
-      imageUrl: '/images/placeholders/gallery-tent-stay.svg',
-      caption: 'Tent camping experience with campfire grounds and starry skies',
+      imageUrl: '/images/rooms/lawn-tent.png',
+      caption: 'Lawn tent accommodation under clear skies and mountain air',
       category: 'Tent Stay',
-      displayOrder: 9,
-      isPlaceholder: true,
+      displayOrder: 14,
+      isPlaceholder: false,
+    },
+    {
+      id: 'tent-3',
+      imageUrl: '/images/rooms/tents-cottages.jpg',
+      caption: 'Tents alongside resort cottages amidst lush greenery',
+      category: 'Tent Stay',
+      displayOrder: 15,
+      isPlaceholder: false,
+    },
+    {
+      id: 'tent-4',
+      imageUrl: '/images/rooms/tent-interior.jpg',
+      caption: 'Comfortable four sharing camping tent interior',
+      category: 'Tent Stay',
+      displayOrder: 16,
+      isPlaceholder: false,
     },
 
     // 4. Dining
     {
       id: 'dine-1',
-      imageUrl: '/images/placeholders/facility-dining.svg',
-      caption: 'Resort kitchen & dining area serving fresh Bengali cuisine and local thalis',
+      imageUrl: '/images/facilities/dining.jpg',
+      caption: 'Resort dining area serving fresh Bengali thalis and home-cooked cuisine',
       category: 'Dining',
-      displayOrder: 10,
-      isPlaceholder: true,
-    },
-    {
-      id: 'dine-2',
-      imageUrl: '/images/placeholders/gallery-dining.svg',
-      caption: 'Wholesome home-cooked preparations and hot morning tea on the veranda',
-      category: 'Dining',
-      displayOrder: 11,
-      isPlaceholder: true,
+      displayOrder: 17,
+      isPlaceholder: false,
     },
 
     // 5. Facilities
     {
       id: 'fac-1',
-      imageUrl: '/images/placeholders/facility-bathroom.svg',
-      caption: 'Modern attached western bathrooms with 24/7 running water and geyser',
+      imageUrl: '/images/facilities/bathroom.jpg',
+      caption: 'Attached clean western bathroom with 24/7 running water and geyser',
       category: 'Facilities',
-      displayOrder: 12,
-      isPlaceholder: true,
+      displayOrder: 18,
+      isPlaceholder: false,
     },
     {
       id: 'fac-2',
-      imageUrl: '/images/placeholders/facility-gardens.svg',
-      caption: 'Spacious green lawns and open courtyards for peaceful walks',
+      imageUrl: '/images/facilities/lawns.jpg',
+      caption: 'Resort lawn and open recreational spaces for peaceful evening walks',
       category: 'Facilities',
-      displayOrder: 13,
-      isPlaceholder: true,
+      displayOrder: 19,
+      isPlaceholder: false,
     },
     {
       id: 'fac-3',
-      imageUrl: '/images/placeholders/facility-kidsplay.svg',
-      caption: "Safe children's play area and open grounds for family recreation",
+      imageUrl: '/images/facilities/kids-play.jpg',
+      caption: 'Kids play area and garden swings on property',
       category: 'Facilities',
-      displayOrder: 14,
-      isPlaceholder: true,
+      displayOrder: 20,
+      isPlaceholder: false,
     },
     {
       id: 'fac-4',
-      imageUrl: '/images/placeholders/facility-bonfire.svg',
-      caption: 'Evening bonfire & campfire area for acoustic gatherings under the stars',
+      imageUrl: '/images/facilities/bonfire.png',
+      caption: 'Lawn campfire & barbecue area under clear starry Purulia skies',
       category: 'Facilities',
-      displayOrder: 15,
-      isPlaceholder: true,
-    },
-    {
-      id: 'fac-5',
-      imageUrl: '/images/placeholders/facility-parking.svg',
-      caption: 'Secure on-site parking for guest cars and two-wheelers',
-      category: 'Facilities',
-      displayOrder: 16,
-      isPlaceholder: true,
+      displayOrder: 21,
+      isPlaceholder: false,
     },
 
     // 6. Nature & Surroundings
     {
       id: 'nat-1',
-      imageUrl: '/images/placeholders/gallery-nature.svg',
-      caption: 'Murguma Dam and surrounding Ajodhya hill peaks near Mamudi village',
+      imageUrl: '/images/resort/valley-panorama.jpg',
+      caption: 'Panoramic aerial view of Hill Queen Eco Resort and surrounding valley',
       category: 'Nature & Surroundings',
-      displayOrder: 17,
-      isPlaceholder: true,
+      displayOrder: 22,
+      isPlaceholder: false,
+    },
+    {
+      id: 'nat-2',
+      imageUrl: '/images/resort/hill-view.jpg',
+      caption: 'View of the resort property overlooking the Purulia hills',
+      category: 'Nature & Surroundings',
+      displayOrder: 23,
+      isPlaceholder: false,
+    },
+    {
+      id: 'nat-3',
+      imageUrl: '/images/resort/murguma-landscape.jpg',
+      caption: 'Scenic landscape near Murguma Dam and Ajodhya Hill ranges',
+      category: 'Nature & Surroundings',
+      displayOrder: 24,
+      isPlaceholder: false,
     },
   ];
 
@@ -186,7 +242,7 @@ export default async function GalleryPage() {
       <section className="relative py-20 sm:py-24 bg-forest-dark text-ivory overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/placeholders/hero-resort.svg"
+            src="/images/resort/hero-aerial.jpg"
             alt="Hill Queen Eco Resort Aerial & Property View"
             fill
             priority
@@ -204,7 +260,7 @@ export default async function GalleryPage() {
             Resort Photographic Gallery
           </h1>
           <p className="text-sm sm:text-base text-ivory/80 leading-relaxed max-w-2xl mx-auto font-light">
-            Explore genuine views of our cottages, room categories, tent stay, dining spaces, resort facilities, and the natural beauty of Murguma, Purulia.
+            Explore genuine photographs of our cottages, room categories, tent stay, dining spaces, resort facilities, and the natural beauty of Murguma, Purulia.
           </p>
         </div>
       </section>
@@ -218,10 +274,10 @@ export default async function GalleryPage() {
             </div>
             <div>
               <h2 className="font-serif text-base sm:text-lg font-bold text-forest">
-                Authentic Resort Imagery
+                Authentic Property Photographs
               </h2>
               <p className="text-xs sm:text-sm text-forest/75 mt-0.5">
-                We believe in genuine representations. Photos are verified and managed directly by resort staff through the owner portal. Placeholders are clearly identified to prevent misleading travelers.
+                Every photograph shown here is captured directly at Hill Queen Eco Resort in Mamudi, Murguma, Purulia. All photos and tariffs are maintained directly by resort management.
               </p>
             </div>
           </div>

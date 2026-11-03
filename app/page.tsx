@@ -67,42 +67,42 @@ export default async function HomePage() {
     {
       title: 'Restaurant & Dining Area',
       description: 'Hygienic and flavorful local Bengali thalis, fresh morning tea, and home-cooked meals prepared on order.',
-      image: '/images/placeholders/facility-dining.svg',
+      image: '/images/facilities/dining.jpg',
       tag: 'Homely Cuisine',
       icon: Utensils,
     },
     {
       title: 'Modern Attached Bathrooms',
       description: 'Clean western sanitation with continuous 24/7 running water and hot water geysers in all rooms.',
-      image: '/images/placeholders/facility-bathroom.svg',
+      image: '/images/facilities/bathroom.jpg',
       tag: '24/7 Running Water',
       icon: Bath,
     },
     {
       title: 'Garden & Open Lawns',
       description: 'Lush green open spaces and natural courtyards for peaceful morning strolls, tea, and outdoor relaxation.',
-      image: '/images/placeholders/facility-gardens.svg',
+      image: '/images/facilities/lawns.jpg',
       tag: 'Nature Spaces',
       icon: Mountain,
     },
     {
       title: "Children's Play Area",
       description: 'Safe outdoor garden pathways and play zones for families traveling with children in a quiet country setting.',
-      image: '/images/placeholders/facility-kidsplay.svg',
+      image: '/images/facilities/kids-play.jpg',
       tag: 'Family Friendly',
       icon: Sparkles,
     },
     {
       title: 'Bonfire & Outdoor Campfire',
       description: 'Spacious open grounds ideal for evening campfire sessions, acoustic moments, and clear night stargazing.',
-      image: '/images/placeholders/facility-bonfire.svg',
+      image: '/images/facilities/bonfire.png',
       tag: 'Stargazing Nights',
       icon: Flame,
     },
     {
       title: 'Secure On-Site Parking',
       description: 'Safe on-premises private parking space for cars and motorcycles with staff assistance upon arrival.',
-      image: '/images/placeholders/facility-parking.svg',
+      image: '/images/facilities/grounds-layout.jpg',
       tag: 'Safe & Gated',
       icon: ShieldCheck,
     },
@@ -143,7 +143,7 @@ export default async function HomePage() {
         {/* Background Image with Dark/Warm Gradient Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/placeholders/hero-resort.svg"
+            src="/images/resort/hero-aerial.jpg"
             alt="Hill Queen Eco Resort hill aerial landscape"
             fill
             priority
@@ -272,7 +272,7 @@ export default async function HomePage() {
             <div className="lg:col-span-5 relative">
               <div className="relative h-[420px] sm:h-[480px] rounded-3xl overflow-hidden shadow-luxury border-4 border-white">
                 <Image
-                  src="/images/placeholders/about-resort.svg"
+                  src="/images/resort/resort-front.jpg"
                   alt="Hill Queen Eco Resort cottage preview"
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
@@ -514,37 +514,37 @@ export default async function HomePage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="relative h-60 sm:h-72 rounded-2xl overflow-hidden shadow-sm group">
               <Image
-                src="/images/placeholders/gallery-resort-exterior.svg"
-                alt="Hill Queen Eco Resort exterior view"
+                src="/images/resort/cottages-nature.jpg"
+                alt="Hill Queen Eco Resort cottages nestled amidst nature"
                 fill
                 sizes="(max-width: 640px) 50vw, 25vw"
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <span className="absolute bottom-2 left-2 text-[10px] bg-forest-dark/85 text-ivory px-2.5 py-1 rounded-md font-medium border border-gold/30">
-                Resort & Exterior
+                Eco Cottages & Nature
               </span>
               <span className="absolute top-2 right-2 text-[9px] bg-forest-dark/80 text-gold px-2 py-0.5 rounded backdrop-blur-sm border border-gold/30">
-                Preview
+                Authentic
               </span>
             </div>
             <div className="relative h-60 sm:h-72 rounded-2xl overflow-hidden shadow-sm group">
               <Image
-                src="/images/placeholders/gallery-rooms.svg"
-                alt="Hill Queen Eco Resort Cottages & Rooms"
+                src="/images/rooms/double-bedded-room.jpg"
+                alt="Hill Queen Eco Resort Double Bedded Room"
                 fill
                 sizes="(max-width: 640px) 50vw, 25vw"
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <span className="absolute bottom-2 left-2 text-[10px] bg-forest-dark/85 text-ivory px-2.5 py-1 rounded-md font-medium border border-gold/30">
-                Cottages & Rooms
+                Double Bedded Room
               </span>
               <span className="absolute top-2 right-2 text-[9px] bg-forest-dark/80 text-gold px-2 py-0.5 rounded backdrop-blur-sm border border-gold/30">
-                Preview
+                Authentic
               </span>
             </div>
             <div className="relative h-60 sm:h-72 rounded-2xl overflow-hidden shadow-sm group">
               <Image
-                src="/images/placeholders/gallery-tent-stay.svg"
+                src="/images/rooms/tent-accommodation.jpg"
                 alt="Tent camping experience at Hill Queen Eco Resort"
                 fill
                 sizes="(max-width: 640px) 50vw, 25vw"
@@ -554,12 +554,12 @@ export default async function HomePage() {
                 Tent Camping Stay
               </span>
               <span className="absolute top-2 right-2 text-[9px] bg-forest-dark/80 text-gold px-2 py-0.5 rounded backdrop-blur-sm border border-gold/30">
-                Preview
+                Authentic
               </span>
             </div>
             <div className="relative h-60 sm:h-72 rounded-2xl overflow-hidden shadow-sm group">
               <Image
-                src="/images/placeholders/facility-dining.svg"
+                src="/images/facilities/dining.jpg"
                 alt="Fresh home-cooked Bengali dining"
                 fill
                 sizes="(max-width: 640px) 50vw, 25vw"
@@ -569,7 +569,7 @@ export default async function HomePage() {
                 Dining & Kitchen
               </span>
               <span className="absolute top-2 right-2 text-[9px] bg-forest-dark/80 text-gold px-2 py-0.5 rounded backdrop-blur-sm border border-gold/30">
-                Preview
+                Authentic
               </span>
             </div>
           </div>

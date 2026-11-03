@@ -45,7 +45,7 @@ export default async function RoomsPage() {
       <section className="relative py-20 sm:py-24 bg-forest-dark text-ivory overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/placeholders/hero-resort.svg"
+            src="/images/resort/resort-front.jpg"
             alt="Hill Queen Eco Resort Cottages & Grounds"
             fill
             priority
