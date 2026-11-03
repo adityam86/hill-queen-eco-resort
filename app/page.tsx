@@ -303,7 +303,7 @@ export default async function HomePage() {
             </div>
           </div>
 
-          {/* Rooms Grid */}
+          {/* Rooms Grid: 2 boxes on phone, 2 on tablet, 3 on desktop */}
           {rooms.length === 0 ? (
             <div className="text-center py-16 px-4 bg-ivory/50 rounded-3xl border border-ivory-dark max-w-2xl mx-auto">
               <Mountain className="w-12 h-12 text-gold mx-auto mb-3" />
@@ -324,7 +324,7 @@ export default async function HomePage() {
               </a>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-8">
               {rooms.map((room) => (
                 <RoomCard
                   key={room.id}
@@ -338,57 +338,60 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 4. VERIFIED RESORT FACILITIES */}
-      <section className="py-20 sm:py-28 bg-[#FAF7EF]">
+      {/* 4. VERIFIED RESORT FACILITIES & AMENITIES */}
+      <section className="py-14 sm:py-24 bg-[#FAF7EF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-16">
+          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
             <span className="text-xs uppercase tracking-widest text-gold-dark font-semibold">
               Authentic Hospitality
             </span>
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-forest mt-2 mb-4">
+            <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl font-bold text-forest mt-1 sm:mt-2 mb-2 sm:mb-4">
               Resort Amenities & Comforts
             </h2>
-            <p className="text-sm sm:text-base text-forest/75 leading-relaxed">
+            <p className="text-xs sm:text-base text-forest/75 leading-relaxed">
               We focus on genuine comfort, cleanliness, and peace. All facilities are real and maintained with dedication.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Facilities Grid: 2 boxes on Phone, 2 on Tablet, 3 on Desktop */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 sm:gap-6">
             {defaultFacilities.map((facility, idx) => {
               const IconComponent = facility.icon;
               return (
                 <div
                   key={idx}
-                  className="bg-white rounded-3xl border border-ivory-dark shadow-sm hover:shadow-luxury transition-all duration-300 group overflow-hidden flex flex-col"
+                  className="bg-white rounded-xl sm:rounded-3xl border border-ivory-dark shadow-sm hover:shadow-luxury transition-all duration-300 group overflow-hidden flex flex-col justify-between"
                 >
-                  <div className="relative h-48 w-full bg-forest-dark overflow-hidden">
-                    <Image
-                      src={facility.image}
-                      alt={facility.title}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-forest-dark/80 via-transparent to-black/20" />
-                    <span className="absolute top-3 right-3 text-[10px] bg-forest-dark/80 backdrop-blur-sm text-gold px-2.5 py-0.5 rounded-full border border-gold/30 font-semibold tracking-wider uppercase">
-                      {facility.tag}
-                    </span>
-                    <div className="absolute bottom-3 left-3 w-10 h-10 rounded-xl bg-forest/90 text-gold flex items-center justify-center border border-gold/30">
-                      <IconComponent className="w-5 h-5" />
+                  <div>
+                    <div className="relative h-28 sm:h-44 md:h-48 w-full bg-forest-dark overflow-hidden">
+                      <Image
+                        src={facility.image}
+                        alt={facility.title}
+                        fill
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-forest-dark/85 via-transparent to-black/20" />
+                      <span className="absolute top-2 right-2 sm:top-3 sm:right-3 text-[8px] sm:text-[10px] bg-forest-dark/85 backdrop-blur-sm text-gold px-1.5 sm:px-2.5 py-0.5 rounded-full border border-gold/30 font-semibold tracking-wider uppercase">
+                        {facility.tag}
+                      </span>
+                      <div className="absolute bottom-2 left-2 sm:bottom-3 sm:left-3 w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-forest/90 text-gold flex items-center justify-center border border-gold/30">
+                        <IconComponent className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
+                      </div>
                     </div>
-                  </div>
-                  <div className="p-6 flex-1 flex flex-col justify-between">
-                    <div>
-                      <h3 className="font-serif text-lg font-bold text-forest mb-2">
+                    <div className="p-3 sm:p-6">
+                      <h3 className="font-serif text-xs sm:text-lg font-bold text-forest mb-1 sm:mb-2 truncate" title={facility.title}>
                         {facility.title}
                       </h3>
-                      <p className="text-xs sm:text-sm text-forest/75 leading-relaxed">
+                      <p className="text-[11px] sm:text-sm text-forest/75 line-clamp-2 leading-snug sm:leading-relaxed">
                         {facility.description}
                       </p>
                     </div>
-                    <div className="pt-4 mt-4 border-t border-ivory-dark flex items-center justify-between text-[11px] text-forest/60">
-                      <span>Hill Queen Eco Resort</span>
-                      <span className="text-gold font-medium">Verified Facility</span>
+                  </div>
+                  <div className="px-3 pb-3 sm:px-6 sm:pb-5 pt-0">
+                    <div className="pt-2 border-t border-ivory-dark flex items-center justify-between text-[9px] sm:text-[11px] text-forest/60">
+                      <span className="truncate">Hill Queen</span>
+                      <span className="text-gold font-medium shrink-0">Verified</span>
                     </div>
                   </div>
                 </div>
