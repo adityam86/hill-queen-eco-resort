@@ -29,6 +29,8 @@ import {
 } from '@/lib/settings';
 import RoomCard, { RoomData } from '@/components/RoomCard';
 import { DEFAULT_ROOMS } from '@/lib/rooms';
+import NearbyAttractions from '@/components/NearbyAttractions';
+import { getAttractions } from '@/lib/attractions';
 
 export const revalidate = 60; // Revalidate every minute or on-demand
 
@@ -108,33 +110,8 @@ export default async function HomePage() {
     },
   ];
 
-  // Verified Purulia Attractions
-  const nearbyAttractions = [
-    {
-      name: 'Murguma Dam & Reservoir',
-      distance: 'Adjacent / 2 km',
-      description: 'A breathtaking water body framed by green hillocks. Ideal for sunrise walks, photography, and evening contemplation.',
-      image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800&auto=format&fit=crop',
-    },
-    {
-      name: 'Ajodhya Hills Ridge',
-      distance: '18 km',
-      description: 'Legendary forested hill range famous for rugged trails, fresh sal forests, and panoramic views of Purulia plateau.',
-      image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=800&auto=format&fit=crop',
-    },
-    {
-      name: 'Bamni & Turga Waterfalls',
-      distance: '24 km',
-      description: 'Spectacular tiered streams gushing down rocky boulders amidst dense greenery, offering cool retreats.',
-      image: 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?q=80&w=800&auto=format&fit=crop',
-    },
-    {
-      name: 'Marble Lake (Blue Water)',
-      distance: '20 km',
-      description: 'A deep azure water basin surrounded by dramatic rocky cliffs, known as Purulia’s mini Grand Canyon.',
-      image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop',
-    },
-  ];
+  // Fetch verified Purulia attractions
+  const attractions = await getAttractions();
 
   return (
     <div className="flex flex-col">
@@ -422,9 +399,9 @@ export default async function HomePage() {
       </section>
 
       {/* 5. NEARBY ATTRACTIONS (PURULIA HIGHLIGHTS) */}
-      <section className="py-20 sm:py-28 bg-forest-dark text-ivory">
+      <section className="py-20 sm:py-28 bg-forest-dark text-ivory" id="attractions">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-14">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10">
             <div>
               <span className="text-xs uppercase tracking-widest text-gold font-semibold">
                 Explore The Land Of Hills & Water
@@ -432,58 +409,48 @@ export default async function HomePage() {
               <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-ivory mt-2">
                 Nearby Attractions in Purulia
               </h2>
-              <p className="text-sm text-ivory/70 mt-2 max-w-xl">
-                Hill Queen Eco Resort serves as an ideal base for exploring scenic lakes, forested dams, and Ajodhya hill points.
+              <p className="text-sm text-ivory/70 mt-2 max-w-2xl">
+                Hill Queen Eco Resort (Mamudi, Murguma, PIN 723152) is your ideal gateway. Explore serene dams, deep canyon lakes, cascading waterfalls, and tribal heritage. All distances are measured directly from the resort gate.
               </p>
             </div>
-            <div className="mt-4 md:mt-0">
+            <div className="mt-6 md:mt-0 flex flex-wrap items-center gap-3">
+              <Link
+                href="/attractions"
+                className="px-5 py-2.5 rounded-full bg-gold text-forest text-xs font-semibold hover:bg-gold-light transition-colors inline-flex items-center gap-2 shadow-sm"
+              >
+                <span>View Full Sightseeing Guide</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
               <a
-                href={buildWhatsAppLink(settings.whatsappNumber)}
+                href={buildWhatsAppLink(
+                  settings.whatsappNumber,
+                  'Hello Hill Queen Eco Resort, I would like guidance and cab assistance for sightseeing tours around Purulia.'
+                )}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-5 py-2.5 rounded-full border border-gold/40 text-gold text-xs font-semibold hover:bg-gold hover:text-forest transition-colors inline-flex items-center gap-2"
               >
-                <span>Ask Us For Sightseeing Tour Help</span>
+                <span>Ask Us For Tour Help</span>
                 <MessageSquare className="w-3.5 h-3.5" />
               </a>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {nearbyAttractions.map((attraction, idx) => (
-              <div
-                key={idx}
-                className="group bg-forest rounded-2xl overflow-hidden border border-gold/20 shadow-luxury flex flex-col"
-              >
-                <div className="relative h-48 w-full overflow-hidden">
-                  <Image
-                    src={attraction.image}
-                    alt={attraction.name}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-forest via-transparent to-black/20" />
-                  <span className="absolute top-3 right-3 text-[10px] bg-black/60 backdrop-blur-sm text-gold px-2.5 py-0.5 rounded-full border border-gold/30 font-medium">
-                    {attraction.distance}
-                  </span>
-                </div>
-                <div className="p-5 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="font-serif text-lg font-bold text-ivory mb-2">
-                      {attraction.name}
-                    </h3>
-                    <p className="text-xs text-ivory/70 leading-relaxed mb-4">
-                      {attraction.description}
-                    </p>
-                  </div>
-                  <div className="text-[11px] text-gold font-medium flex items-center gap-1">
-                    <MapPin className="w-3 h-3" />
-                    <span>Easily accessible from resort</span>
-                  </div>
-                </div>
-              </div>
-            ))}
+          {/* Interactive Nearby Attractions Showcase with Filters & Lightbox */}
+          <NearbyAttractions
+            attractions={attractions}
+            whatsappNumber={settings.whatsappNumber}
+            limit={6}
+          />
+
+          <div className="mt-12 text-center">
+            <Link
+              href="/attractions"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-gold/50 text-gold hover:bg-gold hover:text-forest transition-all text-xs font-semibold tracking-wider uppercase shadow-luxury"
+            >
+              <span>Explore All 13 Purulia Sightseeing Destinations</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>

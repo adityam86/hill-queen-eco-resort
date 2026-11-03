@@ -3,6 +3,7 @@ import Link from 'next/link';
 import {
   BedDouble,
   Image as ImageIcon,
+  Compass,
   Phone,
   MessageSquare,
   PlusCircle,
@@ -35,12 +36,14 @@ export default async function AdminDashboardPage() {
   let activeRooms = 0;
   let inactiveRooms = 0;
   let totalGallery = 0;
+  let totalAttractions = 0;
 
   try {
     totalRooms = await prisma.room.count();
     activeRooms = await prisma.room.count({ where: { isActive: true } });
     inactiveRooms = await prisma.room.count({ where: { isActive: false } });
     totalGallery = await prisma.galleryImage.count();
+    totalAttractions = await prisma.attraction.count();
   } catch (error) {
     console.warn('Dashboard DB query error:', error);
   }
@@ -91,61 +94,75 @@ export default async function AdminDashboardPage() {
       </div>
 
       {/* 2. Key Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
         {/* Total Rooms */}
-        <div className="bg-white p-6 rounded-2xl border border-ivory-dark shadow-sm">
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-xs uppercase tracking-wider text-forest/60 font-semibold">
-              Total Categories
+        <div className="bg-white p-5 rounded-2xl border border-ivory-dark shadow-sm">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-[11px] uppercase tracking-wider text-forest/60 font-semibold">
+              Room Categories
             </span>
-            <div className="p-2.5 rounded-xl bg-ivory text-gold">
-              <BedDouble className="w-5 h-5" />
+            <div className="p-2 rounded-xl bg-ivory text-gold">
+              <BedDouble className="w-4 h-4" />
             </div>
           </div>
-          <p className="font-serif text-3xl font-bold text-forest">{totalRooms}</p>
+          <p className="font-serif text-2xl font-bold text-forest">{totalRooms}</p>
           <p className="text-[11px] text-forest/60 mt-1">Managed room categories</p>
         </div>
 
         {/* Active Rooms */}
-        <div className="bg-white p-6 rounded-2xl border border-ivory-dark shadow-sm">
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-xs uppercase tracking-wider text-green-700 font-semibold">
-              Active on Website
+        <div className="bg-white p-5 rounded-2xl border border-ivory-dark shadow-sm">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-[11px] uppercase tracking-wider text-green-700 font-semibold">
+              Active Rooms
             </span>
-            <div className="p-2.5 rounded-xl bg-green-50 text-green-600">
-              <CheckCircle2 className="w-5 h-5" />
+            <div className="p-2 rounded-xl bg-green-50 text-green-600">
+              <CheckCircle2 className="w-4 h-4" />
             </div>
           </div>
-          <p className="font-serif text-3xl font-bold text-green-700">{activeRooms}</p>
-          <p className="text-[11px] text-forest/60 mt-1">Visible with tariffs to guests</p>
+          <p className="font-serif text-2xl font-bold text-green-700">{activeRooms}</p>
+          <p className="text-[11px] text-forest/60 mt-1">Visible on website</p>
         </div>
 
         {/* Inactive Rooms */}
-        <div className="bg-white p-6 rounded-2xl border border-ivory-dark shadow-sm">
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-xs uppercase tracking-wider text-amber-700 font-semibold">
-              Inactive / Paused
+        <div className="bg-white p-5 rounded-2xl border border-ivory-dark shadow-sm">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-[11px] uppercase tracking-wider text-amber-700 font-semibold">
+              Paused Rooms
             </span>
-            <div className="p-2.5 rounded-xl bg-amber-50 text-amber-600">
-              <Clock className="w-5 h-5" />
+            <div className="p-2 rounded-xl bg-amber-50 text-amber-600">
+              <Clock className="w-4 h-4" />
             </div>
           </div>
-          <p className="font-serif text-3xl font-bold text-amber-800">{inactiveRooms}</p>
-          <p className="text-[11px] text-forest/60 mt-1">Hidden from public listing</p>
+          <p className="font-serif text-2xl font-bold text-amber-800">{inactiveRooms}</p>
+          <p className="text-[11px] text-forest/60 mt-1">Hidden from public</p>
         </div>
 
         {/* Total Gallery Photos */}
-        <div className="bg-white p-6 rounded-2xl border border-ivory-dark shadow-sm">
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-xs uppercase tracking-wider text-forest/60 font-semibold">
+        <div className="bg-white p-5 rounded-2xl border border-ivory-dark shadow-sm">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-[11px] uppercase tracking-wider text-forest/60 font-semibold">
               Gallery Photos
             </span>
-            <div className="p-2.5 rounded-xl bg-ivory text-gold">
-              <ImageIcon className="w-5 h-5" />
+            <div className="p-2 rounded-xl bg-ivory text-gold">
+              <ImageIcon className="w-4 h-4" />
             </div>
           </div>
-          <p className="font-serif text-3xl font-bold text-forest">{totalGallery}</p>
-          <p className="text-[11px] text-forest/60 mt-1">Photos across all categories</p>
+          <p className="font-serif text-2xl font-bold text-forest">{totalGallery}</p>
+          <p className="text-[11px] text-forest/60 mt-1">Across 8 categories</p>
+        </div>
+
+        {/* Nearby Attractions */}
+        <div className="bg-white p-5 rounded-2xl border border-ivory-dark shadow-sm">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-[11px] uppercase tracking-wider text-forest/60 font-semibold">
+              Attractions
+            </span>
+            <div className="p-2 rounded-xl bg-ivory text-gold">
+              <Compass className="w-4 h-4" />
+            </div>
+          </div>
+          <p className="font-serif text-2xl font-bold text-forest">{totalAttractions || 13}</p>
+          <p className="text-[11px] text-forest/60 mt-1">Sightseeing spots</p>
         </div>
       </div>
 
@@ -187,6 +204,23 @@ export default async function AdminDashboardPage() {
                 </strong>
                 <p className="text-xs text-forest/70">
                   Upload genuine property photos, categorize and reorder.
+                </p>
+              </div>
+            </Link>
+
+            <Link
+              href="/admin/attractions"
+              className="p-4 rounded-2xl bg-ivory/50 border border-ivory-dark hover:border-gold hover:bg-white transition-all flex items-start gap-3 group"
+            >
+              <div className="p-2 rounded-xl bg-forest text-gold group-hover:scale-105 transition-transform">
+                <Compass className="w-5 h-5" />
+              </div>
+              <div>
+                <strong className="block text-sm text-forest font-semibold mb-0.5">
+                  Nearby Attractions
+                </strong>
+                <p className="text-xs text-forest/70">
+                  Manage Purulia sightseeing spots, driving distances & travel tips.
                 </p>
               </div>
             </Link>

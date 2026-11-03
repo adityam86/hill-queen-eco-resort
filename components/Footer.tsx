@@ -70,6 +70,11 @@ export default function Footer({ settings }: FooterProps) {
                 </Link>
               </li>
               <li>
+                <Link href="/attractions" className="hover:text-gold transition-colors flex items-center gap-1.5">
+                  <span>›</span> Nearby Attractions & Sightseeing
+                </Link>
+              </li>
+              <li>
                 <Link href="/gallery" className="hover:text-gold transition-colors flex items-center gap-1.5">
                   <span>›</span> Photo Gallery
                 </Link>

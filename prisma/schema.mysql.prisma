@@ -97,3 +97,24 @@ model PageContent {
   content   String   @db.Text
   updatedAt DateTime @updatedAt
 }
+
+model Attraction {
+  id              String   @id @default(cuid())
+  name            String
+  title           String
+  slug            String   @unique
+  description     String   @db.Text
+  category        String   // "Dams & Lakes", "Waterfalls", "Hills & Viewpoints", "Culture & Heritage", "Nature & Adventure"
+  distanceKm      Float
+  drivingTimeMin  Int
+  imageUrl        String   @db.Text
+  imageAlt        String?
+  directionsUrl   String   @db.Text
+  bestTimeToVisit String?
+  highlights      String?  @db.Text
+  travelTip       String?  @db.Text
+  displayOrder    Int      @default(0)
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}

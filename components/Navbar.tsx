@@ -38,6 +38,7 @@ export default function Navbar({
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Rooms & Pricing', href: '/rooms' },
+    { name: 'Sightseeing', href: '/attractions' },
     { name: 'Photo Gallery', href: '/gallery' },
     { name: 'Contact & Map', href: '/contact' },
   ];

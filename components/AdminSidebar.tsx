@@ -9,6 +9,7 @@ import {
   BedDouble,
   PlusCircle,
   Image as ImageIcon,
+  Compass,
   Settings,
   KeyRound,
   ExternalLink,
@@ -37,6 +38,7 @@ export default function AdminSidebar({ session, adminName }: AdminSidebarProps) 
     { href: '/admin/rooms', label: 'Rooms & Tariffs', icon: BedDouble },
     ...(isOwner ? [{ href: '/admin/rooms/new', label: 'Add New Room', icon: PlusCircle }] : []),
     { href: '/admin/gallery', label: 'Photo Gallery', icon: ImageIcon },
+    { href: '/admin/attractions', label: 'Nearby Attractions', icon: Compass },
     ...(isOwner
       ? [
           { href: '/admin/staff', label: 'Staff Management', icon: Users },

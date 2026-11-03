@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
 import { DEFAULT_ROOMS } from '@/lib/rooms';
+import { DEFAULT_ATTRACTIONS } from '@/lib/attractions';
 
 export const dynamic = 'force-dynamic';
 
@@ -159,9 +160,48 @@ export async function GET(req: NextRequest) {
       },
     });
 
+    // Initialize verified Purulia attractions measured from Hill Queen Eco Resort
+    for (const attr of DEFAULT_ATTRACTIONS) {
+      await prisma.attraction.upsert({
+        where: { slug: attr.slug },
+        update: {
+          name: attr.name,
+          title: attr.title,
+          description: attr.description,
+          category: attr.category,
+          distanceKm: attr.distanceKm,
+          drivingTimeMin: attr.drivingTimeMin,
+          imageUrl: attr.imageUrl,
+          imageAlt: attr.imageAlt,
+          directionsUrl: attr.directionsUrl,
+          bestTimeToVisit: attr.bestTimeToVisit,
+          highlights: attr.highlights,
+          travelTip: attr.travelTip,
+          displayOrder: attr.displayOrder,
+        },
+        create: {
+          name: attr.name,
+          title: attr.title,
+          slug: attr.slug,
+          description: attr.description,
+          category: attr.category,
+          distanceKm: attr.distanceKm,
+          drivingTimeMin: attr.drivingTimeMin,
+          imageUrl: attr.imageUrl,
+          imageAlt: attr.imageAlt,
+          directionsUrl: attr.directionsUrl,
+          bestTimeToVisit: attr.bestTimeToVisit,
+          highlights: attr.highlights,
+          travelTip: attr.travelTip,
+          displayOrder: attr.displayOrder,
+          isActive: true,
+        },
+      });
+    }
+
     return NextResponse.json({
       success: true,
-      message: 'Admin account, website settings, and 5 room categories successfully initialized in production!',
+      message: 'Admin account, website settings, 5 room categories, and 13 verified Purulia attractions successfully initialized in production!',
       loginUrl: 'https://hill-queen-eco-resort.vercel.app/admin/login',
       credentials: {
         username: 'admin',
