@@ -410,3 +410,4 @@ export default async function AttractionsPage() {
     </div>
   );
 }
+

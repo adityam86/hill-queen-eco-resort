@@ -398,58 +398,47 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 5. NEARBY ATTRACTIONS (PURULIA HIGHLIGHTS) */}
-      <section className="py-20 sm:py-28 bg-forest-dark text-ivory" id="attractions">
+      {/* 5. NEARBY ATTRACTIONS (COMPACT SHOWCASE) */}
+      <section className="py-12 sm:py-16 bg-forest-dark text-ivory" id="attractions">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
             <div>
-              <span className="text-xs uppercase tracking-widest text-gold font-semibold">
-                Explore The Land Of Hills & Water
+              <span className="text-[11px] uppercase tracking-widest text-gold font-semibold">
+                Explore Purulia
               </span>
-              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-ivory mt-2">
-                Nearby Attractions in Purulia
+              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-ivory mt-1">
+                Nearby Attractions
               </h2>
-              <p className="text-sm text-ivory/70 mt-2 max-w-2xl">
-                Hill Queen Eco Resort (Mamudi, Murguma, PIN 723152) is your ideal gateway. Explore serene dams, deep canyon lakes, cascading waterfalls, and tribal heritage. All distances are measured directly from the resort gate.
+              <p className="text-xs sm:text-sm text-ivory/70 mt-1 max-w-xl">
+                Accurate driving distances measured directly from Hill Queen Eco Resort (Mamudi, Murguma, PIN 723152).
               </p>
             </div>
-            <div className="mt-6 md:mt-0 flex flex-wrap items-center gap-3">
+            <div className="flex items-center gap-3 shrink-0">
               <Link
                 href="/attractions"
-                className="px-5 py-2.5 rounded-full bg-gold text-forest text-xs font-semibold hover:bg-gold-light transition-colors inline-flex items-center gap-2 shadow-sm"
+                className="px-4 py-2 rounded-full bg-gold text-forest text-xs font-semibold hover:bg-gold-light transition-colors inline-flex items-center gap-1.5 shadow-sm"
               >
-                <span>View Full Sightseeing Guide</span>
+                <span>Full Guide (13 Places)</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
-              <a
-                href={buildWhatsAppLink(
-                  settings.whatsappNumber,
-                  'Hello Hill Queen Eco Resort, I would like guidance and cab assistance for sightseeing tours around Purulia.'
-                )}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-5 py-2.5 rounded-full border border-gold/40 text-gold text-xs font-semibold hover:bg-gold hover:text-forest transition-colors inline-flex items-center gap-2"
-              >
-                <span>Ask Us For Tour Help</span>
-                <MessageSquare className="w-3.5 h-3.5" />
-              </a>
             </div>
           </div>
 
-          {/* Interactive Nearby Attractions Showcase with Filters & Lightbox */}
+          {/* Compact Space-Efficient Attractions Grid */}
           <NearbyAttractions
             attractions={attractions}
             whatsappNumber={settings.whatsappNumber}
-            limit={6}
+            limit={4}
+            compact={true}
           />
 
-          <div className="mt-12 text-center">
+          <div className="mt-8 text-center">
             <Link
               href="/attractions"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-gold/50 text-gold hover:bg-gold hover:text-forest transition-all text-xs font-semibold tracking-wider uppercase shadow-luxury"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-gold/40 text-gold hover:bg-gold hover:text-forest transition-all text-xs font-semibold tracking-wider uppercase"
             >
-              <span>Explore All 13 Purulia Sightseeing Destinations</span>
-              <ArrowRight className="w-4 h-4" />
+              <span>Explore All 13 Purulia Destinations & Day Tour Circuits</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
         </div>

@@ -523,62 +523,62 @@ export default function AdminAttractionsManager({
         ))}
       </div>
 
-      {/* Attractions List Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Attractions List Cards (Compact Grid) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {filteredAttractions.map((item) => (
           <div
             key={item.id}
-            className={`bg-white rounded-2xl overflow-hidden border transition-all duration-300 shadow-sm flex flex-col justify-between ${
+            className={`bg-white rounded-xl overflow-hidden border transition-all duration-300 shadow-sm flex flex-col justify-between ${
               item.isActive ? 'border-gold/30 hover:border-gold/60' : 'border-red-200 opacity-60'
             }`}
           >
             <div>
               {/* Photo */}
-              <div className="relative h-48 w-full bg-forest-dark overflow-hidden">
+              <div className="relative h-36 sm:h-40 w-full bg-forest-dark overflow-hidden">
                 <Image
                   src={item.imageUrl}
                   alt={item.name}
                   fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
+                  sizes="(max-width: 768px) 100vw, 25vw"
                   className="object-cover"
                 />
-                <div className="absolute top-3 left-3 bg-forest-dark/85 backdrop-blur-sm text-gold px-2.5 py-0.5 rounded-full text-[10px] font-semibold border border-gold/30">
+                <div className="absolute top-2.5 left-2.5 bg-forest-dark/85 backdrop-blur-sm text-gold px-2 py-0.5 rounded-full text-[9px] font-semibold border border-gold/30">
                   {item.category}
                 </div>
-                <div className="absolute top-3 right-3 bg-black/75 backdrop-blur-sm text-ivory px-2.5 py-0.5 rounded-full text-[10px] font-semibold border border-gold/30 flex items-center gap-1">
-                  <Car className="w-3 h-3 text-gold" />
+                <div className="absolute top-2.5 right-2.5 bg-black/75 backdrop-blur-sm text-ivory px-2 py-0.5 rounded-full text-[9px] font-semibold border border-gold/30 flex items-center gap-1">
+                  <Car className="w-2.5 h-2.5 text-gold" />
                   <span>~{item.distanceKm} km</span>
                   <span className="text-gold/50">•</span>
                   <span>~{item.drivingTimeMin}m</span>
                 </div>
                 {!item.isActive && (
                   <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
-                    <span className="text-red-300 text-xs font-bold uppercase tracking-wider bg-red-950/80 px-3 py-1 rounded-full border border-red-500/40">
-                      Hidden from Public Guide
+                    <span className="text-red-300 text-[10px] font-bold uppercase tracking-wider bg-red-950/80 px-2.5 py-0.5 rounded-full border border-red-500/40">
+                      Hidden
                     </span>
                   </div>
                 )}
               </div>
 
               {/* Details */}
-              <div className="p-5">
-                <div className="flex items-center justify-between gap-2 mb-1.5">
-                  <h3 className="font-serif text-base font-bold text-forest">
+              <div className="p-3.5">
+                <div className="flex items-center justify-between gap-1.5 mb-1">
+                  <h3 className="font-serif text-sm font-bold text-forest truncate" title={item.name}>
                     {item.name}
                   </h3>
-                  <span className="text-[10px] text-forest/50 font-mono">
-                    Order: {item.displayOrder}
+                  <span className="text-[9px] text-forest/50 font-mono shrink-0">
+                    #{item.displayOrder}
                   </span>
                 </div>
 
-                <p className="text-xs text-forest/70 line-clamp-2 leading-relaxed mb-3">
+                <p className="text-xs text-forest/70 line-clamp-2 leading-relaxed mb-2">
                   {item.description}
                 </p>
 
                 {item.travelTip && (
-                  <div className="p-2 rounded-lg bg-gold/10 border border-gold/20 text-[11px] text-forest/80 flex items-start gap-1.5 mb-3">
-                    <Info className="w-3.5 h-3.5 text-gold-dark shrink-0 mt-0.5" />
-                    <span className="line-clamp-2">{item.travelTip}</span>
+                  <div className="p-1.5 rounded-lg bg-gold/10 border border-gold/20 text-[10px] text-forest/80 flex items-start gap-1 mb-2">
+                    <Info className="w-3 h-3 text-gold-dark shrink-0 mt-0.5" />
+                    <span className="line-clamp-1">{item.travelTip}</span>
                   </div>
                 )}
               </div>
@@ -840,3 +840,4 @@ export default function AdminAttractionsManager({
     </div>
   );
 }
+

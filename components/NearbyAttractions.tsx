@@ -15,6 +15,7 @@ import {
   CheckCircle2,
   Car,
   MessageSquare,
+  ArrowRight,
 } from 'lucide-react';
 import { AttractionData, AttractionCategory, ATTRACTION_CATEGORIES } from '@/lib/attractions';
 import { buildWhatsAppLink } from '@/lib/settings';
@@ -24,6 +25,7 @@ interface NearbyAttractionsProps {
   whatsappNumber?: string;
   showAllInitially?: boolean;
   limit?: number;
+  compact?: boolean;
 }
 
 export default function NearbyAttractions({
@@ -31,6 +33,7 @@ export default function NearbyAttractions({
   whatsappNumber = '9735888106',
   showAllInitially = true,
   limit,
+  compact = false,
 }: NearbyAttractionsProps) {
   const [selectedCategory, setSelectedCategory] = useState<AttractionCategory>('All');
   const [activeLightbox, setActiveLightbox] = useState<AttractionData | null>(null);
@@ -59,7 +62,7 @@ export default function NearbyAttractions({
   return (
     <div>
       {/* Category Filter Tabs */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-thin scrollbar-thumb-gold/30 scrollbar-track-transparent">
+      <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-3 mb-6 scrollbar-thin scrollbar-thumb-gold/30 scrollbar-track-transparent">
         {ATTRACTION_CATEGORIES.map((cat) => {
           const isSelected = selectedCategory === cat;
           const count = categoryCounts[cat] || 0;
@@ -67,7 +70,7 @@ export default function NearbyAttractions({
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all duration-300 flex items-center gap-2 ${
+              className={`px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all duration-300 flex items-center gap-1.5 ${
                 isSelected
                   ? 'bg-gold text-forest shadow-md border border-gold scale-105'
                   : 'bg-forest/60 text-ivory/80 hover:bg-forest hover:text-ivory border border-gold/20'
@@ -86,8 +89,14 @@ export default function NearbyAttractions({
         })}
       </div>
 
-      {/* Attractions Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      {/* Attractions Grid (Compact or Full) */}
+      <div
+        className={
+          compact
+            ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'
+            : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8'
+        }
+      >
         {filteredAttractions.map((attraction) => {
           let highlightsList: string[] = [];
           if (attraction.highlights) {
@@ -98,14 +107,91 @@ export default function NearbyAttractions({
             }
           }
 
+          if (compact) {
+            // Sleek & Space-Efficient Card for Homepage
+            return (
+              <article
+                key={attraction.id}
+                className="group bg-forest rounded-xl overflow-hidden border border-gold/20 hover:border-gold/50 shadow-sm hover:shadow-luxury transition-all duration-300 flex flex-col justify-between"
+              >
+                <div>
+                  {/* Compact Photo */}
+                  <div className="relative h-36 sm:h-40 w-full overflow-hidden bg-forest-dark">
+                    <Image
+                      src={attraction.imageUrl}
+                      alt={attraction.imageAlt || attraction.name}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-forest via-transparent to-black/30" />
+
+                    <span className="absolute top-2.5 left-2.5 text-[10px] bg-forest-dark/90 backdrop-blur-sm text-gold px-2.5 py-0.5 rounded-full border border-gold/30 font-medium">
+                      {attraction.category}
+                    </span>
+
+                    <div className="absolute top-2.5 right-2.5 text-[10px] bg-black/80 backdrop-blur-sm text-ivory px-2 py-0.5 rounded-full border border-gold/30 font-medium flex items-center gap-1 shadow-sm">
+                      <Car className="w-2.5 h-2.5 text-gold" />
+                      <span>~{attraction.distanceKm} km</span>
+                    </div>
+
+                    <button
+                      onClick={() => setActiveLightbox(attraction)}
+                      aria-label={`View photo of ${attraction.name}`}
+                      className="absolute bottom-2.5 right-2.5 w-7 h-7 rounded-full bg-forest-dark/85 backdrop-blur-sm text-gold hover:bg-gold hover:text-forest transition-colors flex items-center justify-center border border-gold/30"
+                    >
+                      <Eye className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+
+                  {/* Compact Body */}
+                  <div className="p-4">
+                    <div className="flex items-center gap-1 text-[10px] text-gold font-semibold uppercase tracking-wider mb-1">
+                      <MapPin className="w-3 h-3 shrink-0" />
+                      <span>~{attraction.drivingTimeMin}m from resort</span>
+                    </div>
+
+                    <h3 className="font-serif text-base font-bold text-ivory mb-1.5 truncate group-hover:text-gold transition-colors">
+                      {attraction.name}
+                    </h3>
+
+                    <p className="text-xs text-ivory/70 line-clamp-2 leading-relaxed mb-3">
+                      {attraction.description}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Compact Actions */}
+                <div className="px-4 pb-4 pt-0 border-t border-gold/15 flex items-center gap-2 pt-3">
+                  <a
+                    href={attraction.directionsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 py-1.5 px-2.5 rounded-lg bg-gold text-forest font-semibold text-[11px] text-center hover:bg-gold-light transition-colors flex items-center justify-center gap-1"
+                  >
+                    <Navigation className="w-3 h-3" />
+                    <span>Directions</span>
+                  </a>
+
+                  <button
+                    onClick={() => setActiveLightbox(attraction)}
+                    className="py-1.5 px-2.5 rounded-lg border border-gold/30 text-gold hover:bg-gold/15 text-[11px] font-semibold transition-colors flex items-center gap-1"
+                  >
+                    <span>Details</span>
+                  </button>
+                </div>
+              </article>
+            );
+          }
+
+          // Full Detailed Card (Used on /attractions page)
           return (
             <article
               key={attraction.id}
               className="group bg-forest rounded-2xl overflow-hidden border border-gold/20 hover:border-gold/50 shadow-luxury hover:shadow-2xl transition-all duration-500 flex flex-col justify-between"
             >
               <div>
-                {/* Photo Header */}
-                <div className="relative h-56 sm:h-64 w-full overflow-hidden bg-forest-dark">
+                <div className="relative h-52 sm:h-56 w-full overflow-hidden bg-forest-dark">
                   <Image
                     src={attraction.imageUrl}
                     alt={attraction.imageAlt || attraction.name}
@@ -115,12 +201,10 @@ export default function NearbyAttractions({
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-forest via-transparent to-black/30" />
 
-                  {/* Category Pill */}
                   <span className="absolute top-3 left-3 text-[11px] bg-forest-dark/85 backdrop-blur-md text-gold px-3 py-1 rounded-full border border-gold/30 font-medium">
                     {attraction.category}
                   </span>
 
-                  {/* Distance Badge */}
                   <div className="absolute top-3 right-3 text-[11px] bg-black/75 backdrop-blur-md text-ivory px-3 py-1 rounded-full border border-gold/30 font-medium flex items-center gap-1.5 shadow-sm">
                     <Car className="w-3 h-3 text-gold" />
                     <span>~{attraction.distanceKm} km</span>
@@ -128,7 +212,6 @@ export default function NearbyAttractions({
                     <span>~{attraction.drivingTimeMin}m</span>
                   </div>
 
-                  {/* Expand / View Full Photo Button */}
                   <button
                     onClick={() => setActiveLightbox(attraction)}
                     aria-label={`View photo of ${attraction.name}`}
@@ -138,7 +221,6 @@ export default function NearbyAttractions({
                   </button>
                 </div>
 
-                {/* Content Body */}
                 <div className="p-5 sm:p-6">
                   <div className="flex items-center gap-1.5 text-[11px] text-gold font-semibold uppercase tracking-wider mb-1.5">
                     <MapPin className="w-3.5 h-3.5" />
@@ -153,7 +235,6 @@ export default function NearbyAttractions({
                     {attraction.description}
                   </p>
 
-                  {/* Key Highlights */}
                   {highlightsList.length > 0 && (
                     <div className="mb-4">
                       <span className="text-[10px] uppercase font-bold tracking-wider text-gold/80 block mb-2">
@@ -173,7 +254,6 @@ export default function NearbyAttractions({
                     </div>
                   )}
 
-                  {/* Best Time To Visit */}
                   {attraction.bestTimeToVisit && (
                     <div className="p-2.5 rounded-xl bg-forest-dark/60 border border-gold/15 mb-3 flex items-start gap-2 text-[11px] text-ivory/70">
                       <Clock className="w-3.5 h-3.5 text-gold shrink-0 mt-0.5" />
@@ -184,7 +264,6 @@ export default function NearbyAttractions({
                     </div>
                   )}
 
-                  {/* Travel Tip */}
                   {attraction.travelTip && (
                     <div className="p-2.5 rounded-xl bg-gold/10 border border-gold/20 flex items-start gap-2 text-[11px] text-ivory/80">
                       <Info className="w-3.5 h-3.5 text-gold shrink-0 mt-0.5" />
@@ -197,7 +276,6 @@ export default function NearbyAttractions({
                 </div>
               </div>
 
-              {/* Action Buttons */}
               <div className="p-5 sm:p-6 pt-0 border-t border-gold/15 mt-4 flex flex-col sm:flex-row gap-2.5">
                 <a
                   href={attraction.directionsUrl}
@@ -228,7 +306,7 @@ export default function NearbyAttractions({
         })}
       </div>
 
-      {/* Lightbox Modal */}
+      {/* Lightbox / Full Info Modal */}
       {activeLightbox && (
         <div
           className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-6"
@@ -241,14 +319,14 @@ export default function NearbyAttractions({
             {/* Close Button */}
             <button
               onClick={() => setActiveLightbox(null)}
-              className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/60 text-ivory hover:text-gold hover:bg-black/90 transition-colors flex items-center justify-center border border-gold/30"
+              className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-black/60 text-ivory hover:text-gold hover:bg-black/90 transition-colors flex items-center justify-center border border-gold/30"
               aria-label="Close modal"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4" />
             </button>
 
             {/* Photo in Lightbox */}
-            <div className="relative h-72 sm:h-96 w-full bg-black shrink-0">
+            <div className="relative h-64 sm:h-80 w-full bg-black shrink-0">
               <Image
                 src={activeLightbox.imageUrl}
                 alt={activeLightbox.imageAlt || activeLightbox.name}
@@ -259,13 +337,13 @@ export default function NearbyAttractions({
             </div>
 
             {/* Lightbox Details Scrollable */}
-            <div className="p-6 overflow-y-auto space-y-4">
+            <div className="p-5 sm:p-6 overflow-y-auto space-y-4">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div>
-                  <span className="text-[11px] text-gold font-bold uppercase tracking-wider">
+                  <span className="text-[10px] text-gold font-bold uppercase tracking-wider">
                     {activeLightbox.category}
                   </span>
-                  <h3 className="font-serif text-2xl font-bold text-ivory">
+                  <h3 className="font-serif text-xl sm:text-2xl font-bold text-ivory">
                     {activeLightbox.name}
                   </h3>
                 </div>
@@ -275,7 +353,7 @@ export default function NearbyAttractions({
                 </div>
               </div>
 
-              <p className="text-sm text-ivory/80 leading-relaxed">
+              <p className="text-xs sm:text-sm text-ivory/80 leading-relaxed">
                 {activeLightbox.description}
               </p>
 
@@ -294,17 +372,17 @@ export default function NearbyAttractions({
                   href={activeLightbox.directionsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-gold px-5 py-2.5 rounded-full text-xs font-semibold inline-flex items-center gap-2"
+                  className="btn-gold px-4 py-2 rounded-full text-xs font-semibold inline-flex items-center gap-1.5"
                 >
                   <Navigation className="w-3.5 h-3.5" />
-                  <span>Start Navigation from Resort on Google Maps</span>
+                  <span>Open Directions on Google Maps</span>
                   <ExternalLink className="w-3 h-3" />
                 </a>
                 <button
                   onClick={() => setActiveLightbox(null)}
-                  className="px-5 py-2.5 rounded-full border border-gold/40 text-ivory text-xs font-semibold hover:bg-gold/20 transition-colors"
+                  className="px-4 py-2 rounded-full border border-gold/40 text-ivory text-xs font-semibold hover:bg-gold/20 transition-colors"
                 >
-                  Close Photo
+                  Close
                 </button>
               </div>
             </div>
