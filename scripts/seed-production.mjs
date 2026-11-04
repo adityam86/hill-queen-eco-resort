@@ -307,7 +307,7 @@ async function main() {
         phoneTertiary: "8670214030",
         whatsappNumber: "9735888106",
         email: "hillqueenecoresort@gmail.com",
-        websiteUrl: "https://hillqueenresorts.com",
+        websiteUrl: "https://hillqueenecoresorts.com",
         googleMapsUrl: "https://share.google/yDmE0tmJM7PhlxVlN",
         checkInTime: "11:00 AM",
         checkOutTime: "10:00 AM",

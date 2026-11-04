@@ -4,7 +4,7 @@ import { getResortSettings } from '@/lib/settings';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const settings = await getResortSettings();
-  const baseUrl = settings.websiteUrl || 'https://hillqueenresorts.com';
+  const baseUrl = settings.websiteUrl || 'https://hillqueenecoresorts.com';
 
   // Base static routes
   const staticRoutes: MetadataRoute.Sitemap = [
