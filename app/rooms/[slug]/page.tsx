@@ -265,10 +265,11 @@ export default async function RoomDetailPage({ params }: RoomDetailPageProps) {
                   <span className="font-serif text-3xl sm:text-4xl font-bold text-forest">
                     {formattedPrice}
                   </span>
+                  <span className="text-sm font-bold text-gold-dark">+ tax</span>
                   <span className="text-xs text-forest/70 font-medium">/ night</span>
                 </div>
                 <p className="text-[11px] text-forest/60 mt-1">
-                  Taxes & dining as per chosen packages. Direct owner rate.
+                  Exclusive of applicable government tax. Direct owner rate.
                 </p>
               </div>
 

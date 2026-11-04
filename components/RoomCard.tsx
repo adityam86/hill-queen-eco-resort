@@ -96,12 +96,15 @@ export default function RoomCard({
               <span className="text-[9px] sm:text-[11px] uppercase tracking-wider text-ivory/80 block">
                 Tariff / Night
               </span>
-              <div className="flex items-baseline gap-1 sm:gap-1.5">
-                <span className="font-serif text-base sm:text-2xl md:text-3xl font-bold text-ivory">
+              <div className="flex items-baseline flex-wrap gap-1 sm:gap-1.5">
+                <span className="font-serif text-sm sm:text-2xl md:text-3xl font-bold text-ivory">
                   {formattedPrice}
                 </span>
+                <span className="text-[10px] sm:text-xs text-gold font-semibold">
+                  + tax
+                </span>
                 <span className="text-[10px] sm:text-xs text-ivory/70 font-normal hidden sm:inline">
-                  + taxes / night
+                  / night
                 </span>
               </div>
             </div>

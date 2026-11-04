@@ -148,7 +148,7 @@ export default async function RoomsPage() {
               </div>
               <div className="flex items-center gap-2 text-xs text-forest/70">
                 <Info className="w-3.5 h-3.5 text-gold-dark" />
-                <span>Prices in Indian Rupees (INR) per night</span>
+                <span>Prices in Indian Rupees (INR) per night (+ applicable tax)</span>
               </div>
             </div>
 

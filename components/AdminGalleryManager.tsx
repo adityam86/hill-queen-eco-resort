@@ -286,29 +286,25 @@ export default function AdminGalleryManager({ initialPhotos }: AdminGalleryManag
             <label className="block text-xs font-semibold text-forest uppercase tracking-wider">
               Photograph Image Source *
             </label>
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
-              <div className="md:col-span-8">
+            <div className="flex flex-col sm:flex-row gap-3">
+              <input
+                type="text"
+                required
+                value={imageUrl}
+                onChange={(e) => setImageUrl(e.target.value)}
+                placeholder="Paste photograph URL or click Upload from Device"
+                className="flex-1 min-w-0 px-4 py-2.5 rounded-xl border border-ivory-dark bg-white text-forest text-sm focus:outline-none focus:border-gold"
+              />
+              <label className="btn-forest px-5 py-2.5 rounded-xl text-xs font-semibold cursor-pointer inline-flex items-center justify-center gap-2 shadow-sm shrink-0 whitespace-nowrap">
+                <Upload className="w-4 h-4 text-gold" />
+                <span>{uploading ? 'Uploading...' : 'Upload from Device'}</span>
                 <input
-                  type="text"
-                  required
-                  value={imageUrl}
-                  onChange={(e) => setImageUrl(e.target.value)}
-                  placeholder="Paste direct photograph URL (e.g. from Google Drive, Cloudinary, Imgur, Unsplash)"
-                  className="w-full px-4 py-2.5 rounded-xl border border-ivory-dark bg-white text-forest text-sm focus:outline-none focus:border-gold"
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp,image/avif"
+                  onChange={(e) => handleFileUpload(e, false)}
+                  className="hidden"
                 />
-              </div>
-              <div className="md:col-span-4">
-                <label className="w-full btn-forest px-4 py-2.5 rounded-xl text-xs font-semibold cursor-pointer inline-flex items-center justify-center gap-2 shadow-sm">
-                  <Upload className="w-4 h-4 text-gold" />
-                  <span>{uploading ? 'Uploading...' : 'Upload from Device'}</span>
-                  <input
-                    type="file"
-                    accept="image/jpeg,image/png,image/webp,image/avif"
-                    onChange={(e) => handleFileUpload(e, false)}
-                    className="hidden"
-                  />
-                </label>
-              </div>
+              </label>
             </div>
             <p className="text-[11px] text-forest/60">
               Tip: Pasting direct photo URLs is recommended for cloud deployments. Supported: JPG, PNG, WebP, AVIF.

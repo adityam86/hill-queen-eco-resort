@@ -247,4 +247,86 @@ export const DEFAULT_ROOMS: RoomData[] = [
       },
     ],
   },
+  {
+    id: 'six-bedded-room',
+    name: 'Six Bedded Room',
+    slug: 'six-bedded-room',
+    roomType: 'Six Bedded Room',
+    description:
+      'Spacious six bedded family and group accommodation ideal for touring parties, extended families, and trekking teams visiting Murguma Dam and Ajodhya Hills. Features comfortable multi-bed layout, attached western washroom, continuous running water, and garden veranda access.',
+    price: 2750,
+    maximumOccupancy: 6,
+    bedConfiguration: '3 Double Beds',
+    isAc: true,
+    hasAttachedBath: true,
+    extraBedAvailable: true,
+    foodInclusion:
+      'Complimentary morning tea; home-cooked Bengali thalis and fresh meals available on order',
+    amenities:
+      'Air Conditioning, Attached Western Toilet, Geyser / Hot Water, Power Backup, Bonfire, Barbeque, Open Lawn Access, 24/7 Running Water',
+    mainImage: '/images/placeholders/six-bedded-room.svg',
+    isActive: true,
+    displayOrder: 6,
+    images: [
+      {
+        id: 'sbr-1',
+        imageUrl: '/images/placeholders/six-bedded-room.svg',
+        caption: 'Six Bedded Room Layout - Awaiting Owner Upload',
+        displayOrder: 1,
+      },
+      {
+        id: 'sbr-2',
+        imageUrl: '/images/facilities/bathroom.jpg',
+        caption: 'Attached Clean Washroom',
+        displayOrder: 2,
+      },
+      {
+        id: 'sbr-3',
+        imageUrl: '/images/facilities/lawns.jpg',
+        caption: 'Veranda & Open Lawn Access',
+        displayOrder: 3,
+      },
+    ],
+  },
+  {
+    id: 'eight-bedded-room',
+    name: 'Eight Bedded Room',
+    slug: 'eight-bedded-room',
+    roomType: 'Eight Bedded Room',
+    description:
+      'Grand eight bedded dormitory-style family suite tailored for large family gatherings, trekking clubs, and student groups exploring Purulia. Provides expansive space for 8 guests, attached modern washroom, running water, and serene hillside surroundings.',
+    price: 3500,
+    maximumOccupancy: 8,
+    bedConfiguration: '4 Double Beds',
+    isAc: true,
+    hasAttachedBath: true,
+    extraBedAvailable: true,
+    foodInclusion:
+      'Complimentary morning tea; authentic Bengali feasts and group dining available on advance notice',
+    amenities:
+      'Air Conditioning, Attached Western Toilet, Geyser / Hot Water, Power Backup, Bonfire, Barbeque, Open Lawn Access, 24/7 Running Water',
+    mainImage: '/images/placeholders/eight-bedded-room.svg',
+    isActive: true,
+    displayOrder: 7,
+    images: [
+      {
+        id: 'ebr-1',
+        imageUrl: '/images/placeholders/eight-bedded-room.svg',
+        caption: 'Eight Bedded Room Layout - Awaiting Owner Upload',
+        displayOrder: 1,
+      },
+      {
+        id: 'ebr-2',
+        imageUrl: '/images/facilities/bathroom.jpg',
+        caption: 'Attached Clean Washroom',
+        displayOrder: 2,
+      },
+      {
+        id: 'ebr-3',
+        imageUrl: '/images/facilities/lawns.jpg',
+        caption: 'Open Garden & Mountain Breeze',
+        displayOrder: 3,
+      },
+    ],
+  },
 ];

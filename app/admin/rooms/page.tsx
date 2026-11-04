@@ -108,7 +108,7 @@ export default async function AdminRoomsPage() {
                         {room.roomType || 'Cottage'}
                       </span>
                       <span className="text-xs font-semibold text-gold-dark">
-                        ₹{room.price.toLocaleString('en-IN')}<span className="text-[10px] text-forest/60 font-normal">/night</span>
+                        ₹{room.price.toLocaleString('en-IN')}<span className="text-[10px] text-forest/60 font-normal"> + tax / night</span>
                       </span>
                     </div>
                   </div>
@@ -191,7 +191,7 @@ export default async function AdminRoomsPage() {
                           <span className="font-serif text-base font-bold text-forest">
                             ₹{room.price.toLocaleString('en-IN')}
                           </span>
-                          <span className="text-[10px] text-forest/60">/ night</span>
+                          <span className="text-[10px] text-forest/60"> + tax / night</span>
                         </div>
                       </td>
 
