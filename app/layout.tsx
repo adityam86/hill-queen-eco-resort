@@ -34,14 +34,14 @@ export async function generateMetadata(): Promise<Metadata> {
       'Ajodhya Hills resort',
       'Purulia eco tourism stay',
     ],
-    metadataBase: new URL(settings.websiteUrl || 'https://hillqueenecoresorts.com'),
+    metadataBase: new URL(settings.websiteUrl || 'https://hillqueenresorts.com'),
     alternates: {
       canonical: '/',
     },
     openGraph: {
       title: 'Hill Queen Eco Resort | Peaceful Luxury in Murguma, Purulia',
       description: 'Escape into nature. Experience serene cottages, fresh local dining, and quiet surroundings near Murguma Dam, Purulia.',
-      url: settings.websiteUrl || 'https://hillqueenecoresorts.com',
+      url: settings.websiteUrl || 'https://hillqueenresorts.com',
       siteName: 'Hill Queen Eco Resort',
       images: [
         {

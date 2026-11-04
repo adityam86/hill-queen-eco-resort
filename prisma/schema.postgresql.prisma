@@ -78,7 +78,7 @@ model WebsiteSettings {
   phoneTertiary  String   @default("8670214030")
   whatsappNumber String   @default("9735888106")
   email          String   @default("hillqueenecoresort@gmail.com")
-  websiteUrl     String   @default("https://hillqueenecoresorts.com")
+  websiteUrl     String   @default("https://hillqueenresorts.com")
   googleMapsUrl  String?  @db.Text
   checkInTime    String   @default("11:00 AM")
   checkOutTime   String   @default("10:00 AM")

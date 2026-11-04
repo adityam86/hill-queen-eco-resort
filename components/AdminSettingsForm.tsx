@@ -20,7 +20,7 @@ export default function AdminSettingsForm({ initialSettings }: SettingsFormProps
     phoneTertiary: initialSettings.phoneTertiary || '8670214030',
     whatsappNumber: initialSettings.whatsappNumber || '9735888106',
     email: initialSettings.email || 'hillqueenecoresort@gmail.com',
-    websiteUrl: initialSettings.websiteUrl || 'https://hillqueenecoresorts.com',
+    websiteUrl: initialSettings.websiteUrl || 'https://hillqueenresorts.com',
     googleMapsUrl: initialSettings.googleMapsUrl || 'https://share.google/yDmE0tmJM7PhlxVlN',
     checkInTime: initialSettings.checkInTime || '11:00 AM',
     checkOutTime: initialSettings.checkOutTime || '10:00 AM',
@@ -200,7 +200,7 @@ export default function AdminSettingsForm({ initialSettings }: SettingsFormProps
               name="websiteUrl"
               value={formData.websiteUrl}
               onChange={handleChange}
-              placeholder="https://hillqueenecoresorts.com"
+              placeholder="https://hillqueenresorts.com"
               className="w-full px-4 py-2.5 rounded-xl border border-ivory-dark bg-ivory/20 text-forest text-sm focus:outline-none focus:border-gold"
             />
           </div>
