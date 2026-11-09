@@ -23,9 +23,10 @@ export default function Navbar({
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
+      setScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -85,10 +86,8 @@ export default function Navbar({
 
       {/* Main Navigation */}
       <header
-        className={`sticky top-0 z-50 transition-all duration-300 ${
-          scrolled || !isHome
-            ? 'glass-nav shadow-luxury py-3'
-            : 'bg-forest/90 md:bg-transparent backdrop-blur-md md:backdrop-blur-none py-4 border-b border-white/10'
+        className={`sticky top-0 z-50 transition-all duration-300 glass-nav ${
+          scrolled ? 'shadow-luxury py-3' : 'py-3.5 sm:py-4 shadow-md'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
