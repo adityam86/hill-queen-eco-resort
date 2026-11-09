@@ -131,7 +131,7 @@ export default async function HomePage() {
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20 pb-16">
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-32 sm:pt-40 pb-16">
           {/* Nature Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-forest/80 border border-gold/40 text-gold text-xs sm:text-sm font-medium mb-6 backdrop-blur-md">
             <Sparkles className="w-4 h-4 text-gold" />

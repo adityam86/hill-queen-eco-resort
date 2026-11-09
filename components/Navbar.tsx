@@ -54,42 +54,50 @@ export default function Navbar({
 
   return (
     <>
-      {/* Top verified contact banner */}
-      <div className="bg-forest-dark text-ivory/80 text-xs py-1.5 px-4 border-b border-gold/15 hidden md:block">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-6">
-            <span className="flex items-center gap-1.5">
-              <Mountain className="w-3.5 h-3.5 text-gold" />
-              Mamudi, Murguma, Purulia, West Bengal 723152
-            </span>
-            <span className="text-ivory/40">|</span>
-            <span>Direct Resort Bookings & Inquiries</span>
-          </div>
-          <div className="flex items-center gap-6">
-            <a
-              href={buildTelLink(phone)}
-              className="hover:text-gold transition-colors flex items-center gap-1 font-medium"
-            >
-              <Phone className="w-3 h-3 text-gold" /> Call: +91 {phone}
-            </a>
-            <a
-              href={buildWhatsAppLink(whatsapp)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-gold transition-colors flex items-center gap-1 font-medium"
-            >
-              <MessageSquare className="w-3 h-3 text-gold" /> WhatsApp Inquiry
-            </a>
+      {/* Locked / Fixed Navigation Container */}
+      <div className="fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300">
+        {/* Top verified contact banner */}
+        <div
+          className={`bg-forest-dark text-ivory/80 text-xs px-4 border-b border-gold/15 hidden md:block transition-all duration-300 ${
+            scrolled
+              ? 'max-h-0 py-0 opacity-0 border-transparent overflow-hidden'
+              : 'max-h-12 py-1.5 opacity-100'
+          }`}
+        >
+          <div className="max-w-7xl mx-auto flex justify-between items-center">
+            <div className="flex items-center gap-6">
+              <span className="flex items-center gap-1.5">
+                <Mountain className="w-3.5 h-3.5 text-gold" />
+                Mamudi, Murguma, Purulia, West Bengal 723152
+              </span>
+              <span className="text-ivory/40">|</span>
+              <span>Direct Resort Bookings & Inquiries</span>
+            </div>
+            <div className="flex items-center gap-6">
+              <a
+                href={buildTelLink(phone)}
+                className="hover:text-gold transition-colors flex items-center gap-1 font-medium"
+              >
+                <Phone className="w-3 h-3 text-gold" /> Call: +91 {phone}
+              </a>
+              <a
+                href={buildWhatsAppLink(whatsapp)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-gold transition-colors flex items-center gap-1 font-medium"
+              >
+                <MessageSquare className="w-3 h-3 text-gold" /> WhatsApp Inquiry
+              </a>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Main Navigation */}
-      <header
-        className={`sticky top-0 z-50 transition-all duration-300 glass-nav ${
-          scrolled ? 'shadow-luxury py-3' : 'py-3.5 sm:py-4 shadow-md'
-        }`}
-      >
+        {/* Main Navigation with Luxury Glass */}
+        <header
+          className={`w-full glass-nav transition-all duration-300 ${
+            scrolled ? 'shadow-luxury py-2.5 sm:py-3' : 'py-3.5 sm:py-4 shadow-md'
+          }`}
+        >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Brand Logo & Name */}
@@ -211,6 +219,12 @@ export default function Navbar({
           </div>
         )}
       </header>
-    </>
-  );
+    </div>
+
+    {/* Spacer on non-home pages so content is not obscured by the fixed navbar */}
+    {!isHome && (
+      <div className="h-20 sm:h-24 w-full shrink-0" aria-hidden="true" />
+    )}
+  </>
+);
 }
